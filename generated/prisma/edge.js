@@ -358,11 +358,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:724568@localhost:6000/news-blog-server?schema=public"
+        "value": null
       }
     }
   },
