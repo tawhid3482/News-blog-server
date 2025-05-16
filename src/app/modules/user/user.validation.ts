@@ -6,14 +6,13 @@ const UserRoleEnum = z.enum(["ADMIN", "AUTHOR", "EDITOR", "USER"]); // তোম
 const UserStatusEnum = z.nativeEnum(UserStatus); // Prisma-generated enum
 
 export const createUserValidation = z.object({
-  body: z.object({
-    email: z.string().email({ message: "Valid email is required" }),
-    name: z.string().min(1, { message: "Name is required" }),
-    gender: GenderEnum,
-    role: UserRoleEnum,
-    status: UserStatusEnum.optional(),
-    profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
-  }),
+  email: z.string().email({ message: "Valid email is required" }),
+  name: z.string().min(1, { message: "Name is required" }),
+  gender: GenderEnum,
+  password:z.string(),
+  role: UserRoleEnum.default("USER"),
+  status: UserStatusEnum.optional(),
+  profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
 });
 
 export const UserValidation = {

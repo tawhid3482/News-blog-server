@@ -10,25 +10,11 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Patient create successfully!",
+    message: "User create successfully!",
     data: result,
   });
 });
 
-// const getAllUser = catchAsync(async (req: Request, res: Response) => {
-//   const filters = pick(req.query, userFilterableFields);
-//   const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
-//   const result = await userService.getAllUser(filters, options);
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Users retrieval successfully',
-//     meta: result.meta,
-//     data: result.data,
-//   });
-// });
-
 export const userController = {
   createUser,
-  //   getAllUser
 };
