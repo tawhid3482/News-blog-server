@@ -1,0 +1,226 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(uuid())
+  email         String          @unique
+  password      String
+  name          String
+  profilePhoto  String?
+  role          UserRole
+  status        UserStatus      @default(ACTIVE)
+  gender        Gender
+  createdAt     DateTime        @default(now())
+  updateAt      DateTime        @updatedAt
+  admin         Admin?
+  WebsiteReview WebsiteReview[]
+  postViews     PostView[]
+
+  @@map("users")
+}
+
+model Admin {
+  id            String   @id @default(uuid())
+  userId        String   @unique
+  name          String
+  profilePhoto  String?
+  contactNumber String?
+  isDeleted     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id])
+}
+
+model Author {
+  id            String       @id @default(uuid())
+  email         String       @unique
+  name          String
+  profilePhoto  String
+  contactNumber String
+  address       String?
+  bio           String?
+  socialLinks   Json?
+  isVerified    Boolean      @default(false)
+  totalPosts    Int          @default(0)
+  totalReacts   Int          @default(0)
+  status        AuthorStatus @default(ACTIVE)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  // posts Post[]
+  Post Post[]
+}
+
+model Editor {
+  id            String     @id @default(uuid())
+  email         String     @unique
+  name          String
+  profilePhoto  String
+  contactNumber String
+  address       String?
+  bio           String?
+  role          EditorRole @default(STANDARD)
+  isActive      Boolean    @default(true)
+  isVerified    Boolean    @default(false)
+  socialLinks   Json?
+  // assignedPosts Post[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Post {
+  id          String     @id @default(uuid())
+  title       String
+  slug        String     @unique
+  summary     String?
+  content     String
+  coverImage  String?
+  authorId    String
+  author      Author     @relation(fields: [authorId], references: [id])
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+  tags        Tag[]      @relation("PostTags")
+  isPublished Boolean    @default(false)
+  publishedAt DateTime?
+  status      PostStatus @default(DRAFT)
+  reactions   Reaction[]
+  comments    Comment[]
+  viewsCount  Int        @default(0) // শুধু ভিউ কাউন্ট
+  postViews   PostView[]
+  readingTime Int?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Category {
+  id    String @id @default(uuid())
+  name  String @unique
+  slug  String @unique
+  posts Post[]
+}
+
+model Tag {
+  id    String @id @default(uuid())
+  name  String @unique
+  posts Post[] @relation("PostTags")
+}
+
+model Reaction {
+  id        String       @id @default(uuid())
+  type      ReactionType
+  userId    String
+  postId    String
+  post      Post         @relation(fields: [postId], references: [id])
+  createdAt DateTime     @default(now())
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model WebsiteReview {
+  id          String   @id @default(uuid())
+  content     String
+  rating      Int
+  reviewerId  String?
+  reviewer    User?    @relation(fields: [reviewerId], references: [id])
+  isAnonymous Boolean  @default(false)
+  isApproved  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Subscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PostView {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String? // anonymous views possible
+  ipAddress String?
+  userAgent String?
+  viewedAt  DateTime @default(now())
+
+  post Post  @relation(fields: [postId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  SUPER_ADMIN
+  EDITOR
+  AUTHOR
+}
+
+enum ReactionType {
+  LIKE
+  LOVE
+  ANGRY
+  SAD
+  WOW
+  FUNNY
+}
+
+enum UserStatus {
+  BLOCKED
+  ACTIVE
+  PENDING
+  DELETED
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AuthorStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum EditorRole {
+  STANDARD
+  SENIOR
+  CHIEF
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  BLOCKED
+}
