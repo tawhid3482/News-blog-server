@@ -132,6 +132,9 @@ const getAllPostFromDb = async (
     include: {
       category: true,
       tags: true,
+      reactions: true,
+      comments: true,
+      postViews: true,
       author: true,
     },
   });

@@ -4,6 +4,8 @@ import { AuthRoutes } from "../modules/auth/auth.route";
 import { PostRoutes } from "../modules/post/post.route";
 import { CategoryRoutes } from "../modules/category/category.route";
 import { TagRoutes } from "../modules/tag/tag.route";
+import { ReactionRoutes } from "../modules/reaction/reaction.route";
+import { commentRoutes } from "../modules/comment/comment.route";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -26,6 +28,14 @@ const moduleRoutes = [
   {
     path: "/tag",
     route: TagRoutes,
+  },
+  {
+    path: "/reaction",
+    route: ReactionRoutes,
+  },
+  {
+    path: "/comment",
+    route: commentRoutes,
   },
 ];
 
