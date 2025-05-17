@@ -3,9 +3,15 @@ import { userController } from "./user.controller";
 import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
 import validationRequest from "../../middlewares/validationRequest";
 import { UserValidation } from "./user.validation";
+import auth from "../../middlewares/auth";
+import { USER_ROLE } from "../../../enums/user";
 const router = express.Router();
 
-// router.get("/", userController.getAllUser);
+router.get(
+  "/",
+  auth(USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN),
+  userController.getAllUser
+);
 
 router.post(
   "/create-user",

@@ -25,7 +25,7 @@ model User {
   gender             Gender
   needPasswordChange Boolean?        @default(true)
   createdAt          DateTime        @default(now())
-  updateAt           DateTime        @updatedAt
+  updatedAt          DateTime        @updatedAt
   admin              Admin?
   WebsiteReview      WebsiteReview[]
   postViews          PostView[]

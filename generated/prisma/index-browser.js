@@ -131,7 +131,7 @@ exports.Prisma.UserScalarFieldEnum = {
   gender: 'gender',
   needPasswordChange: 'needPasswordChange',
   createdAt: 'createdAt',
-  updateAt: 'updateAt'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {

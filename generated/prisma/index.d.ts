@@ -2274,7 +2274,7 @@ export namespace Prisma {
     gender: $Enums.Gender | null
     needPasswordChange: boolean | null
     createdAt: Date | null
-    updateAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2288,7 +2288,7 @@ export namespace Prisma {
     gender: $Enums.Gender | null
     needPasswordChange: boolean | null
     createdAt: Date | null
-    updateAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2302,7 +2302,7 @@ export namespace Prisma {
     gender: number
     needPasswordChange: number
     createdAt: number
-    updateAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2318,7 +2318,7 @@ export namespace Prisma {
     gender?: true
     needPasswordChange?: true
     createdAt?: true
-    updateAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2332,7 +2332,7 @@ export namespace Prisma {
     gender?: true
     needPasswordChange?: true
     createdAt?: true
-    updateAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2346,7 +2346,7 @@ export namespace Prisma {
     gender?: true
     needPasswordChange?: true
     createdAt?: true
-    updateAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2433,7 +2433,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange: boolean | null
     createdAt: Date
-    updateAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2464,7 +2464,7 @@ export namespace Prisma {
     gender?: boolean
     needPasswordChange?: boolean
     createdAt?: boolean
-    updateAt?: boolean
+    updatedAt?: boolean
     admin?: boolean | User$adminArgs<ExtArgs>
     WebsiteReview?: boolean | User$WebsiteReviewArgs<ExtArgs>
     postViews?: boolean | User$postViewsArgs<ExtArgs>
@@ -2484,7 +2484,7 @@ export namespace Prisma {
     gender?: boolean
     needPasswordChange?: boolean
     createdAt?: boolean
-    updateAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2498,7 +2498,7 @@ export namespace Prisma {
     gender?: boolean
     needPasswordChange?: boolean
     createdAt?: boolean
-    updateAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2512,10 +2512,10 @@ export namespace Prisma {
     gender?: boolean
     needPasswordChange?: boolean
     createdAt?: boolean
-    updateAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "profilePhoto" | "role" | "status" | "gender" | "needPasswordChange" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "profilePhoto" | "role" | "status" | "gender" | "needPasswordChange" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | User$adminArgs<ExtArgs>
     WebsiteReview?: boolean | User$WebsiteReviewArgs<ExtArgs>
@@ -2547,7 +2547,7 @@ export namespace Prisma {
       gender: $Enums.Gender
       needPasswordChange: boolean | null
       createdAt: Date
-      updateAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2986,7 +2986,7 @@ export namespace Prisma {
     readonly gender: FieldRef<"User", 'Gender'>
     readonly needPasswordChange: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updateAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -16807,7 +16807,7 @@ export namespace Prisma {
     gender: 'gender',
     needPasswordChange: 'needPasswordChange',
     createdAt: 'createdAt',
-    updateAt: 'updateAt'
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -17213,7 +17213,7 @@ export namespace Prisma {
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
     needPasswordChange?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updateAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     WebsiteReview?: WebsiteReviewListRelationFilter
     postViews?: PostViewListRelationFilter
@@ -17232,7 +17232,7 @@ export namespace Prisma {
     gender?: SortOrder
     needPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updatedAt?: SortOrder
     admin?: AdminOrderByWithRelationInput
     WebsiteReview?: WebsiteReviewOrderByRelationAggregateInput
     postViews?: PostViewOrderByRelationAggregateInput
@@ -17254,7 +17254,7 @@ export namespace Prisma {
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
     needPasswordChange?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    updateAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     WebsiteReview?: WebsiteReviewListRelationFilter
     postViews?: PostViewListRelationFilter
@@ -17273,7 +17273,7 @@ export namespace Prisma {
     gender?: SortOrder
     needPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -17293,7 +17293,7 @@ export namespace Prisma {
     gender?: EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
     needPasswordChange?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type AdminWhereInput = {
@@ -18138,7 +18138,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
@@ -18157,7 +18157,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
@@ -18176,7 +18176,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
@@ -18195,7 +18195,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
@@ -18214,7 +18214,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -18228,7 +18228,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -18242,7 +18242,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdminCreateInput = {
@@ -19263,7 +19263,7 @@ export namespace Prisma {
     gender?: SortOrder
     needPasswordChange?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -19277,7 +19277,7 @@ export namespace Prisma {
     gender?: SortOrder
     needPasswordChange?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -19291,7 +19291,7 @@ export namespace Prisma {
     gender?: SortOrder
     needPasswordChange?: SortOrder
     createdAt?: SortOrder
-    updateAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -21433,7 +21433,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
@@ -21451,7 +21451,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
@@ -21485,7 +21485,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
@@ -21503,7 +21503,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
@@ -21521,7 +21521,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
@@ -21539,7 +21539,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
@@ -21625,7 +21625,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
@@ -21643,7 +21643,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
@@ -21698,7 +21698,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
@@ -21716,7 +21716,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
@@ -21750,7 +21750,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
@@ -21768,7 +21768,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
@@ -22424,7 +22424,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
@@ -22442,7 +22442,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
@@ -22476,7 +22476,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
@@ -22494,7 +22494,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
@@ -22559,7 +22559,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     Author?: AuthorCreateNestedOneWithoutUserInput
@@ -22577,7 +22577,7 @@ export namespace Prisma {
     gender: $Enums.Gender
     needPasswordChange?: boolean | null
     createdAt?: Date | string
-    updateAt?: Date | string
+    updatedAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
@@ -22664,7 +22664,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
@@ -22682,7 +22682,7 @@ export namespace Prisma {
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
