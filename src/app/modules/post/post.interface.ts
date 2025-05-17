@@ -1,9 +1,8 @@
-import { SetNewsType, PostStatus } from "../../../../generated/prisma";
+import { PostStatus } from "../../../../generated/prisma";
 import { Author, Category, Tag, Reaction, Comment, PostView } from "../../../../generated/prisma";
 
 export type TPost = {
   title: string;
-  newType: SetNewsType;
   slug: string;
   summary?: string;
   content: string;

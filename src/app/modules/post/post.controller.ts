@@ -6,7 +6,8 @@ import sendResponse from "../../../shared/sendResponse";
 import { postService } from "./post.service";
 
 const createPost = catchAsync(async (req: Request, res: Response) => {
-  const result = await postService.createPostIntoDB(req);
+  const { userId } = req.user;
+  const result = await postService.createPostIntoDB(req, userId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

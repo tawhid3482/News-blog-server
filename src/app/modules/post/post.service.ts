@@ -4,7 +4,7 @@ import { IUploadFile } from "../../../interfaces/file";
 import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
 import prisma from "../../../shared/prisma"; // assuming this is your Prisma client instance
 
-const createPostIntoDB = async (req: Request) => {
+const createPostIntoDB = async (req: Request, userId: string) => {
   const file = req.file as IUploadFile;
 
   let coverImage: string | undefined = undefined;
@@ -15,22 +15,9 @@ const createPostIntoDB = async (req: Request) => {
     };
     coverImage = uploadedImage?.secure_url;
   }
-
-  const userId = req.user?.id; // assuming you get user from token middleware
   if (!userId) throw new Error("Unauthorized: Missing user ID");
 
-  const {
-    title,
-    slug,
-    summary,
-    content,
-    categoryId,
-    tags,
-    isPublished,
-    publishedAt,
-    status,
-    readingTime,
-  } = req.body;
+  const { title, slug, summary, content, categoryId, tags } = req.body;
 
   const post = await prisma.post.create({
     data: {
@@ -41,12 +28,8 @@ const createPostIntoDB = async (req: Request) => {
       coverImage,
       categoryId,
       authorId: userId,
-      isPublished,
-      publishedAt,
-      status,
-      readingTime,
       tags: {
-        connect: tags?.map((tagId: string) => ({ id: tagId })),
+        connect: tags?.map((tag: { id: string }) => ({ id: tag.id })),
       },
     },
     include: {
@@ -54,7 +37,6 @@ const createPostIntoDB = async (req: Request) => {
       tags: true,
     },
   });
-
   return post;
 };
 
