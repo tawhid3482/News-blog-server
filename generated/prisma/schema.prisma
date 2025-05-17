@@ -15,33 +15,36 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  email         String          @unique
-  password      String
-  name          String
-  profilePhoto  String?
-  role          UserRole
-  status        UserStatus      @default(ACTIVE)
-  gender        Gender
-  createdAt     DateTime        @default(now())
-  updateAt      DateTime        @updatedAt
-  admin         Admin?
-  WebsiteReview WebsiteReview[]
-  postViews     PostView[]
+  id                 String          @id @default(uuid())
+  email              String          @unique
+  password           String
+  name               String
+  profilePhoto       String?
+  role               UserRole
+  status             UserStatus      @default(ACTIVE)
+  gender             Gender
+  needPasswordChange Boolean?        @default(true)
+  createdAt          DateTime        @default(now())
+  updateAt           DateTime        @updatedAt
+  admin              Admin?
+  WebsiteReview      WebsiteReview[]
+  postViews          PostView[]
+  Author             Author?
+  Editor             Editor?
 
   @@map("users")
 }
 
 model Admin {
   id            String   @id @default(uuid())
-  userId        String   @unique
+  email         String   @unique
   name          String
   profilePhoto  String?
   contactNumber String?
   isDeleted     Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  user          User     @relation(fields: [userId], references: [id])
+  user          User     @relation(fields: [email], references: [email])
 }
 
 model Author {
@@ -59,6 +62,7 @@ model Author {
   status        AuthorStatus @default(ACTIVE)
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
+  user          User         @relation(fields: [email], references: [email])
 
   // posts Post[]
   Post Post[]
@@ -76,9 +80,11 @@ model Editor {
   isActive      Boolean    @default(true)
   isVerified    Boolean    @default(false)
   socialLinks   Json?
+  user          User       @relation(fields: [email], references: [email])
+
   // assignedPosts Post[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Post {

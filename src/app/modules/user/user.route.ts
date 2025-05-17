@@ -17,6 +17,7 @@ router.post(
     return userController.createUser(req, res, next);
   }
 );
+
 router.post(
   "/create-admin",
   FileUploadHelper.upload.single("file"),
@@ -25,6 +26,28 @@ router.post(
       JSON.parse(req.body.data)
     );
     return userController.createAdmin(req, res, next);
+  }
+);
+
+router.post(
+  "/create-author",
+  FileUploadHelper.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = UserValidation.createAuthorValidation.parse(
+      JSON.parse(req.body.data)
+    );
+    return userController.createAuthor(req, res, next);
+  }
+);
+
+router.post(
+  "/create-editor",
+  FileUploadHelper.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = UserValidation.createEditorValidation.parse(
+      JSON.parse(req.body.data)
+    );
+    return userController.createEditor(req, res, next);
   }
 );
 

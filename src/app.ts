@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./app/routes";
 import httpStatus from "http-status";
+import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 
 const app: Application = express();
 
@@ -21,6 +22,9 @@ app.get("/", async (req: Request, res: Response) => {
     message: "News Server working....",
   });
 });
+
+//global error handler
+app.use(globalErrorHandler);
 
 //handle not found
 app.use((req: Request, res: Response) => {

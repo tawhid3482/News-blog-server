@@ -2272,6 +2272,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     status: $Enums.UserStatus | null
     gender: $Enums.Gender | null
+    needPasswordChange: boolean | null
     createdAt: Date | null
     updateAt: Date | null
   }
@@ -2285,6 +2286,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     status: $Enums.UserStatus | null
     gender: $Enums.Gender | null
+    needPasswordChange: boolean | null
     createdAt: Date | null
     updateAt: Date | null
   }
@@ -2298,6 +2300,7 @@ export namespace Prisma {
     role: number
     status: number
     gender: number
+    needPasswordChange: number
     createdAt: number
     updateAt: number
     _all: number
@@ -2313,6 +2316,7 @@ export namespace Prisma {
     role?: true
     status?: true
     gender?: true
+    needPasswordChange?: true
     createdAt?: true
     updateAt?: true
   }
@@ -2326,6 +2330,7 @@ export namespace Prisma {
     role?: true
     status?: true
     gender?: true
+    needPasswordChange?: true
     createdAt?: true
     updateAt?: true
   }
@@ -2339,6 +2344,7 @@ export namespace Prisma {
     role?: true
     status?: true
     gender?: true
+    needPasswordChange?: true
     createdAt?: true
     updateAt?: true
     _all?: true
@@ -2425,6 +2431,7 @@ export namespace Prisma {
     role: $Enums.UserRole
     status: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange: boolean | null
     createdAt: Date
     updateAt: Date
     _count: UserCountAggregateOutputType | null
@@ -2455,11 +2462,14 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     gender?: boolean
+    needPasswordChange?: boolean
     createdAt?: boolean
     updateAt?: boolean
     admin?: boolean | User$adminArgs<ExtArgs>
     WebsiteReview?: boolean | User$WebsiteReviewArgs<ExtArgs>
     postViews?: boolean | User$postViewsArgs<ExtArgs>
+    Author?: boolean | User$AuthorArgs<ExtArgs>
+    Editor?: boolean | User$EditorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2472,6 +2482,7 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     gender?: boolean
+    needPasswordChange?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -2485,6 +2496,7 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     gender?: boolean
+    needPasswordChange?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -2498,15 +2510,18 @@ export namespace Prisma {
     role?: boolean
     status?: boolean
     gender?: boolean
+    needPasswordChange?: boolean
     createdAt?: boolean
     updateAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "profilePhoto" | "role" | "status" | "gender" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "profilePhoto" | "role" | "status" | "gender" | "needPasswordChange" | "createdAt" | "updateAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     admin?: boolean | User$adminArgs<ExtArgs>
     WebsiteReview?: boolean | User$WebsiteReviewArgs<ExtArgs>
     postViews?: boolean | User$postViewsArgs<ExtArgs>
+    Author?: boolean | User$AuthorArgs<ExtArgs>
+    Editor?: boolean | User$EditorArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2518,6 +2533,8 @@ export namespace Prisma {
       admin: Prisma.$AdminPayload<ExtArgs> | null
       WebsiteReview: Prisma.$WebsiteReviewPayload<ExtArgs>[]
       postViews: Prisma.$PostViewPayload<ExtArgs>[]
+      Author: Prisma.$AuthorPayload<ExtArgs> | null
+      Editor: Prisma.$EditorPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2528,6 +2545,7 @@ export namespace Prisma {
       role: $Enums.UserRole
       status: $Enums.UserStatus
       gender: $Enums.Gender
+      needPasswordChange: boolean | null
       createdAt: Date
       updateAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2927,6 +2945,8 @@ export namespace Prisma {
     admin<T extends User$adminArgs<ExtArgs> = {}>(args?: Subset<T, User$adminArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     WebsiteReview<T extends User$WebsiteReviewArgs<ExtArgs> = {}>(args?: Subset<T, User$WebsiteReviewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebsiteReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     postViews<T extends User$postViewsArgs<ExtArgs> = {}>(args?: Subset<T, User$postViewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Author<T extends User$AuthorArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthorArgs<ExtArgs>>): Prisma__AuthorClient<$Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Editor<T extends User$EditorArgs<ExtArgs> = {}>(args?: Subset<T, User$EditorArgs<ExtArgs>>): Prisma__EditorClient<$Result.GetResult<Prisma.$EditorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2964,6 +2984,7 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'UserRole'>
     readonly status: FieldRef<"User", 'UserStatus'>
     readonly gender: FieldRef<"User", 'Gender'>
+    readonly needPasswordChange: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updateAt: FieldRef<"User", 'DateTime'>
   }
@@ -3421,6 +3442,44 @@ export namespace Prisma {
   }
 
   /**
+   * User.Author
+   */
+  export type User$AuthorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Author
+     */
+    select?: AuthorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Author
+     */
+    omit?: AuthorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorInclude<ExtArgs> | null
+    where?: AuthorWhereInput
+  }
+
+  /**
+   * User.Editor
+   */
+  export type User$EditorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Editor
+     */
+    select?: EditorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Editor
+     */
+    omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    where?: EditorWhereInput
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3451,7 +3510,7 @@ export namespace Prisma {
 
   export type AdminMinAggregateOutputType = {
     id: string | null
-    userId: string | null
+    email: string | null
     name: string | null
     profilePhoto: string | null
     contactNumber: string | null
@@ -3462,7 +3521,7 @@ export namespace Prisma {
 
   export type AdminMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
+    email: string | null
     name: string | null
     profilePhoto: string | null
     contactNumber: string | null
@@ -3473,7 +3532,7 @@ export namespace Prisma {
 
   export type AdminCountAggregateOutputType = {
     id: number
-    userId: number
+    email: number
     name: number
     profilePhoto: number
     contactNumber: number
@@ -3486,7 +3545,7 @@ export namespace Prisma {
 
   export type AdminMinAggregateInputType = {
     id?: true
-    userId?: true
+    email?: true
     name?: true
     profilePhoto?: true
     contactNumber?: true
@@ -3497,7 +3556,7 @@ export namespace Prisma {
 
   export type AdminMaxAggregateInputType = {
     id?: true
-    userId?: true
+    email?: true
     name?: true
     profilePhoto?: true
     contactNumber?: true
@@ -3508,7 +3567,7 @@ export namespace Prisma {
 
   export type AdminCountAggregateInputType = {
     id?: true
-    userId?: true
+    email?: true
     name?: true
     profilePhoto?: true
     contactNumber?: true
@@ -3592,7 +3651,7 @@ export namespace Prisma {
 
   export type AdminGroupByOutputType = {
     id: string
-    userId: string
+    email: string
     name: string
     profilePhoto: string | null
     contactNumber: string | null
@@ -3620,7 +3679,7 @@ export namespace Prisma {
 
   export type AdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    email?: boolean
     name?: boolean
     profilePhoto?: boolean
     contactNumber?: boolean
@@ -3632,7 +3691,7 @@ export namespace Prisma {
 
   export type AdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    email?: boolean
     name?: boolean
     profilePhoto?: boolean
     contactNumber?: boolean
@@ -3644,7 +3703,7 @@ export namespace Prisma {
 
   export type AdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    email?: boolean
     name?: boolean
     profilePhoto?: boolean
     contactNumber?: boolean
@@ -3656,7 +3715,7 @@ export namespace Prisma {
 
   export type AdminSelectScalar = {
     id?: boolean
-    userId?: boolean
+    email?: boolean
     name?: boolean
     profilePhoto?: boolean
     contactNumber?: boolean
@@ -3665,7 +3724,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "profilePhoto" | "contactNumber" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "profilePhoto" | "contactNumber" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
   export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3683,7 +3742,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      email: string
       name: string
       profilePhoto: string | null
       contactNumber: string | null
@@ -4115,7 +4174,7 @@ export namespace Prisma {
    */
   interface AdminFieldRefs {
     readonly id: FieldRef<"Admin", 'String'>
-    readonly userId: FieldRef<"Admin", 'String'>
+    readonly email: FieldRef<"Admin", 'String'>
     readonly name: FieldRef<"Admin", 'String'>
     readonly profilePhoto: FieldRef<"Admin", 'String'>
     readonly contactNumber: FieldRef<"Admin", 'String'>
@@ -4806,6 +4865,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
     Post?: boolean | Author$PostArgs<ExtArgs>
     _count?: boolean | AuthorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["author"]>
@@ -4825,6 +4885,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["author"]>
 
   export type AuthorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4842,6 +4903,7 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["author"]>
 
   export type AuthorSelectScalar = {
@@ -4863,15 +4925,21 @@ export namespace Prisma {
 
   export type AuthorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "profilePhoto" | "contactNumber" | "address" | "bio" | "socialLinks" | "isVerified" | "totalPosts" | "totalReacts" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["author"]>
   export type AuthorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
     Post?: boolean | Author$PostArgs<ExtArgs>
     _count?: boolean | AuthorCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type AuthorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AuthorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AuthorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AuthorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $AuthorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Author"
     objects: {
+      user: Prisma.$UserPayload<ExtArgs>
       Post: Prisma.$PostPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5283,6 +5351,7 @@ export namespace Prisma {
    */
   export interface Prisma__AuthorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Post<T extends Author$PostArgs<ExtArgs> = {}>(args?: Subset<T, Author$PostArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5576,6 +5645,10 @@ export namespace Prisma {
      */
     data: AuthorCreateManyInput | AuthorCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5646,6 +5719,10 @@ export namespace Prisma {
      * Limit how many Authors to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5981,6 +6058,7 @@ export namespace Prisma {
     socialLinks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["editor"]>
 
   export type EditorSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5997,6 +6075,7 @@ export namespace Prisma {
     socialLinks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["editor"]>
 
   export type EditorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6013,6 +6092,7 @@ export namespace Prisma {
     socialLinks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["editor"]>
 
   export type EditorSelectScalar = {
@@ -6032,10 +6112,21 @@ export namespace Prisma {
   }
 
   export type EditorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "profilePhoto" | "contactNumber" | "address" | "bio" | "role" | "isActive" | "isVerified" | "socialLinks" | "createdAt" | "updatedAt", ExtArgs["result"]["editor"]>
+  export type EditorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EditorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EditorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $EditorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Editor"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
@@ -6444,6 +6535,7 @@ export namespace Prisma {
    */
   export interface Prisma__EditorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6503,6 +6595,10 @@ export namespace Prisma {
      */
     omit?: EditorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    /**
      * Filter, which Editor to fetch.
      */
     where: EditorWhereUniqueInput
@@ -6521,6 +6617,10 @@ export namespace Prisma {
      */
     omit?: EditorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    /**
      * Filter, which Editor to fetch.
      */
     where: EditorWhereUniqueInput
@@ -6538,6 +6638,10 @@ export namespace Prisma {
      * Omit specific fields from the Editor
      */
     omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
     /**
      * Filter, which Editor to fetch.
      */
@@ -6587,6 +6691,10 @@ export namespace Prisma {
      */
     omit?: EditorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    /**
      * Filter, which Editor to fetch.
      */
     where?: EditorWhereInput
@@ -6635,6 +6743,10 @@ export namespace Prisma {
      */
     omit?: EditorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    /**
      * Filter, which Editors to fetch.
      */
     where?: EditorWhereInput
@@ -6678,6 +6790,10 @@ export namespace Prisma {
      */
     omit?: EditorOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
+    /**
      * The data needed to create a Editor.
      */
     data: XOR<EditorCreateInput, EditorUncheckedCreateInput>
@@ -6711,6 +6827,10 @@ export namespace Prisma {
      */
     data: EditorCreateManyInput | EditorCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6725,6 +6845,10 @@ export namespace Prisma {
      * Omit specific fields from the Editor
      */
     omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
     /**
      * The data needed to update a Editor.
      */
@@ -6777,6 +6901,10 @@ export namespace Prisma {
      * Limit how many Editors to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6791,6 +6919,10 @@ export namespace Prisma {
      * Omit specific fields from the Editor
      */
     omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
     /**
      * The filter to search for the Editor to update in case it exists.
      */
@@ -6817,6 +6949,10 @@ export namespace Prisma {
      * Omit specific fields from the Editor
      */
     omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
     /**
      * Filter which Editor to delete.
      */
@@ -6849,6 +6985,10 @@ export namespace Prisma {
      * Omit specific fields from the Editor
      */
     omit?: EditorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditorInclude<ExtArgs> | null
   }
 
 
@@ -16665,6 +16805,7 @@ export namespace Prisma {
     role: 'role',
     status: 'status',
     gender: 'gender',
+    needPasswordChange: 'needPasswordChange',
     createdAt: 'createdAt',
     updateAt: 'updateAt'
   };
@@ -16674,7 +16815,7 @@ export namespace Prisma {
 
   export const AdminScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
+    email: 'email',
     name: 'name',
     profilePhoto: 'profilePhoto',
     contactNumber: 'contactNumber',
@@ -16937,6 +17078,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -16947,13 +17095,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -17070,11 +17211,14 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    needPasswordChange?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     WebsiteReview?: WebsiteReviewListRelationFilter
     postViews?: PostViewListRelationFilter
+    Author?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
+    Editor?: XOR<EditorNullableScalarRelationFilter, EditorWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17086,11 +17230,14 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     gender?: SortOrder
+    needPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
     admin?: AdminOrderByWithRelationInput
     WebsiteReview?: WebsiteReviewOrderByRelationAggregateInput
     postViews?: PostViewOrderByRelationAggregateInput
+    Author?: AuthorOrderByWithRelationInput
+    Editor?: EditorOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17105,11 +17252,14 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusFilter<"User"> | $Enums.UserStatus
     gender?: EnumGenderFilter<"User"> | $Enums.Gender
+    needPasswordChange?: BoolNullableFilter<"User"> | boolean | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updateAt?: DateTimeFilter<"User"> | Date | string
     admin?: XOR<AdminNullableScalarRelationFilter, AdminWhereInput> | null
     WebsiteReview?: WebsiteReviewListRelationFilter
     postViews?: PostViewListRelationFilter
+    Author?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
+    Editor?: XOR<EditorNullableScalarRelationFilter, EditorWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -17121,6 +17271,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     gender?: SortOrder
+    needPasswordChange?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -17140,6 +17291,7 @@ export namespace Prisma {
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     status?: EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
     gender?: EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
+    needPasswordChange?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updateAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -17149,7 +17301,7 @@ export namespace Prisma {
     OR?: AdminWhereInput[]
     NOT?: AdminWhereInput | AdminWhereInput[]
     id?: StringFilter<"Admin"> | string
-    userId?: StringFilter<"Admin"> | string
+    email?: StringFilter<"Admin"> | string
     name?: StringFilter<"Admin"> | string
     profilePhoto?: StringNullableFilter<"Admin"> | string | null
     contactNumber?: StringNullableFilter<"Admin"> | string | null
@@ -17161,7 +17313,7 @@ export namespace Prisma {
 
   export type AdminOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    email?: SortOrder
     name?: SortOrder
     profilePhoto?: SortOrderInput | SortOrder
     contactNumber?: SortOrderInput | SortOrder
@@ -17173,7 +17325,7 @@ export namespace Prisma {
 
   export type AdminWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId?: string
+    email?: string
     AND?: AdminWhereInput | AdminWhereInput[]
     OR?: AdminWhereInput[]
     NOT?: AdminWhereInput | AdminWhereInput[]
@@ -17184,11 +17336,11 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Admin"> | Date | string
     updatedAt?: DateTimeFilter<"Admin"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "userId">
+  }, "id" | "email">
 
   export type AdminOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    email?: SortOrder
     name?: SortOrder
     profilePhoto?: SortOrderInput | SortOrder
     contactNumber?: SortOrderInput | SortOrder
@@ -17205,7 +17357,7 @@ export namespace Prisma {
     OR?: AdminScalarWhereWithAggregatesInput[]
     NOT?: AdminScalarWhereWithAggregatesInput | AdminScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Admin"> | string
-    userId?: StringWithAggregatesFilter<"Admin"> | string
+    email?: StringWithAggregatesFilter<"Admin"> | string
     name?: StringWithAggregatesFilter<"Admin"> | string
     profilePhoto?: StringNullableWithAggregatesFilter<"Admin"> | string | null
     contactNumber?: StringNullableWithAggregatesFilter<"Admin"> | string | null
@@ -17232,6 +17384,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFilter<"Author"> | $Enums.AuthorStatus
     createdAt?: DateTimeFilter<"Author"> | Date | string
     updatedAt?: DateTimeFilter<"Author"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Post?: PostListRelationFilter
   }
 
@@ -17250,6 +17403,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
     Post?: PostOrderByRelationAggregateInput
   }
 
@@ -17271,6 +17425,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFilter<"Author"> | $Enums.AuthorStatus
     createdAt?: DateTimeFilter<"Author"> | Date | string
     updatedAt?: DateTimeFilter<"Author"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Post?: PostListRelationFilter
   }, "id" | "email">
 
@@ -17333,6 +17488,7 @@ export namespace Prisma {
     socialLinks?: JsonNullableFilter<"Editor">
     createdAt?: DateTimeFilter<"Editor"> | Date | string
     updatedAt?: DateTimeFilter<"Editor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type EditorOrderByWithRelationInput = {
@@ -17349,6 +17505,7 @@ export namespace Prisma {
     socialLinks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type EditorWhereUniqueInput = Prisma.AtLeast<{
@@ -17368,6 +17525,7 @@ export namespace Prisma {
     socialLinks?: JsonNullableFilter<"Editor">
     createdAt?: DateTimeFilter<"Editor"> | Date | string
     updatedAt?: DateTimeFilter<"Editor"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "email">
 
   export type EditorOrderByWithAggregationInput = {
@@ -17978,11 +18136,14 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17994,11 +18155,14 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -18010,11 +18174,14 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -18026,11 +18193,14 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18042,6 +18212,7 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
   }
@@ -18055,6 +18226,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18068,6 +18240,7 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18085,7 +18258,7 @@ export namespace Prisma {
 
   export type AdminUncheckedCreateInput = {
     id?: string
-    userId: string
+    email: string
     name: string
     profilePhoto?: string | null
     contactNumber?: string | null
@@ -18107,7 +18280,7 @@ export namespace Prisma {
 
   export type AdminUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18118,7 +18291,7 @@ export namespace Prisma {
 
   export type AdminCreateManyInput = {
     id?: string
-    userId: string
+    email: string
     name: string
     profilePhoto?: string | null
     contactNumber?: string | null
@@ -18139,7 +18312,7 @@ export namespace Prisma {
 
   export type AdminUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18150,7 +18323,6 @@ export namespace Prisma {
 
   export type AuthorCreateInput = {
     id?: string
-    email: string
     name: string
     profilePhoto: string
     contactNumber: string
@@ -18163,6 +18335,7 @@ export namespace Prisma {
     status?: $Enums.AuthorStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAuthorInput
     Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
@@ -18186,7 +18359,6 @@ export namespace Prisma {
 
   export type AuthorUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: StringFieldUpdateOperationsInput | string
     contactNumber?: StringFieldUpdateOperationsInput | string
@@ -18199,6 +18371,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAuthorNestedInput
     Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
@@ -18239,7 +18412,6 @@ export namespace Prisma {
 
   export type AuthorUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: StringFieldUpdateOperationsInput | string
     contactNumber?: StringFieldUpdateOperationsInput | string
@@ -18273,7 +18445,6 @@ export namespace Prisma {
 
   export type EditorCreateInput = {
     id?: string
-    email: string
     name: string
     profilePhoto: string
     contactNumber: string
@@ -18285,6 +18456,7 @@ export namespace Prisma {
     socialLinks?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutEditorInput
   }
 
   export type EditorUncheckedCreateInput = {
@@ -18305,7 +18477,6 @@ export namespace Prisma {
 
   export type EditorUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: StringFieldUpdateOperationsInput | string
     contactNumber?: StringFieldUpdateOperationsInput | string
@@ -18317,6 +18488,7 @@ export namespace Prisma {
     socialLinks?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutEditorNestedInput
   }
 
   export type EditorUncheckedUpdateInput = {
@@ -18353,7 +18525,6 @@ export namespace Prisma {
 
   export type EditorUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: StringFieldUpdateOperationsInput | string
     contactNumber?: StringFieldUpdateOperationsInput | string
@@ -19025,6 +19196,11 @@ export namespace Prisma {
     not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19053,6 +19229,16 @@ export namespace Prisma {
     none?: PostViewWhereInput
   }
 
+  export type AuthorNullableScalarRelationFilter = {
+    is?: AuthorWhereInput | null
+    isNot?: AuthorWhereInput | null
+  }
+
+  export type EditorNullableScalarRelationFilter = {
+    is?: EditorWhereInput | null
+    isNot?: EditorWhereInput | null
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -19075,6 +19261,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     gender?: SortOrder
+    needPasswordChange?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -19088,6 +19275,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     gender?: SortOrder
+    needPasswordChange?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -19101,6 +19289,7 @@ export namespace Prisma {
     role?: SortOrder
     status?: SortOrder
     gender?: SortOrder
+    needPasswordChange?: SortOrder
     createdAt?: SortOrder
     updateAt?: SortOrder
   }
@@ -19171,6 +19360,14 @@ export namespace Prisma {
     _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -19197,7 +19394,7 @@ export namespace Prisma {
 
   export type AdminCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    email?: SortOrder
     name?: SortOrder
     profilePhoto?: SortOrder
     contactNumber?: SortOrder
@@ -19208,7 +19405,7 @@ export namespace Prisma {
 
   export type AdminMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    email?: SortOrder
     name?: SortOrder
     profilePhoto?: SortOrder
     contactNumber?: SortOrder
@@ -19219,7 +19416,7 @@ export namespace Prisma {
 
   export type AdminMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    email?: SortOrder
     name?: SortOrder
     profilePhoto?: SortOrder
     contactNumber?: SortOrder
@@ -19881,6 +20078,18 @@ export namespace Prisma {
     connect?: PostViewWhereUniqueInput | PostViewWhereUniqueInput[]
   }
 
+  export type AuthorCreateNestedOneWithoutUserInput = {
+    create?: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AuthorCreateOrConnectWithoutUserInput
+    connect?: AuthorWhereUniqueInput
+  }
+
+  export type EditorCreateNestedOneWithoutUserInput = {
+    create?: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EditorCreateOrConnectWithoutUserInput
+    connect?: EditorWhereUniqueInput
+  }
+
   export type AdminUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -19901,6 +20110,18 @@ export namespace Prisma {
     connect?: PostViewWhereUniqueInput | PostViewWhereUniqueInput[]
   }
 
+  export type AuthorUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AuthorCreateOrConnectWithoutUserInput
+    connect?: AuthorWhereUniqueInput
+  }
+
+  export type EditorUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EditorCreateOrConnectWithoutUserInput
+    connect?: EditorWhereUniqueInput
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -19919,6 +20140,10 @@ export namespace Prisma {
 
   export type EnumGenderFieldUpdateOperationsInput = {
     set?: $Enums.Gender
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -19963,6 +20188,26 @@ export namespace Prisma {
     deleteMany?: PostViewScalarWhereInput | PostViewScalarWhereInput[]
   }
 
+  export type AuthorUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AuthorCreateOrConnectWithoutUserInput
+    upsert?: AuthorUpsertWithoutUserInput
+    disconnect?: AuthorWhereInput | boolean
+    delete?: AuthorWhereInput | boolean
+    connect?: AuthorWhereUniqueInput
+    update?: XOR<XOR<AuthorUpdateToOneWithWhereWithoutUserInput, AuthorUpdateWithoutUserInput>, AuthorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EditorUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EditorCreateOrConnectWithoutUserInput
+    upsert?: EditorUpsertWithoutUserInput
+    disconnect?: EditorWhereInput | boolean
+    delete?: EditorWhereInput | boolean
+    connect?: EditorWhereUniqueInput
+    update?: XOR<XOR<EditorUpdateToOneWithWhereWithoutUserInput, EditorUpdateWithoutUserInput>, EditorUncheckedUpdateWithoutUserInput>
+  }
+
   export type AdminUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -20001,6 +20246,26 @@ export namespace Prisma {
     deleteMany?: PostViewScalarWhereInput | PostViewScalarWhereInput[]
   }
 
+  export type AuthorUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AuthorCreateOrConnectWithoutUserInput
+    upsert?: AuthorUpsertWithoutUserInput
+    disconnect?: AuthorWhereInput | boolean
+    delete?: AuthorWhereInput | boolean
+    connect?: AuthorWhereUniqueInput
+    update?: XOR<XOR<AuthorUpdateToOneWithWhereWithoutUserInput, AuthorUpdateWithoutUserInput>, AuthorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EditorUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: EditorCreateOrConnectWithoutUserInput
+    upsert?: EditorUpsertWithoutUserInput
+    disconnect?: EditorWhereInput | boolean
+    delete?: EditorWhereInput | boolean
+    connect?: EditorWhereUniqueInput
+    update?: XOR<XOR<EditorUpdateToOneWithWhereWithoutUserInput, EditorUpdateWithoutUserInput>, EditorUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserCreateNestedOneWithoutAdminInput = {
     create?: XOR<UserCreateWithoutAdminInput, UserUncheckedCreateWithoutAdminInput>
     connectOrCreate?: UserCreateOrConnectWithoutAdminInput
@@ -20017,6 +20282,12 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutAdminInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdminInput, UserUpdateWithoutAdminInput>, UserUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type UserCreateNestedOneWithoutAuthorInput = {
+    create?: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthorInput
+    connect?: UserWhereUniqueInput
   }
 
   export type PostCreateNestedManyWithoutAuthorInput = {
@@ -20043,6 +20314,14 @@ export namespace Prisma {
 
   export type EnumAuthorStatusFieldUpdateOperationsInput = {
     set?: $Enums.AuthorStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutAuthorNestedInput = {
+    create?: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAuthorInput
+    upsert?: UserUpsertWithoutAuthorInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthorInput, UserUpdateWithoutAuthorInput>, UserUncheckedUpdateWithoutAuthorInput>
   }
 
   export type PostUpdateManyWithoutAuthorNestedInput = {
@@ -20073,8 +20352,22 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutEditorInput = {
+    create?: XOR<UserCreateWithoutEditorInput, UserUncheckedCreateWithoutEditorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEditorInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type EnumEditorRoleFieldUpdateOperationsInput = {
     set?: $Enums.EditorRole
+  }
+
+  export type UserUpdateOneRequiredWithoutEditorNestedInput = {
+    create?: XOR<UserCreateWithoutEditorInput, UserUncheckedCreateWithoutEditorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEditorInput
+    upsert?: UserUpsertWithoutEditorInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEditorInput, UserUpdateWithoutEditorInput>, UserUncheckedUpdateWithoutEditorInput>
   }
 
   export type AuthorCreateNestedOneWithoutPostInput = {
@@ -20492,6 +20785,11 @@ export namespace Prisma {
     not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -20587,6 +20885,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumGenderFilter<$PrismaModel>
     _max?: NestedEnumGenderFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -20867,6 +21173,80 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AuthorCreateWithoutUserInput = {
+    id?: string
+    name: string
+    profilePhoto: string
+    contactNumber: string
+    address?: string | null
+    bio?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    isVerified?: boolean
+    totalPosts?: number
+    totalReacts?: number
+    status?: $Enums.AuthorStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Post?: PostCreateNestedManyWithoutAuthorInput
+  }
+
+  export type AuthorUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    profilePhoto: string
+    contactNumber: string
+    address?: string | null
+    bio?: string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    isVerified?: boolean
+    totalPosts?: number
+    totalReacts?: number
+    status?: $Enums.AuthorStatus
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type AuthorCreateOrConnectWithoutUserInput = {
+    where: AuthorWhereUniqueInput
+    create: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+  }
+
+  export type EditorCreateWithoutUserInput = {
+    id?: string
+    name: string
+    profilePhoto: string
+    contactNumber: string
+    address?: string | null
+    bio?: string | null
+    role?: $Enums.EditorRole
+    isActive?: boolean
+    isVerified?: boolean
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditorUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    profilePhoto: string
+    contactNumber: string
+    address?: string | null
+    bio?: string | null
+    role?: $Enums.EditorRole
+    isActive?: boolean
+    isVerified?: boolean
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditorCreateOrConnectWithoutUserInput = {
+    where: EditorWhereUniqueInput
+    create: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+  }
+
   export type AdminUpsertWithoutUserInput = {
     update: XOR<AdminUpdateWithoutUserInput, AdminUncheckedUpdateWithoutUserInput>
     create: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
@@ -20956,6 +21336,92 @@ export namespace Prisma {
     viewedAt?: DateTimeFilter<"PostView"> | Date | string
   }
 
+  export type AuthorUpsertWithoutUserInput = {
+    update: XOR<AuthorUpdateWithoutUserInput, AuthorUncheckedUpdateWithoutUserInput>
+    create: XOR<AuthorCreateWithoutUserInput, AuthorUncheckedCreateWithoutUserInput>
+    where?: AuthorWhereInput
+  }
+
+  export type AuthorUpdateToOneWithWhereWithoutUserInput = {
+    where?: AuthorWhereInput
+    data: XOR<AuthorUpdateWithoutUserInput, AuthorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AuthorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    totalPosts?: IntFieldUpdateOperationsInput | number
+    totalReacts?: IntFieldUpdateOperationsInput | number
+    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type AuthorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    totalPosts?: IntFieldUpdateOperationsInput | number
+    totalReacts?: IntFieldUpdateOperationsInput | number
+    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type EditorUpsertWithoutUserInput = {
+    update: XOR<EditorUpdateWithoutUserInput, EditorUncheckedUpdateWithoutUserInput>
+    create: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+    where?: EditorWhereInput
+  }
+
+  export type EditorUpdateToOneWithWhereWithoutUserInput = {
+    where?: EditorWhereInput
+    data: XOR<EditorUpdateWithoutUserInput, EditorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type EditorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEditorRoleFieldUpdateOperationsInput | $Enums.EditorRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumEditorRoleFieldUpdateOperationsInput | $Enums.EditorRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    socialLinks?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutAdminInput = {
     id?: string
     email: string
@@ -20965,10 +21431,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -20980,10 +21449,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -21011,10 +21483,13 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -21026,10 +21501,54 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutAuthorInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    admin?: AdminCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewCreateNestedManyWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAuthorInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
   }
 
   export type PostCreateWithoutAuthorInput = {
@@ -21084,6 +21603,53 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutAuthorInput = {
+    update: XOR<UserUpdateWithoutAuthorInput, UserUncheckedUpdateWithoutAuthorInput>
+    create: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAuthorInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAuthorInput, UserUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type UserUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
     where: PostWhereUniqueInput
     update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
@@ -21121,9 +21687,96 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Post"> | Date | string
   }
 
-  export type AuthorCreateWithoutPostInput = {
+  export type UserCreateWithoutEditorInput = {
     id?: string
     email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    admin?: AdminCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutEditorInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updateAt?: Date | string
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutEditorInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEditorInput, UserUncheckedCreateWithoutEditorInput>
+  }
+
+  export type UserUpsertWithoutEditorInput = {
+    update: XOR<UserUpdateWithoutEditorInput, UserUncheckedUpdateWithoutEditorInput>
+    create: XOR<UserCreateWithoutEditorInput, UserUncheckedCreateWithoutEditorInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEditorInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEditorInput, UserUncheckedUpdateWithoutEditorInput>
+  }
+
+  export type UserUpdateWithoutEditorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEditorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type AuthorCreateWithoutPostInput = {
+    id?: string
     name: string
     profilePhoto: string
     contactNumber: string
@@ -21136,6 +21789,7 @@ export namespace Prisma {
     status?: $Enums.AuthorStatus
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAuthorInput
   }
 
   export type AuthorUncheckedCreateWithoutPostInput = {
@@ -21279,7 +21933,6 @@ export namespace Prisma {
 
   export type AuthorUpdateWithoutPostInput = {
     id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     profilePhoto?: StringFieldUpdateOperationsInput | string
     contactNumber?: StringFieldUpdateOperationsInput | string
@@ -21292,6 +21945,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAuthorNestedInput
   }
 
   export type AuthorUncheckedUpdateWithoutPostInput = {
@@ -21768,10 +22422,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWebsiteReviewInput = {
@@ -21783,10 +22440,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWebsiteReviewInput = {
@@ -21814,10 +22474,13 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsiteReviewInput = {
@@ -21829,10 +22492,13 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type PostCreateWithoutPostViewsInput = {
@@ -21891,10 +22557,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostViewsInput = {
@@ -21906,10 +22575,13 @@ export namespace Prisma {
     role: $Enums.UserRole
     status?: $Enums.UserStatus
     gender: $Enums.Gender
+    needPasswordChange?: boolean | null
     createdAt?: Date | string
     updateAt?: Date | string
     admin?: AdminUncheckedCreateNestedOneWithoutUserInput
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostViewsInput = {
@@ -21990,10 +22662,13 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostViewsInput = {
@@ -22005,10 +22680,13 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type WebsiteReviewCreateManyReviewerInput = {

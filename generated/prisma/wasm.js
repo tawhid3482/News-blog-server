@@ -129,13 +129,14 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   status: 'status',
   gender: 'gender',
+  needPasswordChange: 'needPasswordChange',
   createdAt: 'createdAt',
   updateAt: 'updateAt'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  email: 'email',
   name: 'name',
   profilePhoto: 'profilePhoto',
   contactNumber: 'contactNumber',

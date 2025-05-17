@@ -26,7 +26,31 @@ const createAdmin = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createAuthor = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.createAuthorIntoDB(req);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Author created successfully!",
+    data: result,
+  });
+});
+
+const createEditor = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.createEditorIntoDB(req);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Editor created successfully!",
+    data: result,
+  });
+});
+
 export const userController = {
   createUser,
-  createAdmin
+  createAdmin,
+  createAuthor,
+  createEditor,
 };
