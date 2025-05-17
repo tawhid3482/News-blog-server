@@ -24,6 +24,21 @@
             "date": 1747461881382,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-17-05-12-error.log",
             "hash": "97f11d35f30aa45b09f84e6e98a7ab1ca5f0ad743384179426967562197c11b0"
+        },
+        {
+            "date": 1747465850912,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-17-05-13-error.log",
+            "hash": "2dec9ec9d31081dafa77fd5cfea7a6afe18d932506cb98e6a185bd1c979306f3"
+        },
+        {
+            "date": 1747469428172,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-17-05-14-error.log",
+            "hash": "be272ba625d4ec20f87f9cb6028d39099aa77473c50a3bb31db528d7633ddee1"
+        },
+        {
+            "date": 1747473172599,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-17-05-15-error.log",
+            "hash": "8ab00d96c4e37fa11588acd64cd3be4d08185d992ad821455d7ced261090e014"
         }
     ],
     "hashType": "sha256"

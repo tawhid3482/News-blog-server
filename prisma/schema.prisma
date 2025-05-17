@@ -25,12 +25,13 @@ model User {
   gender             Gender
   needPasswordChange Boolean?        @default(true)
   createdAt          DateTime        @default(now())
-  updatedAt          DateTime        @updatedAt 
+  updatedAt          DateTime        @updatedAt
   admin              Admin?
   WebsiteReview      WebsiteReview[]
   postViews          PostView[]
   Author             Author?
   Editor             Editor?
+  Post               Post[]
 
   @@map("users")
 }
@@ -65,7 +66,7 @@ model Author {
   user          User         @relation(fields: [email], references: [email])
 
   // posts Post[]
-  Post Post[]
+  Post Post[] @relation("AuthorPosts")
 }
 
 model Editor {
@@ -95,16 +96,18 @@ model Post {
   content     String
   coverImage  String?
   authorId    String
-  author      Author     @relation(fields: [authorId], references: [id])
+  author      User       @relation(fields: [authorId], references: [id], map: "fk_post_author")
+  authorAuthorId String? 
+  authorAuthor   Author?   @relation("AuthorPosts", fields: [authorAuthorId], references: [id])
   categoryId  String
-  category    Category   @relation(fields: [categoryId], references: [id])
+  category    Category   @relation(fields: [categoryId], references: [id], map: "fk_post_category")
   tags        Tag[]      @relation("PostTags")
   isPublished Boolean    @default(false)
   publishedAt DateTime?
   status      PostStatus @default(DRAFT)
   reactions   Reaction[]
   comments    Comment[]
-  viewsCount  Int        @default(0) // শুধু ভিউ কাউন্ট
+  viewsCount  Int        @default(0)
   postViews   PostView[]
   readingTime Int?
   createdAt   DateTime   @default(now())
@@ -112,9 +115,9 @@ model Post {
 }
 
 model Category {
-  id    String @id @default(uuid())
-  name  String @unique
-  slug  String @unique
+  id    String      @id @default(uuid())
+  name  SetNewsType
+  slug  String      @unique
   posts Post[]
 }
 
@@ -229,4 +232,12 @@ enum PostStatus {
   DRAFT
   PUBLISHED
   BLOCKED
+}
+
+enum SetNewsType {
+  WORLD
+  NATIONAL
+  SPORTS
+  SCIENCE
+  EDUCATION
 }

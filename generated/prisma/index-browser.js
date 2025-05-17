@@ -186,6 +186,7 @@ exports.Prisma.PostScalarFieldEnum = {
   content: 'content',
   coverImage: 'coverImage',
   authorId: 'authorId',
+  authorAuthorId: 'authorAuthorId',
   categoryId: 'categoryId',
   isPublished: 'isPublished',
   publishedAt: 'publishedAt',
@@ -322,6 +323,14 @@ exports.PostStatus = exports.$Enums.PostStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
   BLOCKED: 'BLOCKED'
+};
+
+exports.SetNewsType = exports.$Enums.SetNewsType = {
+  WORLD: 'WORLD',
+  NATIONAL: 'NATIONAL',
+  SPORTS: 'SPORTS',
+  SCIENCE: 'SCIENCE',
+  EDUCATION: 'EDUCATION'
 };
 
 exports.ReactionType = exports.$Enums.ReactionType = {

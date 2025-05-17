@@ -24,6 +24,21 @@
             "date": 1747461881378,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-17-05-12-success.log",
             "hash": "83b34ed8b56cd1d1c83f38aaa7454b9bbd8adb60573c8489b5b956c29782877e"
+        },
+        {
+            "date": 1747465850908,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-17-05-13-success.log",
+            "hash": "8f9383d6257f0f9801dfb67f944e2eefcb2cadc92f233fb33d12cda912164ae8"
+        },
+        {
+            "date": 1747469428155,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-17-05-14-success.log",
+            "hash": "c351c40c6270cdd3ab9c2fbad64d2a526583480de57d0558459e789cae12040b"
+        },
+        {
+            "date": 1747473172590,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-17-05-15-success.log",
+            "hash": "a903d7287b98830fee3ad8c61af2393f511fdf4e7b4a521de4dfdb9bbf3650cd"
         }
     ],
     "hashType": "sha256"

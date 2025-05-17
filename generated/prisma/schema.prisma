@@ -31,6 +31,7 @@ model User {
   postViews          PostView[]
   Author             Author?
   Editor             Editor?
+  Post               Post[]
 
   @@map("users")
 }
@@ -65,7 +66,7 @@ model Author {
   user          User         @relation(fields: [email], references: [email])
 
   // posts Post[]
-  Post Post[]
+  Post Post[] @relation("AuthorPosts")
 }
 
 model Editor {
@@ -88,33 +89,35 @@ model Editor {
 }
 
 model Post {
-  id          String     @id @default(uuid())
-  title       String
-  slug        String     @unique
-  summary     String?
-  content     String
-  coverImage  String?
-  authorId    String
-  author      Author     @relation(fields: [authorId], references: [id])
-  categoryId  String
-  category    Category   @relation(fields: [categoryId], references: [id])
-  tags        Tag[]      @relation("PostTags")
-  isPublished Boolean    @default(false)
-  publishedAt DateTime?
-  status      PostStatus @default(DRAFT)
-  reactions   Reaction[]
-  comments    Comment[]
-  viewsCount  Int        @default(0) // শুধু ভিউ কাউন্ট
-  postViews   PostView[]
-  readingTime Int?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id             String     @id @default(uuid())
+  title          String
+  slug           String     @unique
+  summary        String?
+  content        String
+  coverImage     String?
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id], map: "fk_post_author")
+  authorAuthorId String?
+  authorAuthor   Author?    @relation("AuthorPosts", fields: [authorAuthorId], references: [id])
+  categoryId     String
+  category       Category   @relation(fields: [categoryId], references: [id], map: "fk_post_category")
+  tags           Tag[]      @relation("PostTags")
+  isPublished    Boolean    @default(false)
+  publishedAt    DateTime?
+  status         PostStatus @default(DRAFT)
+  reactions      Reaction[]
+  comments       Comment[]
+  viewsCount     Int        @default(0)
+  postViews      PostView[]
+  readingTime    Int?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 }
 
 model Category {
-  id    String @id @default(uuid())
-  name  String @unique
-  slug  String @unique
+  id    String      @id @default(uuid())
+  name  SetNewsType
+  slug  String      @unique
   posts Post[]
 }
 
@@ -229,4 +232,12 @@ enum PostStatus {
   DRAFT
   PUBLISHED
   BLOCKED
+}
+
+enum SetNewsType {
+  WORLD
+  NATIONAL
+  SPORTS
+  SCIENCE
+  EDUCATION
 }

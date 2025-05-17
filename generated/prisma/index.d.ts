@@ -151,6 +151,17 @@ export const PostStatus: {
 
 export type PostStatus = (typeof PostStatus)[keyof typeof PostStatus]
 
+
+export const SetNewsType: {
+  WORLD: 'WORLD',
+  NATIONAL: 'NATIONAL',
+  SPORTS: 'SPORTS',
+  SCIENCE: 'SCIENCE',
+  EDUCATION: 'EDUCATION'
+};
+
+export type SetNewsType = (typeof SetNewsType)[keyof typeof SetNewsType]
+
 }
 
 export type UserRole = $Enums.UserRole
@@ -180,6 +191,10 @@ export const EditorRole: typeof $Enums.EditorRole
 export type PostStatus = $Enums.PostStatus
 
 export const PostStatus: typeof $Enums.PostStatus
+
+export type SetNewsType = $Enums.SetNewsType
+
+export const SetNewsType: typeof $Enums.SetNewsType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -2065,11 +2080,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     WebsiteReview: number
     postViews: number
+    Post: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     WebsiteReview?: boolean | UserCountOutputTypeCountWebsiteReviewArgs
     postViews?: boolean | UserCountOutputTypeCountPostViewsArgs
+    Post?: boolean | UserCountOutputTypeCountPostArgs
   }
 
   // Custom InputTypes
@@ -2095,6 +2112,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostViewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostViewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PostWhereInput
   }
 
 
@@ -2470,6 +2494,7 @@ export namespace Prisma {
     postViews?: boolean | User$postViewsArgs<ExtArgs>
     Author?: boolean | User$AuthorArgs<ExtArgs>
     Editor?: boolean | User$EditorArgs<ExtArgs>
+    Post?: boolean | User$PostArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2522,6 +2547,7 @@ export namespace Prisma {
     postViews?: boolean | User$postViewsArgs<ExtArgs>
     Author?: boolean | User$AuthorArgs<ExtArgs>
     Editor?: boolean | User$EditorArgs<ExtArgs>
+    Post?: boolean | User$PostArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2535,6 +2561,7 @@ export namespace Prisma {
       postViews: Prisma.$PostViewPayload<ExtArgs>[]
       Author: Prisma.$AuthorPayload<ExtArgs> | null
       Editor: Prisma.$EditorPayload<ExtArgs> | null
+      Post: Prisma.$PostPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2947,6 +2974,7 @@ export namespace Prisma {
     postViews<T extends User$postViewsArgs<ExtArgs> = {}>(args?: Subset<T, User$postViewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostViewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Author<T extends User$AuthorArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthorArgs<ExtArgs>>): Prisma__AuthorClient<$Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Editor<T extends User$EditorArgs<ExtArgs> = {}>(args?: Subset<T, User$EditorArgs<ExtArgs>>): Prisma__EditorClient<$Result.GetResult<Prisma.$EditorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Post<T extends User$PostArgs<ExtArgs> = {}>(args?: Subset<T, User$PostArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3477,6 +3505,30 @@ export namespace Prisma {
      */
     include?: EditorInclude<ExtArgs> | null
     where?: EditorWhereInput
+  }
+
+  /**
+   * User.Post
+   */
+  export type User$PostArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Post
+     */
+    select?: PostSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Post
+     */
+    omit?: PostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PostInclude<ExtArgs> | null
+    where?: PostWhereInput
+    orderBy?: PostOrderByWithRelationInput | PostOrderByWithRelationInput[]
+    cursor?: PostWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
   }
 
   /**
@@ -7022,6 +7074,7 @@ export namespace Prisma {
     content: string | null
     coverImage: string | null
     authorId: string | null
+    authorAuthorId: string | null
     categoryId: string | null
     isPublished: boolean | null
     publishedAt: Date | null
@@ -7040,6 +7093,7 @@ export namespace Prisma {
     content: string | null
     coverImage: string | null
     authorId: string | null
+    authorAuthorId: string | null
     categoryId: string | null
     isPublished: boolean | null
     publishedAt: Date | null
@@ -7058,6 +7112,7 @@ export namespace Prisma {
     content: number
     coverImage: number
     authorId: number
+    authorAuthorId: number
     categoryId: number
     isPublished: number
     publishedAt: number
@@ -7088,6 +7143,7 @@ export namespace Prisma {
     content?: true
     coverImage?: true
     authorId?: true
+    authorAuthorId?: true
     categoryId?: true
     isPublished?: true
     publishedAt?: true
@@ -7106,6 +7162,7 @@ export namespace Prisma {
     content?: true
     coverImage?: true
     authorId?: true
+    authorAuthorId?: true
     categoryId?: true
     isPublished?: true
     publishedAt?: true
@@ -7124,6 +7181,7 @@ export namespace Prisma {
     content?: true
     coverImage?: true
     authorId?: true
+    authorAuthorId?: true
     categoryId?: true
     isPublished?: true
     publishedAt?: true
@@ -7229,6 +7287,7 @@ export namespace Prisma {
     content: string
     coverImage: string | null
     authorId: string
+    authorAuthorId: string | null
     categoryId: string
     isPublished: boolean
     publishedAt: Date | null
@@ -7266,6 +7325,7 @@ export namespace Prisma {
     content?: boolean
     coverImage?: boolean
     authorId?: boolean
+    authorAuthorId?: boolean
     categoryId?: boolean
     isPublished?: boolean
     publishedAt?: boolean
@@ -7274,7 +7334,8 @@ export namespace Prisma {
     readingTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     tags?: boolean | Post$tagsArgs<ExtArgs>
     reactions?: boolean | Post$reactionsArgs<ExtArgs>
@@ -7291,6 +7352,7 @@ export namespace Prisma {
     content?: boolean
     coverImage?: boolean
     authorId?: boolean
+    authorAuthorId?: boolean
     categoryId?: boolean
     isPublished?: boolean
     publishedAt?: boolean
@@ -7299,7 +7361,8 @@ export namespace Prisma {
     readingTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -7311,6 +7374,7 @@ export namespace Prisma {
     content?: boolean
     coverImage?: boolean
     authorId?: boolean
+    authorAuthorId?: boolean
     categoryId?: boolean
     isPublished?: boolean
     publishedAt?: boolean
@@ -7319,7 +7383,8 @@ export namespace Prisma {
     readingTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["post"]>
 
@@ -7331,6 +7396,7 @@ export namespace Prisma {
     content?: boolean
     coverImage?: boolean
     authorId?: boolean
+    authorAuthorId?: boolean
     categoryId?: boolean
     isPublished?: boolean
     publishedAt?: boolean
@@ -7341,9 +7407,10 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "summary" | "content" | "coverImage" | "authorId" | "categoryId" | "isPublished" | "publishedAt" | "status" | "viewsCount" | "readingTime" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "summary" | "content" | "coverImage" | "authorId" | "authorAuthorId" | "categoryId" | "isPublished" | "publishedAt" | "status" | "viewsCount" | "readingTime" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     tags?: boolean | Post$tagsArgs<ExtArgs>
     reactions?: boolean | Post$reactionsArgs<ExtArgs>
@@ -7352,18 +7419,21 @@ export namespace Prisma {
     _count?: boolean | PostCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }
   export type PostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | AuthorDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    authorAuthor?: boolean | Post$authorAuthorArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
   }
 
   export type $PostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Post"
     objects: {
-      author: Prisma.$AuthorPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs>
+      authorAuthor: Prisma.$AuthorPayload<ExtArgs> | null
       category: Prisma.$CategoryPayload<ExtArgs>
       tags: Prisma.$TagPayload<ExtArgs>[]
       reactions: Prisma.$ReactionPayload<ExtArgs>[]
@@ -7378,6 +7448,7 @@ export namespace Prisma {
       content: string
       coverImage: string | null
       authorId: string
+      authorAuthorId: string | null
       categoryId: string
       isPublished: boolean
       publishedAt: Date | null
@@ -7780,7 +7851,8 @@ export namespace Prisma {
    */
   export interface Prisma__PostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    author<T extends AuthorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AuthorDefaultArgs<ExtArgs>>): Prisma__AuthorClient<$Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    authorAuthor<T extends Post$authorAuthorArgs<ExtArgs> = {}>(args?: Subset<T, Post$authorAuthorArgs<ExtArgs>>): Prisma__AuthorClient<$Result.GetResult<Prisma.$AuthorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends Post$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Post$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reactions<T extends Post$reactionsArgs<ExtArgs> = {}>(args?: Subset<T, Post$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -7822,6 +7894,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Post", 'String'>
     readonly coverImage: FieldRef<"Post", 'String'>
     readonly authorId: FieldRef<"Post", 'String'>
+    readonly authorAuthorId: FieldRef<"Post", 'String'>
     readonly categoryId: FieldRef<"Post", 'String'>
     readonly isPublished: FieldRef<"Post", 'Boolean'>
     readonly publishedAt: FieldRef<"Post", 'DateTime'>
@@ -8226,6 +8299,25 @@ export namespace Prisma {
   }
 
   /**
+   * Post.authorAuthor
+   */
+  export type Post$authorAuthorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Author
+     */
+    select?: AuthorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Author
+     */
+    omit?: AuthorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorInclude<ExtArgs> | null
+    where?: AuthorWhereInput
+  }
+
+  /**
    * Post.tags
    */
   export type Post$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8352,13 +8444,13 @@ export namespace Prisma {
 
   export type CategoryMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    name: $Enums.SetNewsType | null
     slug: string | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    name: $Enums.SetNewsType | null
     slug: string | null
   }
 
@@ -8463,7 +8555,7 @@ export namespace Prisma {
 
   export type CategoryGroupByOutputType = {
     id: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
     _count: CategoryCountAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
@@ -8525,7 +8617,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
+      name: $Enums.SetNewsType
       slug: string
     }, ExtArgs["result"]["category"]>
     composites: {}
@@ -8952,7 +9044,7 @@ export namespace Prisma {
    */
   interface CategoryFieldRefs {
     readonly id: FieldRef<"Category", 'String'>
-    readonly name: FieldRef<"Category", 'String'>
+    readonly name: FieldRef<"Category", 'SetNewsType'>
     readonly slug: FieldRef<"Category", 'String'>
   }
     
@@ -16874,6 +16966,7 @@ export namespace Prisma {
     content: 'content',
     coverImage: 'coverImage',
     authorId: 'authorId',
+    authorAuthorId: 'authorAuthorId',
     categoryId: 'categoryId',
     isPublished: 'isPublished',
     publishedAt: 'publishedAt',
@@ -17169,6 +17262,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'SetNewsType'
+   */
+  export type EnumSetNewsTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SetNewsType'>
+    
+
+
+  /**
+   * Reference to a field of type 'SetNewsType[]'
+   */
+  export type ListEnumSetNewsTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SetNewsType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ReactionType'
    */
   export type EnumReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionType'>
@@ -17219,6 +17326,7 @@ export namespace Prisma {
     postViews?: PostViewListRelationFilter
     Author?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
     Editor?: XOR<EditorNullableScalarRelationFilter, EditorWhereInput> | null
+    Post?: PostListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17238,6 +17346,7 @@ export namespace Prisma {
     postViews?: PostViewOrderByRelationAggregateInput
     Author?: AuthorOrderByWithRelationInput
     Editor?: EditorOrderByWithRelationInput
+    Post?: PostOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17260,6 +17369,7 @@ export namespace Prisma {
     postViews?: PostViewListRelationFilter
     Author?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
     Editor?: XOR<EditorNullableScalarRelationFilter, EditorWhereInput> | null
+    Post?: PostListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -17577,6 +17687,7 @@ export namespace Prisma {
     content?: StringFilter<"Post"> | string
     coverImage?: StringNullableFilter<"Post"> | string | null
     authorId?: StringFilter<"Post"> | string
+    authorAuthorId?: StringNullableFilter<"Post"> | string | null
     categoryId?: StringFilter<"Post"> | string
     isPublished?: BoolFilter<"Post"> | boolean
     publishedAt?: DateTimeNullableFilter<"Post"> | Date | string | null
@@ -17585,7 +17696,8 @@ export namespace Prisma {
     readingTime?: IntNullableFilter<"Post"> | number | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    author?: XOR<AuthorScalarRelationFilter, AuthorWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    authorAuthor?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     tags?: TagListRelationFilter
     reactions?: ReactionListRelationFilter
@@ -17601,6 +17713,7 @@ export namespace Prisma {
     content?: SortOrder
     coverImage?: SortOrderInput | SortOrder
     authorId?: SortOrder
+    authorAuthorId?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
     publishedAt?: SortOrderInput | SortOrder
@@ -17609,7 +17722,8 @@ export namespace Prisma {
     readingTime?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    author?: AuthorOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
+    authorAuthor?: AuthorOrderByWithRelationInput
     category?: CategoryOrderByWithRelationInput
     tags?: TagOrderByRelationAggregateInput
     reactions?: ReactionOrderByRelationAggregateInput
@@ -17628,6 +17742,7 @@ export namespace Prisma {
     content?: StringFilter<"Post"> | string
     coverImage?: StringNullableFilter<"Post"> | string | null
     authorId?: StringFilter<"Post"> | string
+    authorAuthorId?: StringNullableFilter<"Post"> | string | null
     categoryId?: StringFilter<"Post"> | string
     isPublished?: BoolFilter<"Post"> | boolean
     publishedAt?: DateTimeNullableFilter<"Post"> | Date | string | null
@@ -17636,7 +17751,8 @@ export namespace Prisma {
     readingTime?: IntNullableFilter<"Post"> | number | null
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
-    author?: XOR<AuthorScalarRelationFilter, AuthorWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    authorAuthor?: XOR<AuthorNullableScalarRelationFilter, AuthorWhereInput> | null
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     tags?: TagListRelationFilter
     reactions?: ReactionListRelationFilter
@@ -17652,6 +17768,7 @@ export namespace Prisma {
     content?: SortOrder
     coverImage?: SortOrderInput | SortOrder
     authorId?: SortOrder
+    authorAuthorId?: SortOrderInput | SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
     publishedAt?: SortOrderInput | SortOrder
@@ -17678,6 +17795,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Post"> | string
     coverImage?: StringNullableWithAggregatesFilter<"Post"> | string | null
     authorId?: StringWithAggregatesFilter<"Post"> | string
+    authorAuthorId?: StringNullableWithAggregatesFilter<"Post"> | string | null
     categoryId?: StringWithAggregatesFilter<"Post"> | string
     isPublished?: BoolWithAggregatesFilter<"Post"> | boolean
     publishedAt?: DateTimeNullableWithAggregatesFilter<"Post"> | Date | string | null
@@ -17693,7 +17811,7 @@ export namespace Prisma {
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     id?: StringFilter<"Category"> | string
-    name?: StringFilter<"Category"> | string
+    name?: EnumSetNewsTypeFilter<"Category"> | $Enums.SetNewsType
     slug?: StringFilter<"Category"> | string
     posts?: PostListRelationFilter
   }
@@ -17707,13 +17825,13 @@ export namespace Prisma {
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    name?: string
     slug?: string
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
+    name?: EnumSetNewsTypeFilter<"Category"> | $Enums.SetNewsType
     posts?: PostListRelationFilter
-  }, "id" | "name" | "slug">
+  }, "id" | "slug">
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
@@ -17729,7 +17847,7 @@ export namespace Prisma {
     OR?: CategoryScalarWhereWithAggregatesInput[]
     NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Category"> | string
-    name?: StringWithAggregatesFilter<"Category"> | string
+    name?: EnumSetNewsTypeWithAggregatesFilter<"Category"> | $Enums.SetNewsType
     slug?: StringWithAggregatesFilter<"Category"> | string
   }
 
@@ -18144,6 +18262,7 @@ export namespace Prisma {
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
     Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -18163,6 +18282,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
     Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUpdateInput = {
@@ -18182,6 +18302,7 @@ export namespace Prisma {
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
     Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -18201,6 +18322,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
     Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -18336,7 +18458,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAuthorInput
-    Post?: PostCreateNestedManyWithoutAuthorInput
+    Post?: PostCreateNestedManyWithoutAuthorAuthorInput
   }
 
   export type AuthorUncheckedCreateInput = {
@@ -18354,7 +18476,7 @@ export namespace Prisma {
     status?: $Enums.AuthorStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorAuthorInput
   }
 
   export type AuthorUpdateInput = {
@@ -18372,7 +18494,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAuthorNestedInput
-    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Post?: PostUpdateManyWithoutAuthorAuthorNestedInput
   }
 
   export type AuthorUncheckedUpdateInput = {
@@ -18390,7 +18512,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorAuthorNestedInput
   }
 
   export type AuthorCreateManyInput = {
@@ -18568,7 +18690,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     tags?: TagCreateNestedManyWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
@@ -18584,6 +18707,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -18612,7 +18736,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
@@ -18628,6 +18753,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18650,6 +18776,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -18684,6 +18811,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18696,47 +18824,47 @@ export namespace Prisma {
 
   export type CategoryCreateInput = {
     id?: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
     posts?: PostCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
     id?: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
     posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
     posts?: PostUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
     posts?: PostUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
     id?: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
   }
 
   export type CategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
   }
 
@@ -19239,6 +19367,12 @@ export namespace Prisma {
     isNot?: EditorWhereInput | null
   }
 
+  export type PostListRelationFilter = {
+    every?: PostWhereInput
+    some?: PostWhereInput
+    none?: PostWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -19249,6 +19383,10 @@ export namespace Prisma {
   }
 
   export type PostViewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PostOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19474,16 +19612,6 @@ export namespace Prisma {
     not?: NestedEnumAuthorStatusFilter<$PrismaModel> | $Enums.AuthorStatus
   }
 
-  export type PostListRelationFilter = {
-    every?: PostWhereInput
-    some?: PostWhereInput
-    none?: PostWhereInput
-  }
-
-  export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type AuthorCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -19687,11 +19815,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type AuthorScalarRelationFilter = {
-    is?: AuthorWhereInput
-    isNot?: AuthorWhereInput
-  }
-
   export type CategoryScalarRelationFilter = {
     is?: CategoryWhereInput
     isNot?: CategoryWhereInput
@@ -19735,6 +19858,7 @@ export namespace Prisma {
     content?: SortOrder
     coverImage?: SortOrder
     authorId?: SortOrder
+    authorAuthorId?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
     publishedAt?: SortOrder
@@ -19758,6 +19882,7 @@ export namespace Prisma {
     content?: SortOrder
     coverImage?: SortOrder
     authorId?: SortOrder
+    authorAuthorId?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
     publishedAt?: SortOrder
@@ -19776,6 +19901,7 @@ export namespace Prisma {
     content?: SortOrder
     coverImage?: SortOrder
     authorId?: SortOrder
+    authorAuthorId?: SortOrder
     categoryId?: SortOrder
     isPublished?: SortOrder
     publishedAt?: SortOrder
@@ -19831,6 +19957,13 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type EnumSetNewsTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SetNewsType | EnumSetNewsTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSetNewsTypeFilter<$PrismaModel> | $Enums.SetNewsType
+  }
+
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -19847,6 +19980,16 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+  }
+
+  export type EnumSetNewsTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SetNewsType | EnumSetNewsTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSetNewsTypeWithAggregatesFilter<$PrismaModel> | $Enums.SetNewsType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSetNewsTypeFilter<$PrismaModel>
+    _max?: NestedEnumSetNewsTypeFilter<$PrismaModel>
   }
 
   export type TagCountOrderByAggregateInput = {
@@ -20090,6 +20233,13 @@ export namespace Prisma {
     connect?: EditorWhereUniqueInput
   }
 
+  export type PostCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -20120,6 +20270,13 @@ export namespace Prisma {
     create?: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
     connectOrCreate?: EditorCreateOrConnectWithoutUserInput
     connect?: EditorWhereUniqueInput
+  }
+
+  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -20208,6 +20365,20 @@ export namespace Prisma {
     update?: XOR<XOR<EditorUpdateToOneWithWhereWithoutUserInput, EditorUpdateWithoutUserInput>, EditorUncheckedUpdateWithoutUserInput>
   }
 
+  export type PostUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -20266,6 +20437,20 @@ export namespace Prisma {
     update?: XOR<XOR<EditorUpdateToOneWithWhereWithoutUserInput, EditorUpdateWithoutUserInput>, EditorUncheckedUpdateWithoutUserInput>
   }
 
+  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: PostCreateManyAuthorInputEnvelope
+    set?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutAdminInput = {
     create?: XOR<UserCreateWithoutAdminInput, UserUncheckedCreateWithoutAdminInput>
     connectOrCreate?: UserCreateOrConnectWithoutAdminInput
@@ -20290,17 +20475,17 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type PostCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
+  export type PostCreateNestedManyWithoutAuthorAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput> | PostCreateWithoutAuthorAuthorInput[] | PostUncheckedCreateWithoutAuthorAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorAuthorInput | PostCreateOrConnectWithoutAuthorAuthorInput[]
+    createMany?: PostCreateManyAuthorAuthorInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type PostUncheckedCreateNestedManyWithoutAuthorInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
+  export type PostUncheckedCreateNestedManyWithoutAuthorAuthorInput = {
+    create?: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput> | PostCreateWithoutAuthorAuthorInput[] | PostUncheckedCreateWithoutAuthorAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorAuthorInput | PostCreateOrConnectWithoutAuthorAuthorInput[]
+    createMany?: PostCreateManyAuthorAuthorInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
@@ -20324,31 +20509,31 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAuthorInput, UserUpdateWithoutAuthorInput>, UserUncheckedUpdateWithoutAuthorInput>
   }
 
-  export type PostUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
+  export type PostUpdateManyWithoutAuthorAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput> | PostCreateWithoutAuthorAuthorInput[] | PostUncheckedCreateWithoutAuthorAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorAuthorInput | PostCreateOrConnectWithoutAuthorAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorAuthorInput[]
+    createMany?: PostCreateManyAuthorAuthorInputEnvelope
     set?: PostWhereUniqueInput | PostWhereUniqueInput[]
     disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
     delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorAuthorInput | PostUpdateManyWithWhereWithoutAuthorAuthorInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
-  export type PostUncheckedUpdateManyWithoutAuthorNestedInput = {
-    create?: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput> | PostCreateWithoutAuthorInput[] | PostUncheckedCreateWithoutAuthorInput[]
-    connectOrCreate?: PostCreateOrConnectWithoutAuthorInput | PostCreateOrConnectWithoutAuthorInput[]
-    upsert?: PostUpsertWithWhereUniqueWithoutAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorInput[]
-    createMany?: PostCreateManyAuthorInputEnvelope
+  export type PostUncheckedUpdateManyWithoutAuthorAuthorNestedInput = {
+    create?: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput> | PostCreateWithoutAuthorAuthorInput[] | PostUncheckedCreateWithoutAuthorAuthorInput[]
+    connectOrCreate?: PostCreateOrConnectWithoutAuthorAuthorInput | PostCreateOrConnectWithoutAuthorAuthorInput[]
+    upsert?: PostUpsertWithWhereUniqueWithoutAuthorAuthorInput | PostUpsertWithWhereUniqueWithoutAuthorAuthorInput[]
+    createMany?: PostCreateManyAuthorAuthorInputEnvelope
     set?: PostWhereUniqueInput | PostWhereUniqueInput[]
     disconnect?: PostWhereUniqueInput | PostWhereUniqueInput[]
     delete?: PostWhereUniqueInput | PostWhereUniqueInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-    update?: PostUpdateWithWhereUniqueWithoutAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorInput[]
-    updateMany?: PostUpdateManyWithWhereWithoutAuthorInput | PostUpdateManyWithWhereWithoutAuthorInput[]
+    update?: PostUpdateWithWhereUniqueWithoutAuthorAuthorInput | PostUpdateWithWhereUniqueWithoutAuthorAuthorInput[]
+    updateMany?: PostUpdateManyWithWhereWithoutAuthorAuthorInput | PostUpdateManyWithWhereWithoutAuthorAuthorInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
@@ -20368,6 +20553,12 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutEditorInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEditorInput, UserUpdateWithoutEditorInput>, UserUncheckedUpdateWithoutEditorInput>
+  }
+
+  export type UserCreateNestedOneWithoutPostInput = {
+    create?: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostInput
+    connect?: UserWhereUniqueInput
   }
 
   export type AuthorCreateNestedOneWithoutPostInput = {
@@ -20452,10 +20643,20 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type AuthorUpdateOneRequiredWithoutPostNestedInput = {
+  export type UserUpdateOneRequiredWithoutPostNestedInput = {
+    create?: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPostInput
+    upsert?: UserUpsertWithoutPostInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostInput, UserUpdateWithoutPostInput>, UserUncheckedUpdateWithoutPostInput>
+  }
+
+  export type AuthorUpdateOneWithoutPostNestedInput = {
     create?: XOR<AuthorCreateWithoutPostInput, AuthorUncheckedCreateWithoutPostInput>
     connectOrCreate?: AuthorCreateOrConnectWithoutPostInput
     upsert?: AuthorUpsertWithoutPostInput
+    disconnect?: AuthorWhereInput | boolean
+    delete?: AuthorWhereInput | boolean
     connect?: AuthorWhereUniqueInput
     update?: XOR<XOR<AuthorUpdateToOneWithWhereWithoutPostInput, AuthorUpdateWithoutPostInput>, AuthorUncheckedUpdateWithoutPostInput>
   }
@@ -20590,6 +20791,10 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
     createMany?: PostCreateManyCategoryInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type EnumSetNewsTypeFieldUpdateOperationsInput = {
+    set?: $Enums.SetNewsType
   }
 
   export type PostUpdateManyWithoutCategoryNestedInput = {
@@ -21075,6 +21280,23 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumSetNewsTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.SetNewsType | EnumSetNewsTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSetNewsTypeFilter<$PrismaModel> | $Enums.SetNewsType
+  }
+
+  export type NestedEnumSetNewsTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SetNewsType | EnumSetNewsTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumSetNewsTypeWithAggregatesFilter<$PrismaModel> | $Enums.SetNewsType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSetNewsTypeFilter<$PrismaModel>
+    _max?: NestedEnumSetNewsTypeFilter<$PrismaModel>
+  }
+
   export type NestedEnumReactionTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ReactionType | EnumReactionTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ReactionType[] | ListEnumReactionTypeFieldRefInput<$PrismaModel>
@@ -21187,7 +21409,7 @@ export namespace Prisma {
     status?: $Enums.AuthorStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    Post?: PostCreateNestedManyWithoutAuthorInput
+    Post?: PostCreateNestedManyWithoutAuthorAuthorInput
   }
 
   export type AuthorUncheckedCreateWithoutUserInput = {
@@ -21204,7 +21426,7 @@ export namespace Prisma {
     status?: $Enums.AuthorStatus
     createdAt?: Date | string
     updatedAt?: Date | string
-    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorAuthorInput
   }
 
   export type AuthorCreateOrConnectWithoutUserInput = {
@@ -21245,6 +21467,60 @@ export namespace Prisma {
   export type EditorCreateOrConnectWithoutUserInput = {
     where: EditorWhereUniqueInput
     create: XOR<EditorCreateWithoutUserInput, EditorUncheckedCreateWithoutUserInput>
+  }
+
+  export type PostCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    content: string
+    coverImage?: string | null
+    isPublished?: boolean
+    publishedAt?: Date | string | null
+    status?: $Enums.PostStatus
+    viewsCount?: number
+    readingTime?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
+    category: CategoryCreateNestedOneWithoutPostsInput
+    tags?: TagCreateNestedManyWithoutPostsInput
+    reactions?: ReactionCreateNestedManyWithoutPostInput
+    comments?: CommentCreateNestedManyWithoutPostInput
+    postViews?: PostViewCreateNestedManyWithoutPostInput
+  }
+
+  export type PostUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    content: string
+    coverImage?: string | null
+    authorAuthorId?: string | null
+    categoryId: string
+    isPublished?: boolean
+    publishedAt?: Date | string | null
+    status?: $Enums.PostStatus
+    viewsCount?: number
+    readingTime?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutPostsInput
+    reactions?: ReactionUncheckedCreateNestedManyWithoutPostInput
+    comments?: CommentUncheckedCreateNestedManyWithoutPostInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutPostInput
+  }
+
+  export type PostCreateOrConnectWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type PostCreateManyAuthorInputEnvelope = {
+    data: PostCreateManyAuthorInput | PostCreateManyAuthorInput[]
+    skipDuplicates?: boolean
   }
 
   export type AdminUpsertWithoutUserInput = {
@@ -21361,7 +21637,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Post?: PostUpdateManyWithoutAuthorAuthorNestedInput
   }
 
   export type AuthorUncheckedUpdateWithoutUserInput = {
@@ -21378,7 +21654,7 @@ export namespace Prisma {
     status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorAuthorNestedInput
   }
 
   export type EditorUpsertWithoutUserInput = {
@@ -21422,6 +21698,44 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
+    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: PostWhereUniqueInput
+    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type PostUpdateManyWithWhereWithoutAuthorInput = {
+    where: PostScalarWhereInput
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type PostScalarWhereInput = {
+    AND?: PostScalarWhereInput | PostScalarWhereInput[]
+    OR?: PostScalarWhereInput[]
+    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
+    id?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
+    slug?: StringFilter<"Post"> | string
+    summary?: StringNullableFilter<"Post"> | string | null
+    content?: StringFilter<"Post"> | string
+    coverImage?: StringNullableFilter<"Post"> | string | null
+    authorId?: StringFilter<"Post"> | string
+    authorAuthorId?: StringNullableFilter<"Post"> | string | null
+    categoryId?: StringFilter<"Post"> | string
+    isPublished?: BoolFilter<"Post"> | boolean
+    publishedAt?: DateTimeNullableFilter<"Post"> | Date | string | null
+    status?: EnumPostStatusFilter<"Post"> | $Enums.PostStatus
+    viewsCount?: IntFilter<"Post"> | number
+    readingTime?: IntNullableFilter<"Post"> | number | null
+    createdAt?: DateTimeFilter<"Post"> | Date | string
+    updatedAt?: DateTimeFilter<"Post"> | Date | string
+  }
+
   export type UserCreateWithoutAdminInput = {
     id?: string
     email: string
@@ -21438,6 +21752,7 @@ export namespace Prisma {
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
     Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -21456,6 +21771,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
     Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -21490,6 +21806,7 @@ export namespace Prisma {
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
     Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -21508,6 +21825,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
     Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateWithoutAuthorInput = {
@@ -21526,6 +21844,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutAuthorInput = {
@@ -21544,6 +21863,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutAuthorInput = {
@@ -21551,7 +21871,7 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
   }
 
-  export type PostCreateWithoutAuthorInput = {
+  export type PostCreateWithoutAuthorAuthorInput = {
     id?: string
     title: string
     slug: string
@@ -21565,6 +21885,7 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     tags?: TagCreateNestedManyWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
@@ -21572,13 +21893,14 @@ export namespace Prisma {
     postViews?: PostViewCreateNestedManyWithoutPostInput
   }
 
-  export type PostUncheckedCreateWithoutAuthorInput = {
+  export type PostUncheckedCreateWithoutAuthorAuthorInput = {
     id?: string
     title: string
     slug: string
     summary?: string | null
     content: string
     coverImage?: string | null
+    authorId: string
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -21593,13 +21915,13 @@ export namespace Prisma {
     postViews?: PostViewUncheckedCreateNestedManyWithoutPostInput
   }
 
-  export type PostCreateOrConnectWithoutAuthorInput = {
+  export type PostCreateOrConnectWithoutAuthorAuthorInput = {
     where: PostWhereUniqueInput
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+    create: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput>
   }
 
-  export type PostCreateManyAuthorInputEnvelope = {
-    data: PostCreateManyAuthorInput | PostCreateManyAuthorInput[]
+  export type PostCreateManyAuthorAuthorInputEnvelope = {
+    data: PostCreateManyAuthorAuthorInput | PostCreateManyAuthorAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -21630,6 +21952,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthorInput = {
@@ -21648,43 +21971,23 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
-  export type PostUpsertWithWhereUniqueWithoutAuthorInput = {
+  export type PostUpsertWithWhereUniqueWithoutAuthorAuthorInput = {
     where: PostWhereUniqueInput
-    update: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
-    create: XOR<PostCreateWithoutAuthorInput, PostUncheckedCreateWithoutAuthorInput>
+    update: XOR<PostUpdateWithoutAuthorAuthorInput, PostUncheckedUpdateWithoutAuthorAuthorInput>
+    create: XOR<PostCreateWithoutAuthorAuthorInput, PostUncheckedCreateWithoutAuthorAuthorInput>
   }
 
-  export type PostUpdateWithWhereUniqueWithoutAuthorInput = {
+  export type PostUpdateWithWhereUniqueWithoutAuthorAuthorInput = {
     where: PostWhereUniqueInput
-    data: XOR<PostUpdateWithoutAuthorInput, PostUncheckedUpdateWithoutAuthorInput>
+    data: XOR<PostUpdateWithoutAuthorAuthorInput, PostUncheckedUpdateWithoutAuthorAuthorInput>
   }
 
-  export type PostUpdateManyWithWhereWithoutAuthorInput = {
+  export type PostUpdateManyWithWhereWithoutAuthorAuthorInput = {
     where: PostScalarWhereInput
-    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorInput>
-  }
-
-  export type PostScalarWhereInput = {
-    AND?: PostScalarWhereInput | PostScalarWhereInput[]
-    OR?: PostScalarWhereInput[]
-    NOT?: PostScalarWhereInput | PostScalarWhereInput[]
-    id?: StringFilter<"Post"> | string
-    title?: StringFilter<"Post"> | string
-    slug?: StringFilter<"Post"> | string
-    summary?: StringNullableFilter<"Post"> | string | null
-    content?: StringFilter<"Post"> | string
-    coverImage?: StringNullableFilter<"Post"> | string | null
-    authorId?: StringFilter<"Post"> | string
-    categoryId?: StringFilter<"Post"> | string
-    isPublished?: BoolFilter<"Post"> | boolean
-    publishedAt?: DateTimeNullableFilter<"Post"> | Date | string | null
-    status?: EnumPostStatusFilter<"Post"> | $Enums.PostStatus
-    viewsCount?: IntFilter<"Post"> | number
-    readingTime?: IntNullableFilter<"Post"> | number | null
-    createdAt?: DateTimeFilter<"Post"> | Date | string
-    updatedAt?: DateTimeFilter<"Post"> | Date | string
+    data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutAuthorAuthorInput>
   }
 
   export type UserCreateWithoutEditorInput = {
@@ -21703,6 +22006,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutEditorInput = {
@@ -21721,6 +22025,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutEditorInput = {
@@ -21755,6 +22060,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEditorInput = {
@@ -21773,6 +22079,50 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserCreateWithoutPostInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPostInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPostInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
   }
 
   export type AuthorCreateWithoutPostInput = {
@@ -21816,13 +22166,13 @@ export namespace Prisma {
 
   export type CategoryCreateWithoutPostsInput = {
     id?: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
   }
 
   export type CategoryUncheckedCreateWithoutPostsInput = {
     id?: string
-    name: string
+    name: $Enums.SetNewsType
     slug: string
   }
 
@@ -21920,6 +22270,55 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutPostInput = {
+    update: XOR<UserUpdateWithoutPostInput, UserUncheckedUpdateWithoutPostInput>
+    create: XOR<UserCreateWithoutPostInput, UserUncheckedCreateWithoutPostInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPostInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPostInput, UserUncheckedUpdateWithoutPostInput>
+  }
+
+  export type UserUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type AuthorUpsertWithoutPostInput = {
     update: XOR<AuthorUpdateWithoutPostInput, AuthorUncheckedUpdateWithoutPostInput>
     create: XOR<AuthorCreateWithoutPostInput, AuthorUncheckedCreateWithoutPostInput>
@@ -21978,13 +22377,13 @@ export namespace Prisma {
 
   export type CategoryUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
   }
 
@@ -22096,7 +22495,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     tags?: TagCreateNestedManyWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -22111,6 +22511,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     isPublished?: boolean
     publishedAt?: Date | string | null
     status?: $Enums.PostStatus
@@ -22164,7 +22565,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -22179,6 +22581,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -22227,7 +22630,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     tags?: TagCreateNestedManyWithoutPostsInput
     comments?: CommentCreateNestedManyWithoutPostInput
@@ -22242,6 +22646,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -22285,7 +22690,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -22300,6 +22706,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22327,7 +22734,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     tags?: TagCreateNestedManyWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
@@ -22342,6 +22750,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -22385,7 +22794,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
@@ -22400,6 +22810,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22429,6 +22840,7 @@ export namespace Prisma {
     postViews?: PostViewCreateNestedManyWithoutUserInput
     Author?: AuthorCreateNestedOneWithoutUserInput
     Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutWebsiteReviewInput = {
@@ -22447,6 +22859,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
     Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutWebsiteReviewInput = {
@@ -22481,6 +22894,7 @@ export namespace Prisma {
     postViews?: PostViewUpdateManyWithoutUserNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
     Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsiteReviewInput = {
@@ -22499,6 +22913,7 @@ export namespace Prisma {
     postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
     Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostCreateWithoutPostViewsInput = {
@@ -22515,7 +22930,8 @@ export namespace Prisma {
     readingTime?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    author: AuthorCreateNestedOneWithoutPostInput
+    author: UserCreateNestedOneWithoutPostInput
+    authorAuthor?: AuthorCreateNestedOneWithoutPostInput
     category: CategoryCreateNestedOneWithoutPostsInput
     tags?: TagCreateNestedManyWithoutPostsInput
     reactions?: ReactionCreateNestedManyWithoutPostInput
@@ -22530,6 +22946,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     categoryId: string
     isPublished?: boolean
     publishedAt?: Date | string | null
@@ -22564,6 +22981,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
     Author?: AuthorCreateNestedOneWithoutUserInput
     Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostViewsInput = {
@@ -22582,6 +23000,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
     Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
     Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostViewsInput = {
@@ -22614,7 +23033,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
@@ -22629,6 +23049,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22669,6 +23090,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
     Author?: AuthorUpdateOneWithoutUserNestedInput
     Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostViewsInput = {
@@ -22687,6 +23109,7 @@ export namespace Prisma {
     WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
     Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
     Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type WebsiteReviewCreateManyReviewerInput = {
@@ -22705,6 +23128,24 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+  }
+
+  export type PostCreateManyAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    content: string
+    coverImage?: string | null
+    authorAuthorId?: string | null
+    categoryId: string
+    isPublished?: boolean
+    publishedAt?: Date | string | null
+    status?: $Enums.PostStatus
+    viewsCount?: number
+    readingTime?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type WebsiteReviewUpdateWithoutReviewerInput = {
@@ -22761,23 +23202,6 @@ export namespace Prisma {
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PostCreateManyAuthorInput = {
-    id?: string
-    title: string
-    slug: string
-    summary?: string | null
-    content: string
-    coverImage?: string | null
-    categoryId: string
-    isPublished?: boolean
-    publishedAt?: Date | string | null
-    status?: $Enums.PostStatus
-    viewsCount?: number
-    readingTime?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type PostUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -22792,6 +23216,7 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
@@ -22806,6 +23231,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22827,6 +23253,87 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PostCreateManyAuthorAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    summary?: string | null
+    content: string
+    coverImage?: string | null
+    authorId: string
+    categoryId: string
+    isPublished?: boolean
+    publishedAt?: Date | string | null
+    status?: $Enums.PostStatus
+    viewsCount?: number
+    readingTime?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PostUpdateWithoutAuthorAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
+    tags?: TagUpdateManyWithoutPostsNestedInput
+    reactions?: ReactionUpdateManyWithoutPostNestedInput
+    comments?: CommentUpdateManyWithoutPostNestedInput
+    postViews?: PostViewUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateWithoutAuthorAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
+    viewsCount?: IntFieldUpdateOperationsInput | number
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutPostsNestedInput
+    reactions?: ReactionUncheckedUpdateManyWithoutPostNestedInput
+    comments?: CommentUncheckedUpdateManyWithoutPostNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type PostUncheckedUpdateManyWithoutAuthorAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    authorId?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22948,6 +23455,7 @@ export namespace Prisma {
     content: string
     coverImage?: string | null
     authorId: string
+    authorAuthorId?: string | null
     isPublished?: boolean
     publishedAt?: Date | string | null
     status?: $Enums.PostStatus
@@ -22971,7 +23479,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     tags?: TagUpdateManyWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -22986,6 +23495,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
@@ -23007,6 +23517,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
@@ -23030,7 +23541,8 @@ export namespace Prisma {
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    author?: AuthorUpdateOneRequiredWithoutPostNestedInput
+    author?: UserUpdateOneRequiredWithoutPostNestedInput
+    authorAuthor?: AuthorUpdateOneWithoutPostNestedInput
     category?: CategoryUpdateOneRequiredWithoutPostsNestedInput
     reactions?: ReactionUpdateManyWithoutPostNestedInput
     comments?: CommentUpdateManyWithoutPostNestedInput
@@ -23045,6 +23557,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23066,6 +23579,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     coverImage?: NullableStringFieldUpdateOperationsInput | string | null
     authorId?: StringFieldUpdateOperationsInput | string
+    authorAuthorId?: NullableStringFieldUpdateOperationsInput | string | null
     categoryId?: StringFieldUpdateOperationsInput | string
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
