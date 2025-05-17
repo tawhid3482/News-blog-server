@@ -1,8 +1,13 @@
-// post.service.ts
 import { Request } from "express";
 import { IUploadFile } from "../../../interfaces/file";
 import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
-import prisma from "../../../shared/prisma"; // assuming this is your Prisma client instance
+import prisma from "../../../shared/prisma";
+import { IPaginationOptions } from "../../../interfaces/pagination";
+import { paginationHelpers } from "../../../helpers/paginationHelper";
+import { Prisma } from "../../../../generated/prisma";
+import { IPostFilterRequest, TPost } from "./post.interface";
+import { IGenericResponse } from "../../../interfaces/common";
+import { postSearchableFields } from "./post.constant";
 
 const createPostIntoDB = async (req: Request, userId: string) => {
   const file = req.file as IUploadFile;
@@ -15,9 +20,27 @@ const createPostIntoDB = async (req: Request, userId: string) => {
     };
     coverImage = uploadedImage?.secure_url;
   }
+
   if (!userId) throw new Error("Unauthorized: Missing user ID");
 
   const { title, slug, summary, content, categoryId, tags } = req.body;
+
+  // 🧠 Ensure tags exist or create them if not
+  const tagRecords = await Promise.all(
+    tags?.map(async (tag: { name: string }) => {
+      const existingTag = await prisma.tag.findUnique({
+        where: { name: tag.name },
+      });
+
+      if (existingTag) return { id: existingTag.id };
+
+      const newTag = await prisma.tag.create({
+        data: { name: tag.name },
+      });
+
+      return { id: newTag.id };
+    }) || []
+  );
 
   const post = await prisma.post.create({
     data: {
@@ -29,7 +52,7 @@ const createPostIntoDB = async (req: Request, userId: string) => {
       categoryId,
       authorId: userId,
       tags: {
-        connect: tags?.map((tag: { id: string }) => ({ id: tag.id })),
+        connect: tagRecords,
       },
     },
     include: {
@@ -40,6 +63,94 @@ const createPostIntoDB = async (req: Request, userId: string) => {
   return post;
 };
 
+const getAllPostFromDb = async (
+  filters: IPostFilterRequest,
+  options: IPaginationOptions
+): Promise<IGenericResponse<any[]>> => {
+  const { limit, page, skip } = paginationHelpers.calculatePagination(options);
+  const { searchTerm, fromDate, toDate, tags, ...filterData } = filters;
+
+  const andConditions: any[] = [];
+
+  // Search
+  if (searchTerm) {
+    andConditions.push({
+      OR: postSearchableFields.map((field) => ({
+        [field]: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
+  }
+
+  // Other filters (like categoryId, status, isPublished, authorId)
+  if (Object.keys(filterData).length > 0) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: (filterData as any)[key],
+        },
+      })),
+    });
+  }
+
+  // Tags filtering
+  if (tags && tags.length > 0) {
+    andConditions.push({
+      tags: {
+        some: {
+          name: {
+            in: tags,
+          },
+        },
+      },
+    });
+  }
+
+  // Date range filtering
+  if (fromDate || toDate) {
+    andConditions.push({
+      createdAt: {
+        ...(fromDate && { gte: new Date(fromDate) }),
+        ...(toDate && { lte: new Date(toDate) }),
+      },
+    });
+  }
+
+  const whereConditions: Prisma.PostWhereInput =
+    andConditions.length > 0 ? { AND: andConditions } : {};
+
+  const result = await prisma.post.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? { [options.sortBy]: options.sortOrder }
+        : { createdAt: "desc" },
+    include: {
+      category: true,
+      tags: true,
+      author: true,
+    },
+  });
+
+  const total = await prisma.post.count({
+    where: whereConditions,
+  });
+
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: result,
+  };
+};
+
 export const postService = {
   createPostIntoDB,
+  getAllPostFromDb,
 };

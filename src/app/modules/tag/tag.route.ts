@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/", TagController.getAllTag);
 
 router.post(
-  "/create-Tag",
+  "/create-tag",
   auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
   validateRequest(TagValidation.createTagValidation),
   TagController.createTag

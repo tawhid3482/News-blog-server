@@ -7,7 +7,11 @@ export const createPostValidation = z.object({
   summary: z.string().optional(),
   content: z.string().min(20),
   categoryId: z.string(),
-  tags: z.array(z.object({ id: z.string() })).optional(),
+  tags: z.array(
+    z.object({
+      name: z.string(),
+    })
+  ).optional(),
 });
 
 export const PostValidation = {
