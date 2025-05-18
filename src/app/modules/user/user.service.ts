@@ -6,6 +6,7 @@ import {
   Prisma,
   User,
   UserRole,
+  UserStatus,
 } from "../../../../generated/prisma";
 import { hashedPassword } from "./user.utils";
 import prisma from "../../../shared/prisma";
@@ -16,10 +17,18 @@ import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { userSearchableFields } from "./user.constant";
 import { IGenericResponse } from "../../../interfaces/common";
+import { jwtHelpers } from "../../../helpers/jwtHelpers";
+import config from "../../../config";
+import { Secret } from "jsonwebtoken";
 
-const createUserIntoDB = async (
-  req: Request
-): Promise<Omit<User, "password">> => {
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  needPasswordChange: boolean;
+  userWithoutPassword: Omit<User, "password">;
+}
+
+const createUserIntoDB = async (req: Request): Promise<AuthResponse> => {
   const file = req.file as IUploadFile;
 
   if (file) {
@@ -28,6 +37,7 @@ const createUserIntoDB = async (
     )) as { secure_url?: string };
     req.body.profilePhoto = uploadedProfileImage?.secure_url;
   }
+
   const hash = await hashedPassword(req.body.password);
 
   const result = await prisma.user.create({
@@ -39,12 +49,33 @@ const createUserIntoDB = async (
       role: UserRole.USER,
       gender: req.body.gender,
       needPasswordChange: false,
+      status: UserStatus.ACTIVE,
     },
   });
 
-  // password বাদ দিয়ে অবজেক্ট রিটার্ন করছি
+  // No need to fetch user again, use result directly
+  const { id: userId, role, email, needPasswordChange } = result;
+
+  const accessToken = jwtHelpers.createToken(
+    { userId, role, email },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
+
+  const refreshToken = jwtHelpers.createToken(
+    { userId, role },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string
+  );
+
   const { password, ...userWithoutPassword } = result;
-  return userWithoutPassword;
+
+  return {
+    userWithoutPassword,
+    accessToken,
+    refreshToken,
+    needPasswordChange: needPasswordChange ?? false,
+  };
 };
 
 const createAdminIntoDB = async (req: Request): Promise<Admin> => {
@@ -175,7 +206,7 @@ const createEditorIntoDB = async (req: Request): Promise<Editor> => {
 
 const getAllUser = async (
   filters: IUserFilterRequest,
-  options: IPaginationOptions,
+  options: IPaginationOptions
 ): Promise<IGenericResponse<TUser[]>> => {
   const { limit, page, skip } = paginationHelpers.calculatePagination(options);
   const { searchTerm, ...filterData } = filters;
@@ -184,10 +215,10 @@ const getAllUser = async (
 
   if (searchTerm) {
     andConditions.push({
-      OR: userSearchableFields.map(field => ({
+      OR: userSearchableFields.map((field) => ({
         [field]: {
           contains: searchTerm,
-          mode: 'insensitive',
+          mode: "insensitive",
         },
       })),
     });
@@ -195,7 +226,7 @@ const getAllUser = async (
 
   if (Object.keys(filterData).length > 0) {
     andConditions.push({
-      AND: Object.keys(filterData).map(key => ({
+      AND: Object.keys(filterData).map((key) => ({
         [key]: {
           equals: (filterData as any)[key],
         },
@@ -214,13 +245,13 @@ const getAllUser = async (
       options.sortBy && options.sortOrder
         ? { [options.sortBy]: options.sortOrder }
         : {
-            createdAt: 'desc',
+            createdAt: "desc",
           },
     select: {
       id: true,
       email: true,
-      name:true,
-      gender:true,
+      name: true,
+      gender: true,
       role: true,
       needPasswordChange: true,
       status: true,
@@ -247,5 +278,5 @@ export const userService = {
   createAdminIntoDB,
   createAuthorIntoDB,
   createEditorIntoDB,
-  getAllUser
+  getAllUser,
 };

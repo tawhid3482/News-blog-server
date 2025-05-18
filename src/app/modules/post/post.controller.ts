@@ -20,9 +20,22 @@ const createPost = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getAllPost = catchAsync(async (req: Request, res: Response) => {
-  const filters = pick(req.query, postFilterableFields);
+  const filters = {
+    ...pick(req.query, postFilterableFields),
+    searchTerm: req.query.searchTerm as string | undefined,
+    fromDate: req.query.fromDate as string | undefined,
+    toDate: req.query.toDate as string | undefined,
+    tags: req.query.tags
+      ? Array.isArray(req.query.tags)
+        ? req.query.tags.map(tag => String(tag))
+        : [String(req.query.tags)]
+      : undefined,
+  };
+
   const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
   const result = await postService.getAllPostFromDb(filters, options);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -31,6 +44,7 @@ const getAllPost = catchAsync(async (req: Request, res: Response) => {
     data: result.data,
   });
 });
+
 
 export const postController = {
   createPost,

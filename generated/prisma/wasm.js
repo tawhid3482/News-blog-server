@@ -330,7 +330,13 @@ exports.SetNewsType = exports.$Enums.SetNewsType = {
   NATIONAL: 'NATIONAL',
   SPORTS: 'SPORTS',
   SCIENCE: 'SCIENCE',
-  EDUCATION: 'EDUCATION'
+  EDUCATION: 'EDUCATION',
+  WAR: 'WAR',
+  ECONOMY: 'ECONOMY',
+  TECHNOLOGY: 'TECHNOLOGY',
+  HEALTH: 'HEALTH',
+  ENTERTAINMENT: 'ENTERTAINMENT',
+  INVESTIGATION: 'INVESTIGATION'
 };
 
 exports.ReactionType = exports.$Enums.ReactionType = {

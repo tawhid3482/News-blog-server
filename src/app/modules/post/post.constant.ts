@@ -3,8 +3,7 @@ export const postSearchableFields: string[] = [
   'slug',
   'summary',
   'content',
-  'category.name', // যদি category join করো
-  'tags.name',     // যদি tag join করো
+  // Removed category.name and tags.name because they require nested filtering
 ];
 
 export const postFilterableFields: string[] = [
@@ -17,4 +16,3 @@ export const postFilterableFields: string[] = [
   'createdAt',    // date range filtering
   'updatedAt',
 ];
-

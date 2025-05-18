@@ -7,7 +7,7 @@ import { CategoryController } from "./category.controller";
 
 const router = express.Router();
 
-router.post("/", CategoryController.getAllCategory);
+router.get("/", CategoryController.getAllCategory);
 router.post(
   "/create-category",
   auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),

@@ -69,6 +69,41 @@
             "date": 1747524078487,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-05-success.log",
             "hash": "489de9f72f447e765551311818d59875c815073771b316037c7276abd9835ef3"
+        },
+        {
+            "date": 1747526844402,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-06-success.log",
+            "hash": "cb8d0cbd7b02d0777d9b29cc0138f3726763db544e7185d49cb2a47f35ab0ee5"
+        },
+        {
+            "date": 1747531198949,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-07-success.log",
+            "hash": "2431d4d517517d2f4feb648f474b1d4b4b3e8729c5cc57bacf198b3d3acb6848"
+        },
+        {
+            "date": 1747546659104,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-11-success.log",
+            "hash": "56e632b08f7566b8ce735ba6436bdbe3b13c9d90f8e787ddf2248b2ef9267d70"
+        },
+        {
+            "date": 1747550445806,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-12-success.log",
+            "hash": "4f7e8125e1e10a406740b6127b4bbc8a7cf2eeef95c70e0622d0c96b456d1b3b"
+        },
+        {
+            "date": 1747551638956,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-13-success.log",
+            "hash": "007cdfb5a678a04ad29176963ddab99a273472dd3a5afd0a313ac67815ef2b2a"
+        },
+        {
+            "date": 1747556678397,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-14-success.log",
+            "hash": "40cc5f56d69ccf91e9d7e47c3a07b4aef2a79eda4b879e7d6b943e36d7d5e824"
+        },
+        {
+            "date": 1747574438068,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-18-05-19-success.log",
+            "hash": "711602d8faf834a64c9c6fa9bf73fb3a75ed30f97d14070ddaf6729301493864"
         }
     ],
     "hashType": "sha256"

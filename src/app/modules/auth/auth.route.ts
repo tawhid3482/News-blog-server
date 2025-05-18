@@ -1,11 +1,25 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { AuthValidation } from "./auth.validation";
 import { USER_ROLE } from "../../../enums/user";
 import { AuthController } from "./auth.controller";
 import validateRequest from "../../middlewares/validationRequest";
 import auth from "../../middlewares/auth";
+import { UserValidation } from "../user/user.validation";
+import { userController } from "../user/user.controller";
+import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
 
 const router = express.Router();
+
+router.post(
+  "/sign-up",
+   FileUploadHelper.upload.single("file"),
+    (req: Request, res: Response, next: NextFunction) => {
+      req.body = UserValidation.createUserValidation.parse(
+        JSON.parse(req.body.data)
+      );
+      return userController.createUser(req, res, next);
+    }
+);
 
 router.post(
   "/login",

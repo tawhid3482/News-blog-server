@@ -157,7 +157,13 @@ export const SetNewsType: {
   NATIONAL: 'NATIONAL',
   SPORTS: 'SPORTS',
   SCIENCE: 'SCIENCE',
-  EDUCATION: 'EDUCATION'
+  EDUCATION: 'EDUCATION',
+  WAR: 'WAR',
+  ECONOMY: 'ECONOMY',
+  TECHNOLOGY: 'TECHNOLOGY',
+  HEALTH: 'HEALTH',
+  ENTERTAINMENT: 'ENTERTAINMENT',
+  INVESTIGATION: 'INVESTIGATION'
 };
 
 export type SetNewsType = (typeof SetNewsType)[keyof typeof SetNewsType]

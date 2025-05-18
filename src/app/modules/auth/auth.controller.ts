@@ -7,10 +7,10 @@ import { AuthService } from './auth.service';
 
 
 
+
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.loginUser(req.body);
   const { refreshToken } = result;
-  // set refresh token into cookie
   const cookieOptions = {
     secure: config.env === 'production',
     httpOnly: true,

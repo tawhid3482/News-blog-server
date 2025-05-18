@@ -6,14 +6,16 @@ import { userService } from "./user.service";
 import pick from "../../../shared/pick";
 import { userFilterableFields } from "./user.constant";
 
-const createUser = catchAsync(async (req: Request, res: Response) => {
+const createUser = catchAsync(async (req, res) => {
   const result = await userService.createUserIntoDB(req);
+  const { accessToken, userWithoutPassword } = result;
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
+  res.status(200).json({
     success: true,
-    message: "User created successfully!",
-    data: result,
+    statusCode: httpStatus.OK,
+    message: "User created successfully",
+    data: userWithoutPassword,
+    token: accessToken,
   });
 });
 
@@ -52,23 +54,21 @@ const createEditor = catchAsync(async (req: Request, res: Response) => {
 
 const getAllUser = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, userFilterableFields);
-  const options = pick(req.query, ['limit', 'page', 'sortBy', 'sortOrder']);
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
   const result = await userService.getAllUser(filters, options);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Users retrieval successfully',
+    message: "Users retrieval successfully",
     meta: result.meta,
     data: result.data,
   });
 });
-
-
 
 export const userController = {
   createUser,
   createAdmin,
   createAuthor,
   createEditor,
-  getAllUser
+  getAllUser,
 };

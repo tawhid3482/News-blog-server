@@ -72,19 +72,41 @@ const getAllPostFromDb = async (
 
   const andConditions: any[] = [];
 
-  // Search
-  if (searchTerm) {
-    andConditions.push({
-      OR: postSearchableFields.map((field) => ({
+  // Search including category.name and tags.name
+ if (searchTerm) {
+  andConditions.push({
+    OR: [
+      ...postSearchableFields.map((field) => ({
         [field]: {
           contains: searchTerm,
           mode: "insensitive",
         },
       })),
-    });
-  }
+      {
+        category: {
+          is: {
+            slug: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+        },
+      },
+      {
+        tags: {
+          some: {
+            name: {
+              equals: searchTerm,
+            },
+          },
+        },
+      },
+    ],
+  });
+}
 
-  // Other filters (like categoryId, status, isPublished, authorId)
+
+  // Other filters like categoryId, status, isPublished, authorId
   if (Object.keys(filterData).length > 0) {
     andConditions.push({
       AND: Object.keys(filterData).map((key) => ({
@@ -95,7 +117,7 @@ const getAllPostFromDb = async (
     });
   }
 
-  // Tags filtering
+  // Tags filtering by name list (if you want exact match on tags filter)
   if (tags && tags.length > 0) {
     andConditions.push({
       tags: {
