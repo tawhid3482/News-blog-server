@@ -141,6 +141,7 @@ model Comment {
   postId    String
   post      Post     @relation(fields: [postId], references: [id])
   userId    String
+  userImage String 
   content   String
   createdAt DateTime @default(now())
 }

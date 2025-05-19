@@ -6,6 +6,7 @@ const createComment = async (payload: CreateCommentDTO, userId: string) => {
     data: {
       postId: payload.postId,
       userId,
+      userImage:payload.userImage,
       content: payload.content,
     },
   });

@@ -23,6 +23,7 @@ const getAllPost = catchAsync(async (req: Request, res: Response) => {
   const filters = {
     ...pick(req.query, postFilterableFields),
     searchTerm: req.query.searchTerm as string | undefined,
+    
     fromDate: req.query.fromDate as string | undefined,
     toDate: req.query.toDate as string | undefined,
     tags: req.query.tags

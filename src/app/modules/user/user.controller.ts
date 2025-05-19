@@ -64,6 +64,16 @@ const getAllUser = catchAsync(async (req: Request, res: Response) => {
     data: result.data,
   });
 });
+const getMe = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user;
+  const result = await userService.getMe(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile data fetched!",
+    data: result,
+  });
+});
 
 export const userController = {
   createUser,
@@ -71,4 +81,5 @@ export const userController = {
   createAuthor,
   createEditor,
   getAllUser,
+  getMe,
 };

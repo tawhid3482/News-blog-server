@@ -272,6 +272,50 @@ const getAllUser = async (
     data: result,
   };
 };
+const getMe = async (userId: string) => {
+  const userData = await prisma.user.findUnique({
+    where: {
+      id: userId,
+      status: UserStatus.ACTIVE,
+    },
+    select: {
+      email: true,
+      role: true,
+      name: true,
+      profilePhoto: true,
+      needPasswordChange: true,
+      status: true,
+    },
+  });
+
+  let profileData;
+  if (userData?.role === UserRole.ADMIN) {
+    profileData = await prisma.admin.findUnique({
+      where: {
+        email: userData.email,
+      },
+    });
+  } else if (userData?.role === UserRole.AUTHOR) {
+    profileData = await prisma.author.findUnique({
+      where: {
+        email: userData.email,
+      },
+    });
+  } else if (userData?.role === UserRole.EDITOR) {
+    profileData = await prisma.editor.findUnique({
+      where: {
+        email: userData.email,
+      },
+    });
+  } else if (userData?.role === UserRole.SUPER_ADMIN) {
+    profileData = await prisma.editor.findUnique({
+      where: {
+        email: userData.email,
+      },
+    });
+  }
+  return { ...profileData, ...userData };
+};
 
 export const userService = {
   createUserIntoDB,
@@ -279,4 +323,5 @@ export const userService = {
   createAuthorIntoDB,
   createEditorIntoDB,
   getAllUser,
+  getMe,
 };

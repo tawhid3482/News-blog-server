@@ -73,62 +73,82 @@ const getAllPostFromDb = async (
   const andConditions: any[] = [];
 
   // Search including category.name and tags.name
- if (searchTerm) {
-  andConditions.push({
-    OR: [
-      ...postSearchableFields.map((field) => ({
-        [field]: {
-          contains: searchTerm,
-          mode: "insensitive",
-        },
-      })),
-      {
-        category: {
-          is: {
-            slug: {
-              contains: searchTerm,
-              mode: "insensitive",
+  if (searchTerm) {
+    andConditions.push({
+      OR: [
+        ...postSearchableFields.map((field) => ({
+          [field]: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        })),
+        {
+          category: {
+            is: {
+              slug: {
+                contains: searchTerm,
+                mode: "insensitive",
+              },
             },
           },
         },
-      },
-      {
-        tags: {
-          some: {
-            name: {
-              equals: searchTerm,
+        {
+          tags: {
+            some: {
+              name: {
+                equals: searchTerm,
+              },
             },
           },
         },
-      },
-    ],
-  });
-}
+      ],
+    });
+  }
 
-
-  // Other filters like categoryId, status, isPublished, authorId
+  // Filter by other fields with type-sensitive filtering
   if (Object.keys(filterData).length > 0) {
     andConditions.push({
-      AND: Object.keys(filterData).map((key) => ({
-        [key]: {
-          equals: (filterData as any)[key],
-        },
-      })),
+      AND: Object.keys(filterData).map((key) => {
+        const value = (filterData as any)[key];
+
+        // Text fields - partial match case insensitive
+        if (key === "title" || key === "slug") {
+          return {
+            [key]: {
+              contains: value,
+              mode: "insensitive",
+            },
+          };
+        }
+
+        // Exact match fields
+        if (key === "isPublished") {
+          return {
+            [key]: {
+              equals:
+                value === "true" ? true : value === "false" ? false : value,
+            },
+          };
+        }
+
+        if (key === "categoryId" || key === "authorId" || key === "status") {
+          return {
+            [key]: {
+              equals: value,
+            },
+          };
+        }
+
+        // For any other fields, fallback to equals
+        return {
+          [key]: {
+            equals: value,
+          },
+        };
+      }),
     });
   }
 
-  // Tags filtering by name list (if you want exact match on tags filter)
-  if (tags && tags.length > 0) {
-    andConditions.push({
-      tags: {
-        some: {
-          name: {
-            in: tags,
-          },
-        },
-      },
-    });
-  }
 
   // Date range filtering
   if (fromDate || toDate) {
