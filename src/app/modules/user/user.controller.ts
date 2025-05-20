@@ -6,6 +6,21 @@ import { userService } from "./user.service";
 import pick from "../../../shared/pick";
 import { userFilterableFields } from "./user.constant";
 
+const createUserWithSocial = catchAsync(async (req, res) => {
+  const result = await userService.createUserWithSocialIntoDB(req.body);
+  const { accessToken, refreshToken, userWithoutPassword, needPasswordChange } =
+    result;
+  res.status(200).json({
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User login or registration successful",
+    data: userWithoutPassword,
+    token: accessToken,
+    refreshToken,
+    needPasswordChange,
+  });
+});
+
 const createUser = catchAsync(async (req, res) => {
   const result = await userService.createUserIntoDB(req);
   const { accessToken, userWithoutPassword } = result;
@@ -81,5 +96,6 @@ export const userController = {
   createAuthor,
   createEditor,
   getAllUser,
+  createUserWithSocial,
   getMe,
 };

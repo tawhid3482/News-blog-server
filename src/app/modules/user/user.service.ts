@@ -28,6 +28,55 @@ interface AuthResponse {
   userWithoutPassword: Omit<User, "password">;
 }
 
+const createUserWithSocialIntoDB = async (
+  payload: TUser
+): Promise<AuthResponse> => {
+  let user = await prisma.user.findUnique({
+    where: { email: payload.email },
+  });
+
+  if (!payload.password) {
+    throw new Error("Password is required");
+  }
+  const hash = await hashedPassword(payload.password);
+
+  if (!user) {
+    user = await prisma.user.create({
+      data: {
+        email: payload.email,
+        password: hash,
+        name: payload.name,
+        profilePhoto: payload.profilePhoto,
+        role: UserRole.USER,
+        gender: payload.gender,
+        needPasswordChange: true,
+        status: UserStatus.ACTIVE,
+      },
+    });
+  }
+
+  const { password, ...userWithoutPassword } = user;
+
+  const accessToken = jwtHelpers.createToken(
+    { userId: user.id, role: user.role, email: user.email },
+    config.jwt.secret as Secret,
+    config.jwt.expires_in as string
+  );
+
+  const refreshToken = jwtHelpers.createToken(
+    { userId: user.id, role: user.role },
+    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_expires_in as string
+  );
+
+  return {
+    userWithoutPassword,
+    accessToken,
+    refreshToken,
+    needPasswordChange: user.needPasswordChange ?? false,
+  };
+};
+
 const createUserIntoDB = async (req: Request): Promise<AuthResponse> => {
   const file = req.file as IUploadFile;
 
@@ -322,6 +371,7 @@ export const userService = {
   createAdminIntoDB,
   createAuthorIntoDB,
   createEditorIntoDB,
+  createUserWithSocialIntoDB,
   getAllUser,
   getMe,
 };

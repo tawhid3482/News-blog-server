@@ -11,6 +11,7 @@ dotenv.config({ path: envPath });
 export default {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
+  user_Pass:process.env.USER_DF_PASS,
   bcrypt_salt_rounds: process.env.SALT_ROUND,
   cloudinary: {
     cloud_name: process.env.CLOUD_NAME,

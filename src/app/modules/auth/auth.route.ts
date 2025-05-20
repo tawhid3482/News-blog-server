@@ -11,14 +11,24 @@ import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
 const router = express.Router();
 
 router.post(
+  "/social-login",
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = UserValidation.createUserValidation.parse(
+      req.body
+    );
+    return userController.createUserWithSocial(req, res, next);
+  }
+);
+
+router.post(
   "/sign-up",
-   FileUploadHelper.upload.single("file"),
-    (req: Request, res: Response, next: NextFunction) => {
-      req.body = UserValidation.createUserValidation.parse(
-        JSON.parse(req.body.data)
-      );
-      return userController.createUser(req, res, next);
-    }
+  FileUploadHelper.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = UserValidation.createUserValidation.parse(
+      JSON.parse(req.body.data)
+    );
+    return userController.createUser(req, res, next);
+  }
 );
 
 router.post(

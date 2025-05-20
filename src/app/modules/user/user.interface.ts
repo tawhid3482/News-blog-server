@@ -10,6 +10,7 @@ export type TUser = {
   id: string;
   email: string;
   name: string;
+  password?:string;
   gender: Gender;
   profilePhoto?: string;
   needPasswordChange: boolean | null;
