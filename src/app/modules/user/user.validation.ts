@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { Gender, UserRole, UserStatus } from "../../../../generated/prisma";
 
-const GenderEnum = z.nativeEnum(Gender);
+const GenderEnum = z.nativeEnum(Gender).optional();
 const UserRoleEnum = z.nativeEnum(UserRole);
 const UserStatusEnum = z.nativeEnum(UserStatus);
 
@@ -21,6 +21,13 @@ export const createUserValidation = z.object({
   gender: GenderEnum,
   password: z.string(),
   role: UserRoleEnum.default("USER"),
+  status: UserStatusEnum.optional(),
+  profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
+});
+export const updateUserValidation = z.object({
+  email: z.string().email({ message: "Valid email is required" }).optional(),
+  name: z.string().min(1, { message: "Name is required" }).optional(),
+  gender: GenderEnum.optional(),
   status: UserStatusEnum.optional(),
   profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
 });
@@ -80,5 +87,6 @@ export const UserValidation = {
   createAdminValidation,
   createAuthorValidation,
   createEditorValidation,
-  createSocialUserValidation
+  createSocialUserValidation,
+  updateUserValidation
 };

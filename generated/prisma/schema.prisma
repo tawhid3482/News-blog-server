@@ -154,6 +154,7 @@ model WebsiteReview {
   reviewer    User?    @relation(fields: [reviewerId], references: [id])
   isAnonymous Boolean  @default(false)
   isApproved  Boolean  @default(false)
+  isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

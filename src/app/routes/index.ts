@@ -6,6 +6,7 @@ import { CategoryRoutes } from "../modules/category/category.route";
 import { TagRoutes } from "../modules/tag/tag.route";
 import { ReactionRoutes } from "../modules/reaction/reaction.route";
 import { commentRoutes } from "../modules/comment/comment.route";
+import { ReviewRoutes } from "../modules/websiteReview/review.route";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -36,6 +37,10 @@ const moduleRoutes = [
   {
     path: "/comment",
     route: commentRoutes,
+  },
+  {
+    path: "/review",
+    route: ReviewRoutes,
   },
 ];
 

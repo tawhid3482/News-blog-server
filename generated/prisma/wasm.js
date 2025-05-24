@@ -232,6 +232,7 @@ exports.Prisma.WebsiteReviewScalarFieldEnum = {
   reviewerId: 'reviewerId',
   isAnonymous: 'isAnonymous',
   isApproved: 'isApproved',
+  isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

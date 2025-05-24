@@ -12669,6 +12669,7 @@ export namespace Prisma {
     reviewerId: string | null
     isAnonymous: boolean | null
     isApproved: boolean | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12680,6 +12681,7 @@ export namespace Prisma {
     reviewerId: string | null
     isAnonymous: boolean | null
     isApproved: boolean | null
+    isDeleted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12691,6 +12693,7 @@ export namespace Prisma {
     reviewerId: number
     isAnonymous: number
     isApproved: number
+    isDeleted: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12712,6 +12715,7 @@ export namespace Prisma {
     reviewerId?: true
     isAnonymous?: true
     isApproved?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12723,6 +12727,7 @@ export namespace Prisma {
     reviewerId?: true
     isAnonymous?: true
     isApproved?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12734,6 +12739,7 @@ export namespace Prisma {
     reviewerId?: true
     isAnonymous?: true
     isApproved?: true
+    isDeleted?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12832,6 +12838,7 @@ export namespace Prisma {
     reviewerId: string | null
     isAnonymous: boolean
     isApproved: boolean
+    isDeleted: boolean
     createdAt: Date
     updatedAt: Date
     _count: WebsiteReviewCountAggregateOutputType | null
@@ -12862,6 +12869,7 @@ export namespace Prisma {
     reviewerId?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     reviewer?: boolean | WebsiteReview$reviewerArgs<ExtArgs>
@@ -12874,6 +12882,7 @@ export namespace Prisma {
     reviewerId?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     reviewer?: boolean | WebsiteReview$reviewerArgs<ExtArgs>
@@ -12886,6 +12895,7 @@ export namespace Prisma {
     reviewerId?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     reviewer?: boolean | WebsiteReview$reviewerArgs<ExtArgs>
@@ -12898,11 +12908,12 @@ export namespace Prisma {
     reviewerId?: boolean
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type WebsiteReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "rating" | "reviewerId" | "isAnonymous" | "isApproved" | "createdAt" | "updatedAt", ExtArgs["result"]["websiteReview"]>
+  export type WebsiteReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "rating" | "reviewerId" | "isAnonymous" | "isApproved" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["websiteReview"]>
   export type WebsiteReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviewer?: boolean | WebsiteReview$reviewerArgs<ExtArgs>
   }
@@ -12925,6 +12936,7 @@ export namespace Prisma {
       reviewerId: string | null
       isAnonymous: boolean
       isApproved: boolean
+      isDeleted: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["websiteReview"]>
@@ -13357,6 +13369,7 @@ export namespace Prisma {
     readonly reviewerId: FieldRef<"WebsiteReview", 'String'>
     readonly isAnonymous: FieldRef<"WebsiteReview", 'Boolean'>
     readonly isApproved: FieldRef<"WebsiteReview", 'Boolean'>
+    readonly isDeleted: FieldRef<"WebsiteReview", 'Boolean'>
     readonly createdAt: FieldRef<"WebsiteReview", 'DateTime'>
     readonly updatedAt: FieldRef<"WebsiteReview", 'DateTime'>
   }
@@ -17093,6 +17106,7 @@ export namespace Prisma {
     reviewerId: 'reviewerId',
     isAnonymous: 'isAnonymous',
     isApproved: 'isApproved',
+    isDeleted: 'isDeleted',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18084,6 +18098,7 @@ export namespace Prisma {
     reviewerId?: StringNullableFilter<"WebsiteReview"> | string | null
     isAnonymous?: BoolFilter<"WebsiteReview"> | boolean
     isApproved?: BoolFilter<"WebsiteReview"> | boolean
+    isDeleted?: BoolFilter<"WebsiteReview"> | boolean
     createdAt?: DateTimeFilter<"WebsiteReview"> | Date | string
     updatedAt?: DateTimeFilter<"WebsiteReview"> | Date | string
     reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -18096,6 +18111,7 @@ export namespace Prisma {
     reviewerId?: SortOrderInput | SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     reviewer?: UserOrderByWithRelationInput
@@ -18111,6 +18127,7 @@ export namespace Prisma {
     reviewerId?: StringNullableFilter<"WebsiteReview"> | string | null
     isAnonymous?: BoolFilter<"WebsiteReview"> | boolean
     isApproved?: BoolFilter<"WebsiteReview"> | boolean
+    isDeleted?: BoolFilter<"WebsiteReview"> | boolean
     createdAt?: DateTimeFilter<"WebsiteReview"> | Date | string
     updatedAt?: DateTimeFilter<"WebsiteReview"> | Date | string
     reviewer?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -18123,6 +18140,7 @@ export namespace Prisma {
     reviewerId?: SortOrderInput | SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: WebsiteReviewCountOrderByAggregateInput
@@ -18142,6 +18160,7 @@ export namespace Prisma {
     reviewerId?: StringNullableWithAggregatesFilter<"WebsiteReview"> | string | null
     isAnonymous?: BoolWithAggregatesFilter<"WebsiteReview"> | boolean
     isApproved?: BoolWithAggregatesFilter<"WebsiteReview"> | boolean
+    isDeleted?: BoolWithAggregatesFilter<"WebsiteReview"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"WebsiteReview"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"WebsiteReview"> | Date | string
   }
@@ -19110,6 +19129,7 @@ export namespace Prisma {
     rating: number
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     reviewer?: UserCreateNestedOneWithoutWebsiteReviewInput
@@ -19122,6 +19142,7 @@ export namespace Prisma {
     reviewerId?: string | null
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19132,6 +19153,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewer?: UserUpdateOneWithoutWebsiteReviewNestedInput
@@ -19144,6 +19166,7 @@ export namespace Prisma {
     reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19155,6 +19178,7 @@ export namespace Prisma {
     reviewerId?: string | null
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19165,6 +19189,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19176,6 +19201,7 @@ export namespace Prisma {
     reviewerId?: NullableStringFieldUpdateOperationsInput | string | null
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20186,6 +20212,7 @@ export namespace Prisma {
     reviewerId?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20201,6 +20228,7 @@ export namespace Prisma {
     reviewerId?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -20212,6 +20240,7 @@ export namespace Prisma {
     reviewerId?: SortOrder
     isAnonymous?: SortOrder
     isApproved?: SortOrder
+    isDeleted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21453,6 +21482,7 @@ export namespace Prisma {
     rating: number
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21463,6 +21493,7 @@ export namespace Prisma {
     rating: number
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21690,6 +21721,7 @@ export namespace Prisma {
     reviewerId?: StringNullableFilter<"WebsiteReview"> | string | null
     isAnonymous?: BoolFilter<"WebsiteReview"> | boolean
     isApproved?: BoolFilter<"WebsiteReview"> | boolean
+    isDeleted?: BoolFilter<"WebsiteReview"> | boolean
     createdAt?: DateTimeFilter<"WebsiteReview"> | Date | string
     updatedAt?: DateTimeFilter<"WebsiteReview"> | Date | string
   }
@@ -23234,6 +23266,7 @@ export namespace Prisma {
     rating: number
     isAnonymous?: boolean
     isApproved?: boolean
+    isDeleted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23271,6 +23304,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23281,6 +23315,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23291,6 +23326,7 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     isAnonymous?: BoolFieldUpdateOperationsInput | boolean
     isApproved?: BoolFieldUpdateOperationsInput | boolean
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

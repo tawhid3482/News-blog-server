@@ -4,6 +4,8 @@ import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
 import { UserValidation } from "./user.validation";
 import auth from "../../middlewares/auth";
 import { USER_ROLE } from "../../../enums/user";
+import { validateHeaderName } from "http";
+import ApiError from "../../../errors/ApiError";
 const router = express.Router();
 
 router.get(
@@ -66,5 +68,30 @@ router.post(
     return userController.createEditor(req, res, next);
   }
 );
+
+router.patch(
+  "/update-my-profile",
+  auth(
+    USER_ROLE.SUPER_ADMIN,
+    USER_ROLE.ADMIN,
+    USER_ROLE.AUTHOR,
+    USER_ROLE.EDITOR,
+    USER_ROLE.USER
+  ),
+  FileUploadHelper.upload.single("file"),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body && req.body.data) {
+      try {
+        req.body = JSON.parse(req.body.data);
+      } catch (err) {
+        return next(new ApiError(httpStatus.BAD_REQUEST, "Invalid JSON in data field"));
+      }
+    } else {
+      req.body = {};
+    }
+    return userController.updateMyProfile(req, res, next);
+  }
+);
+
 
 export const userRoutes = router;

@@ -102,6 +102,19 @@ const userStats = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+
+  const result = await userService.updateMyProfile(user, req);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Profile data fetched!",
+    data: result,
+  });
+});
+
 export const userController = {
   createUser,
   createAdmin,
@@ -111,4 +124,5 @@ export const userController = {
   createUserWithSocial,
   userStats,
   getMe,
+  updateMyProfile,
 };

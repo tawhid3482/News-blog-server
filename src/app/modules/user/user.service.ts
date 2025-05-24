@@ -99,7 +99,7 @@ const createUserIntoDB = async (req: Request): Promise<AuthResponse> => {
       profilePhoto: req.body.profilePhoto,
       role: UserRole.USER,
       gender: req.body.gender,
-      needPasswordChange: true,
+      needPasswordChange: false,
       status: UserStatus.ACTIVE,
     },
   });
@@ -334,9 +334,10 @@ const getMe = async (userId: string) => {
       role: true,
       name: true,
       profilePhoto: true,
+      gender: true,
       needPasswordChange: true,
       status: true,
-      createdAt:true
+      createdAt: true,
     },
   });
 
@@ -387,7 +388,7 @@ const userStats = async (userId: string): Promise<UserStats> => {
 
   // 1.1. Reaction breakdown by type
   const reactionTypeCountsRaw = await prisma.reaction.groupBy({
-    by: ['type'],
+    by: ["type"],
     where: { userId },
     _count: { _all: true },
   });
@@ -413,7 +414,7 @@ const userStats = async (userId: string): Promise<UserStats> => {
   // 4. Last interaction (reaction or comment)
   const lastReaction = await prisma.reaction.findFirst({
     where: { userId },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
     select: {
       postId: true,
       createdAt: true,
@@ -424,7 +425,7 @@ const userStats = async (userId: string): Promise<UserStats> => {
 
   const lastComment = await prisma.comment.findFirst({
     where: { userId },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
     select: {
       id: true,
       content: true,
@@ -434,28 +435,40 @@ const userStats = async (userId: string): Promise<UserStats> => {
     },
   });
 
+  const lastReview = await prisma.websiteReview.findFirst({
+    where: { reviewerId: userId },
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      content: true,
+      rating: true,
+      createdAt: true,
+    },
+  });
+
   let lastInteraction = null;
 
   if (lastReaction && lastComment) {
-    lastInteraction = lastReaction.createdAt > lastComment.createdAt
-      ? {
-          postId: lastReaction.postId,
-          postTitle: lastReaction.post.title,
-          type: 'reaction' as const,
-          subtype: lastReaction.type,
-          createdAt: lastReaction.createdAt,
-        }
-      : {
-          postId: lastComment.postId,
-          postTitle: lastComment.post.title,
-          type: 'comment' as const,
-          createdAt: lastComment.createdAt,
-        };
+    lastInteraction =
+      lastReaction.createdAt > lastComment.createdAt
+        ? {
+            postId: lastReaction.postId,
+            postTitle: lastReaction.post.title,
+            type: "reaction" as const,
+            subtype: lastReaction.type,
+            createdAt: lastReaction.createdAt,
+          }
+        : {
+            postId: lastComment.postId,
+            postTitle: lastComment.post.title,
+            type: "comment" as const,
+            createdAt: lastComment.createdAt,
+          };
   } else if (lastReaction) {
     lastInteraction = {
       postId: lastReaction.postId,
       postTitle: lastReaction.post.title,
-      type: 'reaction' as const,
+      type: "reaction" as const,
       subtype: lastReaction.type,
       createdAt: lastReaction.createdAt,
     };
@@ -463,7 +476,7 @@ const userStats = async (userId: string): Promise<UserStats> => {
     lastInteraction = {
       postId: lastComment.postId,
       postTitle: lastComment.post.title,
-      type: 'comment' as const,
+      type: "comment" as const,
       createdAt: lastComment.createdAt,
     };
   }
@@ -474,6 +487,14 @@ const userStats = async (userId: string): Promise<UserStats> => {
     commentCount,
     totalReadingTime,
     lastInteraction,
+    lastReview: lastReview
+      ? {
+          id: lastReview.id,
+          content: lastReview.content,
+          rating: lastReview.rating,
+          createdAt: lastReview.createdAt,
+        }
+      : null,
     lastComment: lastComment
       ? {
           id: lastComment.id,
@@ -486,6 +507,69 @@ const userStats = async (userId: string): Promise<UserStats> => {
   };
 };
 
+const updateMyProfile = async (authUser: any, req: Request) => {
+  const userData = await prisma.user.findUnique({
+    where: {
+      id: authUser.userId,
+      status: UserStatus.ACTIVE,
+    },
+  });
+
+  if (!userData) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User does not exists!");
+  }
+
+  const file = req.file as IUploadFile;
+
+  if (file) {
+    const uploadedProfileImage = (await FileUploadHelper.uploadToCloudinary(
+      file
+    )) as { secure_url?: string };
+    req.body.profilePhoto = uploadedProfileImage?.secure_url;
+  }
+
+  let profileData;
+  if (userData?.role === UserRole.ADMIN) {
+    profileData = await prisma.admin.update({
+      where: {
+        email: userData.email,
+      },
+      data: req.body,
+    });
+  } else if (userData?.role === UserRole.AUTHOR) {
+    profileData = await prisma.author.update({
+      where: {
+        email: userData.email,
+      },
+      data: req.body,
+    });
+  } else if (userData?.role === UserRole.EDITOR) {
+    profileData = await prisma.editor.update({
+      where: {
+        email: userData.email,
+      },
+      data: req.body,
+    });
+  } else if (userData?.role === UserRole.USER) {
+    profileData = await prisma.user.update({
+      where: {
+        email: userData.email,
+      },
+      data: req.body,
+    });
+  }
+
+  // If you need to update a search index, import or define 'index' here.
+  // Example: import { index } from '../../../shared/searchIndex';
+  // await index.updateDocuments([{ id, email, name, contactNumber, address }]);
+  // If not needed, you can safely remove this block:
+  // if (profileData && "address" in profileData) {
+  //   const { id, email, name, contactNumber, address } = profileData;
+  //   await index.updateDocuments([{ id, email, name, contactNumber, address }]);
+  // }
+
+  return { ...profileData, ...userData };
+};
 
 export const userService = {
   createUserIntoDB,
@@ -496,4 +580,5 @@ export const userService = {
   getAllUser,
   getMe,
   userStats,
+  updateMyProfile,
 };

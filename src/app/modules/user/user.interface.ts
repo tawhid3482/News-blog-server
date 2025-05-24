@@ -10,7 +10,7 @@ export type TUser = {
   id: string;
   email: string;
   name: string;
-  password?:string;
+  password?: string;
   gender: Gender;
   profilePhoto?: string;
   needPasswordChange: boolean | null;
@@ -28,7 +28,7 @@ export type UserStats = {
   lastInteraction: {
     postId: string;
     postTitle: string;
-    type: 'reaction' | 'comment';
+    type: "reaction" | "comment";
     subtype?: string;
     createdAt: Date;
   } | null;
@@ -39,5 +39,10 @@ export type UserStats = {
     postTitle: string;
     createdAt: Date;
   } | null;
+  lastReview: {
+    id: string;
+    content: string;
+    rating:number;
+    createdAt: Date;
+  } | null;  // <-- এখানে null যোগ করো
 };
-

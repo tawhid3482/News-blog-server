@@ -89,29 +89,29 @@ model Editor {
 }
 
 model Post {
-  id          String     @id @default(uuid())
-  title       String
-  slug        String     @unique
-  summary     String?
-  content     String
-  coverImage  String?
-  authorId    String
-  author      User       @relation(fields: [authorId], references: [id], map: "fk_post_author")
-  authorAuthorId String? 
-  authorAuthor   Author?   @relation("AuthorPosts", fields: [authorAuthorId], references: [id])
-  categoryId  String
-  category    Category   @relation(fields: [categoryId], references: [id], map: "fk_post_category")
-  tags        Tag[]      @relation("PostTags")
-  isPublished Boolean    @default(false)
-  publishedAt DateTime?
-  status      PostStatus @default(DRAFT)
-  reactions   Reaction[]
-  comments    Comment[]
-  viewsCount  Int        @default(0)
-  postViews   PostView[]
-  readingTime Int?      @default(0)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id             String     @id @default(uuid())
+  title          String
+  slug           String     @unique
+  summary        String?
+  content        String
+  coverImage     String?
+  authorId       String
+  author         User       @relation(fields: [authorId], references: [id], map: "fk_post_author")
+  authorAuthorId String?
+  authorAuthor   Author?    @relation("AuthorPosts", fields: [authorAuthorId], references: [id])
+  categoryId     String
+  category       Category   @relation(fields: [categoryId], references: [id], map: "fk_post_category")
+  tags           Tag[]      @relation("PostTags")
+  isPublished    Boolean    @default(false)
+  publishedAt    DateTime?
+  status         PostStatus @default(DRAFT)
+  reactions      Reaction[]
+  comments       Comment[]
+  viewsCount     Int        @default(0)
+  postViews      PostView[]
+  readingTime    Int?       @default(0)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 }
 
 model Category {
@@ -141,7 +141,7 @@ model Comment {
   postId    String
   post      Post     @relation(fields: [postId], references: [id])
   userId    String
-  userImage String 
+  userImage String
   content   String
   createdAt DateTime @default(now())
 }
@@ -154,6 +154,7 @@ model WebsiteReview {
   reviewer    User?    @relation(fields: [reviewerId], references: [id])
   isAnonymous Boolean  @default(false)
   isApproved  Boolean  @default(false)
+  isDeleted   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -178,11 +179,11 @@ model ContactMessage {
 model PostView {
   id          String   @id @default(uuid())
   postId      String
-  userId      String?  // anonymous views possible
+  userId      String? // anonymous views possible
   ipAddress   String?
   userAgent   String?
   viewedAt    DateTime @default(now())
-  readingTime Int?     // time spent reading in seconds (optional)
+  readingTime Int? // time spent reading in seconds (optional)
 
   post Post  @relation(fields: [postId], references: [id])
   user User? @relation(fields: [userId], references: [id])
@@ -190,7 +191,6 @@ model PostView {
   @@index([postId])
   @@index([userId])
 }
-
 
 enum UserRole {
   ADMIN
