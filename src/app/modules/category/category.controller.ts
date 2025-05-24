@@ -5,7 +5,6 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { CategoryService } from "./category.service";
 
-
 const createCategory = catchAsync(async (req: Request, res: Response) => {
   const result = await CategoryService.createCategoryIntoDB(req);
 
@@ -16,6 +15,7 @@ const createCategory = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+
 const getAllCategory = catchAsync(async (req: Request, res: Response) => {
   const result = await CategoryService.getAllCategoryFromDB();
 
@@ -27,7 +27,20 @@ const getAllCategory = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateCategory = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.user;
+  const result = await CategoryService.updateCategoryIntoDB(req, id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Category updated successfully!",
+    data: result,
+  });
+});
+
 export const CategoryController = {
   createCategory,
-  getAllCategory
+  getAllCategory,
+  updateCategory
 };

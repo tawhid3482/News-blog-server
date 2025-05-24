@@ -259,7 +259,8 @@ exports.Prisma.PostViewScalarFieldEnum = {
   userId: 'userId',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
-  viewedAt: 'viewedAt'
+  viewedAt: 'viewedAt',
+  readingTime: 'readingTime'
 };
 
 exports.Prisma.SortOrder = {

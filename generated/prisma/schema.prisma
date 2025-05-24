@@ -109,7 +109,7 @@ model Post {
   comments       Comment[]
   viewsCount     Int        @default(0)
   postViews      PostView[]
-  readingTime    Int?
+  readingTime    Int?       @default(0)
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
 }
@@ -176,15 +176,19 @@ model ContactMessage {
 }
 
 model PostView {
-  id        String   @id @default(uuid())
-  postId    String
-  userId    String? // anonymous views possible
-  ipAddress String?
-  userAgent String?
-  viewedAt  DateTime @default(now())
+  id          String   @id @default(uuid())
+  postId      String
+  userId      String? // anonymous views possible
+  ipAddress   String?
+  userAgent   String?
+  viewedAt    DateTime @default(now())
+  readingTime Int? // time spent reading in seconds (optional)
 
   post Post  @relation(fields: [postId], references: [id])
   user User? @relation(fields: [userId], references: [id])
+
+  @@index([postId])
+  @@index([userId])
 }
 
 enum UserRole {

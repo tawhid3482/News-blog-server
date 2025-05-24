@@ -121,6 +121,18 @@ const getAllPostFromDb = async (
           };
         }
 
+        if (key === "category") {
+          return {
+            category: {
+              is: {
+                name: {
+                  equals: value,
+                },
+              },
+            },
+          };
+        }
+
         // Exact match fields
         if (key === "isPublished") {
           return {
@@ -148,7 +160,6 @@ const getAllPostFromDb = async (
       }),
     });
   }
-
 
   // Date range filtering
   if (fromDate || toDate) {

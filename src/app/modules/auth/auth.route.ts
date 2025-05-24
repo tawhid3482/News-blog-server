@@ -13,7 +13,7 @@ const router = express.Router();
 router.post(
   "/social-login",
   (req: Request, res: Response, next: NextFunction) => {
-    req.body = UserValidation.createUserValidation.parse(
+    req.body = UserValidation.createSocialUserValidation.parse(
       req.body
     );
     return userController.createUserWithSocial(req, res, next);

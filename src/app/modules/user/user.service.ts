@@ -12,7 +12,7 @@ import { hashedPassword } from "./user.utils";
 import prisma from "../../../shared/prisma";
 import { IUploadFile } from "../../../interfaces/file";
 import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
-import { IUserFilterRequest, TUser } from "./user.interface";
+import { IUserFilterRequest, TUser, UserStats } from "./user.interface";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { userSearchableFields } from "./user.constant";
@@ -20,6 +20,7 @@ import { IGenericResponse } from "../../../interfaces/common";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
+import ApiError from "../../../errors/ApiError";
 
 interface AuthResponse {
   accessToken: string;
@@ -28,17 +29,13 @@ interface AuthResponse {
   userWithoutPassword: Omit<User, "password">;
 }
 
-const createUserWithSocialIntoDB = async (
-  payload: TUser
-): Promise<AuthResponse> => {
+const createUserWithSocialIntoDB = async (payload: TUser) => {
   let user = await prisma.user.findUnique({
     where: { email: payload.email },
   });
 
-  if (!payload.password) {
-    throw new Error("Password is required");
-  }
-  const hash = await hashedPassword(payload.password);
+  const rawPassword = payload.password || (config.user_Pass as string);
+  const hash = await hashedPassword(rawPassword);
 
   if (!user) {
     user = await prisma.user.create({
@@ -58,7 +55,12 @@ const createUserWithSocialIntoDB = async (
   const { password, ...userWithoutPassword } = user;
 
   const accessToken = jwtHelpers.createToken(
-    { userId: user.id, role: user.role, email: user.email },
+    {
+      userId: user.id,
+      role: user.role,
+      email: user.email,
+      profilePhoto: user.profilePhoto,
+    },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
@@ -97,16 +99,16 @@ const createUserIntoDB = async (req: Request): Promise<AuthResponse> => {
       profilePhoto: req.body.profilePhoto,
       role: UserRole.USER,
       gender: req.body.gender,
-      needPasswordChange: false,
+      needPasswordChange: true,
       status: UserStatus.ACTIVE,
     },
   });
 
   // No need to fetch user again, use result directly
-  const { id: userId, role, email, needPasswordChange } = result;
+  const { id: userId, role, email, profilePhoto, needPasswordChange } = result;
 
   const accessToken = jwtHelpers.createToken(
-    { userId, role, email },
+    { userId, role, email, profilePhoto },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
@@ -334,6 +336,7 @@ const getMe = async (userId: string) => {
       profilePhoto: true,
       needPasswordChange: true,
       status: true,
+      createdAt:true
     },
   });
 
@@ -366,6 +369,124 @@ const getMe = async (userId: string) => {
   return { ...profileData, ...userData };
 };
 
+const userStats = async (userId: string): Promise<UserStats> => {
+  // 0. Check user exists & active
+  const userData = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { id: true, status: true },
+  });
+
+  if (!userData || userData.status !== "ACTIVE") {
+    throw new Error("User not found or inactive");
+  }
+
+  // 1. Total reaction count
+  const reactionCount = await prisma.reaction.count({
+    where: { userId },
+  });
+
+  // 1.1. Reaction breakdown by type
+  const reactionTypeCountsRaw = await prisma.reaction.groupBy({
+    by: ['type'],
+    where: { userId },
+    _count: { _all: true },
+  });
+
+  const reactionTypeCounts = reactionTypeCountsRaw.reduce((acc, curr) => {
+    acc[curr.type] = curr._count._all;
+    return acc;
+  }, {} as Record<string, number>);
+
+  // 2. Comment count
+  const commentCount = await prisma.comment.count({
+    where: { userId },
+  });
+
+  // 3. Total reading time
+  const readingTimes = await prisma.postView.aggregate({
+    where: { userId },
+    _sum: { readingTime: true },
+  });
+
+  const totalReadingTime = readingTimes._sum.readingTime ?? 0;
+
+  // 4. Last interaction (reaction or comment)
+  const lastReaction = await prisma.reaction.findFirst({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+    select: {
+      postId: true,
+      createdAt: true,
+      type: true,
+      post: { select: { title: true } },
+    },
+  });
+
+  const lastComment = await prisma.comment.findFirst({
+    where: { userId },
+    orderBy: { createdAt: 'desc' },
+    select: {
+      id: true,
+      content: true,
+      postId: true,
+      createdAt: true,
+      post: { select: { title: true } },
+    },
+  });
+
+  let lastInteraction = null;
+
+  if (lastReaction && lastComment) {
+    lastInteraction = lastReaction.createdAt > lastComment.createdAt
+      ? {
+          postId: lastReaction.postId,
+          postTitle: lastReaction.post.title,
+          type: 'reaction' as const,
+          subtype: lastReaction.type,
+          createdAt: lastReaction.createdAt,
+        }
+      : {
+          postId: lastComment.postId,
+          postTitle: lastComment.post.title,
+          type: 'comment' as const,
+          createdAt: lastComment.createdAt,
+        };
+  } else if (lastReaction) {
+    lastInteraction = {
+      postId: lastReaction.postId,
+      postTitle: lastReaction.post.title,
+      type: 'reaction' as const,
+      subtype: lastReaction.type,
+      createdAt: lastReaction.createdAt,
+    };
+  } else if (lastComment) {
+    lastInteraction = {
+      postId: lastComment.postId,
+      postTitle: lastComment.post.title,
+      type: 'comment' as const,
+      createdAt: lastComment.createdAt,
+    };
+  }
+
+  return {
+    reactionCount,
+    reactionTypeCounts,
+    commentCount,
+    totalReadingTime,
+    lastInteraction,
+    lastComment: lastComment
+      ? {
+          id: lastComment.id,
+          content: lastComment.content,
+          postId: lastComment.postId,
+          postTitle: lastComment.post.title,
+          createdAt: lastComment.createdAt,
+        }
+      : null,
+  };
+};
+
+
 export const userService = {
   createUserIntoDB,
   createAdminIntoDB,
@@ -374,4 +495,5 @@ export const userService = {
   createUserWithSocialIntoDB,
   getAllUser,
   getMe,
+  userStats,
 };

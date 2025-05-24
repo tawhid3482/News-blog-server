@@ -5,6 +5,16 @@ const GenderEnum = z.nativeEnum(Gender);
 const UserRoleEnum = z.nativeEnum(UserRole);
 const UserStatusEnum = z.nativeEnum(UserStatus);
 
+export const createSocialUserValidation = z.object({
+  email: z.string().email({ message: "Valid email is required" }),
+  name: z.string().min(1, { message: "Name is required" }),
+  gender: GenderEnum,
+  password: z.string().optional(),
+  role: UserRoleEnum.default("USER"),
+  status: UserStatusEnum.optional(),
+  profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
+});
+
 export const createUserValidation = z.object({
   email: z.string().email({ message: "Valid email is required" }),
   name: z.string().min(1, { message: "Name is required" }),
@@ -70,4 +80,5 @@ export const UserValidation = {
   createAdminValidation,
   createAuthorValidation,
   createEditorValidation,
+  createSocialUserValidation
 };

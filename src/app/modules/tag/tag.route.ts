@@ -11,7 +11,7 @@ router.post("/", TagController.getAllTag);
 
 router.post(
   "/create-tag",
-  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
+  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN,USER_ROLE.AUTHOR),
   validateRequest(TagValidation.createTagValidation),
   TagController.createTag
 );

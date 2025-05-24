@@ -79,6 +79,7 @@ const getAllUser = catchAsync(async (req: Request, res: Response) => {
     data: result.data,
   });
 });
+
 const getMe = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user;
   const result = await userService.getMe(userId);
@@ -90,6 +91,17 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const userStats = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user;
+  const result = await userService.userStats(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User stats fetched!",
+    data: result,
+  });
+});
+
 export const userController = {
   createUser,
   createAdmin,
@@ -97,5 +109,6 @@ export const userController = {
   createEditor,
   getAllUser,
   createUserWithSocial,
+  userStats,
   getMe,
 };

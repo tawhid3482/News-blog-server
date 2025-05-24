@@ -19,3 +19,25 @@ export type TUser = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type UserStats = {
+  reactionCount: number;
+  reactionTypeCounts: Record<string, number>;
+  commentCount: number;
+  totalReadingTime: number;
+  lastInteraction: {
+    postId: string;
+    postTitle: string;
+    type: 'reaction' | 'comment';
+    subtype?: string;
+    createdAt: Date;
+  } | null;
+  lastComment: {
+    id: string;
+    content: string;
+    postId: string;
+    postTitle: string;
+    createdAt: Date;
+  } | null;
+};
+

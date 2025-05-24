@@ -10,6 +10,7 @@ export const postFilterableFields: string[] = [
   'title',
   'slug',
   'categoryId',
+  'category',
   'authorId',
   'status',       // draft, published
   'isPublished',  // true / false

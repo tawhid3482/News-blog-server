@@ -22,6 +22,17 @@ router.get(
   ),
   userController.getMe
 );
+router.get(
+  "/stats",
+  auth(
+    USER_ROLE.SUPER_ADMIN,
+    USER_ROLE.ADMIN,
+    USER_ROLE.USER,
+    USER_ROLE.AUTHOR,
+    USER_ROLE.EDITOR
+  ),
+  userController.userStats
+);
 
 router.post(
   "/create-admin",

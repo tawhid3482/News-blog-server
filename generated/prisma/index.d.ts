@@ -15801,8 +15801,18 @@ export namespace Prisma {
 
   export type AggregatePostView = {
     _count: PostViewCountAggregateOutputType | null
+    _avg: PostViewAvgAggregateOutputType | null
+    _sum: PostViewSumAggregateOutputType | null
     _min: PostViewMinAggregateOutputType | null
     _max: PostViewMaxAggregateOutputType | null
+  }
+
+  export type PostViewAvgAggregateOutputType = {
+    readingTime: number | null
+  }
+
+  export type PostViewSumAggregateOutputType = {
+    readingTime: number | null
   }
 
   export type PostViewMinAggregateOutputType = {
@@ -15812,6 +15822,7 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     viewedAt: Date | null
+    readingTime: number | null
   }
 
   export type PostViewMaxAggregateOutputType = {
@@ -15821,6 +15832,7 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     viewedAt: Date | null
+    readingTime: number | null
   }
 
   export type PostViewCountAggregateOutputType = {
@@ -15830,9 +15842,18 @@ export namespace Prisma {
     ipAddress: number
     userAgent: number
     viewedAt: number
+    readingTime: number
     _all: number
   }
 
+
+  export type PostViewAvgAggregateInputType = {
+    readingTime?: true
+  }
+
+  export type PostViewSumAggregateInputType = {
+    readingTime?: true
+  }
 
   export type PostViewMinAggregateInputType = {
     id?: true
@@ -15841,6 +15862,7 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     viewedAt?: true
+    readingTime?: true
   }
 
   export type PostViewMaxAggregateInputType = {
@@ -15850,6 +15872,7 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     viewedAt?: true
+    readingTime?: true
   }
 
   export type PostViewCountAggregateInputType = {
@@ -15859,6 +15882,7 @@ export namespace Prisma {
     ipAddress?: true
     userAgent?: true
     viewedAt?: true
+    readingTime?: true
     _all?: true
   }
 
@@ -15900,6 +15924,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: PostViewAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PostViewSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: PostViewMinAggregateInputType
@@ -15930,6 +15966,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: PostViewCountAggregateInputType | true
+    _avg?: PostViewAvgAggregateInputType
+    _sum?: PostViewSumAggregateInputType
     _min?: PostViewMinAggregateInputType
     _max?: PostViewMaxAggregateInputType
   }
@@ -15941,7 +15979,10 @@ export namespace Prisma {
     ipAddress: string | null
     userAgent: string | null
     viewedAt: Date
+    readingTime: number | null
     _count: PostViewCountAggregateOutputType | null
+    _avg: PostViewAvgAggregateOutputType | null
+    _sum: PostViewSumAggregateOutputType | null
     _min: PostViewMinAggregateOutputType | null
     _max: PostViewMaxAggregateOutputType | null
   }
@@ -15967,6 +16008,7 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     viewedAt?: boolean
+    readingTime?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
     user?: boolean | PostView$userArgs<ExtArgs>
   }, ExtArgs["result"]["postView"]>
@@ -15978,6 +16020,7 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     viewedAt?: boolean
+    readingTime?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
     user?: boolean | PostView$userArgs<ExtArgs>
   }, ExtArgs["result"]["postView"]>
@@ -15989,6 +16032,7 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     viewedAt?: boolean
+    readingTime?: boolean
     post?: boolean | PostDefaultArgs<ExtArgs>
     user?: boolean | PostView$userArgs<ExtArgs>
   }, ExtArgs["result"]["postView"]>
@@ -16000,9 +16044,10 @@ export namespace Prisma {
     ipAddress?: boolean
     userAgent?: boolean
     viewedAt?: boolean
+    readingTime?: boolean
   }
 
-  export type PostViewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "userId" | "ipAddress" | "userAgent" | "viewedAt", ExtArgs["result"]["postView"]>
+  export type PostViewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "postId" | "userId" | "ipAddress" | "userAgent" | "viewedAt" | "readingTime", ExtArgs["result"]["postView"]>
   export type PostViewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     post?: boolean | PostDefaultArgs<ExtArgs>
     user?: boolean | PostView$userArgs<ExtArgs>
@@ -16029,6 +16074,7 @@ export namespace Prisma {
       ipAddress: string | null
       userAgent: string | null
       viewedAt: Date
+      readingTime: number | null
     }, ExtArgs["result"]["postView"]>
     composites: {}
   }
@@ -16460,6 +16506,7 @@ export namespace Prisma {
     readonly ipAddress: FieldRef<"PostView", 'String'>
     readonly userAgent: FieldRef<"PostView", 'String'>
     readonly viewedAt: FieldRef<"PostView", 'DateTime'>
+    readonly readingTime: FieldRef<"PostView", 'Int'>
   }
     
 
@@ -17082,7 +17129,8 @@ export namespace Prisma {
     userId: 'userId',
     ipAddress: 'ipAddress',
     userAgent: 'userAgent',
-    viewedAt: 'viewedAt'
+    viewedAt: 'viewedAt',
+    readingTime: 'readingTime'
   };
 
   export type PostViewScalarFieldEnum = (typeof PostViewScalarFieldEnum)[keyof typeof PostViewScalarFieldEnum]
@@ -18217,6 +18265,7 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"PostView"> | string | null
     userAgent?: StringNullableFilter<"PostView"> | string | null
     viewedAt?: DateTimeFilter<"PostView"> | Date | string
+    readingTime?: IntNullableFilter<"PostView"> | number | null
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
@@ -18228,6 +18277,7 @@ export namespace Prisma {
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     viewedAt?: SortOrder
+    readingTime?: SortOrderInput | SortOrder
     post?: PostOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -18242,6 +18292,7 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"PostView"> | string | null
     userAgent?: StringNullableFilter<"PostView"> | string | null
     viewedAt?: DateTimeFilter<"PostView"> | Date | string
+    readingTime?: IntNullableFilter<"PostView"> | number | null
     post?: XOR<PostScalarRelationFilter, PostWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
@@ -18253,9 +18304,12 @@ export namespace Prisma {
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     viewedAt?: SortOrder
+    readingTime?: SortOrderInput | SortOrder
     _count?: PostViewCountOrderByAggregateInput
+    _avg?: PostViewAvgOrderByAggregateInput
     _max?: PostViewMaxOrderByAggregateInput
     _min?: PostViewMinOrderByAggregateInput
+    _sum?: PostViewSumOrderByAggregateInput
   }
 
   export type PostViewScalarWhereWithAggregatesInput = {
@@ -18268,6 +18322,7 @@ export namespace Prisma {
     ipAddress?: StringNullableWithAggregatesFilter<"PostView"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"PostView"> | string | null
     viewedAt?: DateTimeWithAggregatesFilter<"PostView"> | Date | string
+    readingTime?: IntNullableWithAggregatesFilter<"PostView"> | number | null
   }
 
   export type UserCreateInput = {
@@ -19249,6 +19304,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
     post: PostCreateNestedOneWithoutPostViewsInput
     user?: UserCreateNestedOneWithoutPostViewsInput
   }
@@ -19260,6 +19316,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type PostViewUpdateInput = {
@@ -19267,6 +19324,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     post?: PostUpdateOneRequiredWithoutPostViewsNestedInput
     user?: UserUpdateOneWithoutPostViewsNestedInput
   }
@@ -19278,6 +19336,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostViewCreateManyInput = {
@@ -19287,6 +19346,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type PostViewUpdateManyMutationInput = {
@@ -19294,6 +19354,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostViewUncheckedUpdateManyInput = {
@@ -19303,6 +19364,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -20216,6 +20278,11 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     viewedAt?: SortOrder
+    readingTime?: SortOrder
+  }
+
+  export type PostViewAvgOrderByAggregateInput = {
+    readingTime?: SortOrder
   }
 
   export type PostViewMaxOrderByAggregateInput = {
@@ -20225,6 +20292,7 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     viewedAt?: SortOrder
+    readingTime?: SortOrder
   }
 
   export type PostViewMinOrderByAggregateInput = {
@@ -20234,6 +20302,11 @@ export namespace Prisma {
     ipAddress?: SortOrder
     userAgent?: SortOrder
     viewedAt?: SortOrder
+    readingTime?: SortOrder
+  }
+
+  export type PostViewSumOrderByAggregateInput = {
+    readingTime?: SortOrder
   }
 
   export type AdminCreateNestedOneWithoutUserInput = {
@@ -21409,6 +21482,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
     post: PostCreateNestedOneWithoutPostViewsInput
   }
 
@@ -21418,6 +21492,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type PostViewCreateOrConnectWithoutUserInput = {
@@ -21645,6 +21720,7 @@ export namespace Prisma {
     ipAddress?: StringNullableFilter<"PostView"> | string | null
     userAgent?: StringNullableFilter<"PostView"> | string | null
     viewedAt?: DateTimeFilter<"PostView"> | Date | string
+    readingTime?: IntNullableFilter<"PostView"> | number | null
   }
 
   export type AuthorUpsertWithoutUserInput = {
@@ -22286,6 +22362,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
     user?: UserCreateNestedOneWithoutPostViewsInput
   }
 
@@ -22295,6 +22372,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type PostViewCreateOrConnectWithoutPostInput = {
@@ -23166,6 +23244,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type PostCreateManyAuthorInput = {
@@ -23221,6 +23300,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     post?: PostUpdateOneRequiredWithoutPostViewsNestedInput
   }
 
@@ -23230,6 +23310,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostViewUncheckedUpdateManyWithoutUserInput = {
@@ -23238,6 +23319,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostUpdateWithoutAuthorInput = {
@@ -23403,6 +23485,7 @@ export namespace Prisma {
     ipAddress?: string | null
     userAgent?: string | null
     viewedAt?: Date | string
+    readingTime?: number | null
   }
 
   export type TagUpdateWithoutPostsInput = {
@@ -23470,6 +23553,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneWithoutPostViewsNestedInput
   }
 
@@ -23479,6 +23563,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostViewUncheckedUpdateManyWithoutPostInput = {
@@ -23487,6 +23572,7 @@ export namespace Prisma {
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     viewedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readingTime?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PostCreateManyCategoryInput = {

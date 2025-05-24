@@ -1,17 +1,20 @@
 import bcrypt from "bcrypt";
 import httpStatus from "http-status";
-import { TChangePassword, TLoginUser, TLoginUserResponse, TRefreshTokenResponse } from "./auth.interface";
+import {
+  TChangePassword,
+  TLoginUser,
+  TLoginUserResponse,
+  TRefreshTokenResponse,
+} from "./auth.interface";
 import prisma from "../../../shared/prisma";
 import { UserStatus } from "../../../../generated/prisma";
 import ApiError from "../../../errors/ApiError";
 import { AuthUtils } from "./auth.utils";
 import config from "../../../config";
-import { JwtPayload, Secret } from 'jsonwebtoken';
+import { JwtPayload, Secret } from "jsonwebtoken";
 import { hashedPassword } from "../user/user.utils";
 import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import { sendEmail } from "./sendResetMail";
-
-
 
 const loginUser = async (payload: TLoginUser): Promise<TLoginUserResponse> => {
   const { email, password } = payload;
@@ -34,9 +37,9 @@ const loginUser = async (payload: TLoginUser): Promise<TLoginUserResponse> => {
     throw new ApiError(httpStatus.UNAUTHORIZED, "Password is incorrect");
   }
 
-  const { id: userId, role, needPasswordChange } = isUserExist;
+  const { id: userId, role, profilePhoto, needPasswordChange } = isUserExist;
   const accessToken = jwtHelpers.createToken(
-    { userId, role, email },
+    { userId, role, email, profilePhoto },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
