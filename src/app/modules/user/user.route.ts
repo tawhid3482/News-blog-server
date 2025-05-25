@@ -78,19 +78,11 @@ router.patch(
     USER_ROLE.EDITOR,
     USER_ROLE.USER
   ),
-  FileUploadHelper.upload.single("file"),
+  FileUploadHelper.upload.single('file'),
   (req: Request, res: Response, next: NextFunction) => {
-    if (req.body && req.body.data) {
-      try {
-        req.body = JSON.parse(req.body.data);
-      } catch (err) {
-        return next(new ApiError(httpStatus.BAD_REQUEST, "Invalid JSON in data field"));
-      }
-    } else {
-      req.body = {};
-    }
+    req.body = JSON.parse(req.body.data)
     return userController.updateMyProfile(req, res, next);
-  }
+  },
 );
 
 

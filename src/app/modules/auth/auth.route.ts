@@ -55,6 +55,7 @@ router.post(
   ),
   AuthController.changePassword
 );
+
 router.post("/forgot-password", AuthController.forgotPass);
 
 router.post("/reset-password", AuthController.resetPassword);

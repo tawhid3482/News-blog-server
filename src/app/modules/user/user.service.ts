@@ -528,6 +528,7 @@ const updateMyProfile = async (authUser: any, req: Request) => {
     req.body.profilePhoto = uploadedProfileImage?.secure_url;
   }
 
+
   let profileData;
   if (userData?.role === UserRole.ADMIN) {
     profileData = await prisma.admin.update({
@@ -558,17 +559,12 @@ const updateMyProfile = async (authUser: any, req: Request) => {
       data: req.body,
     });
   }
+//  if (profileData && 'gender' in profileData) {
+//     const { email, name, gender } = profileData;
+//     await index.updateDocuments([{ email, name, gender }]);
+//   }
 
-  // If you need to update a search index, import or define 'index' here.
-  // Example: import { index } from '../../../shared/searchIndex';
-  // await index.updateDocuments([{ id, email, name, contactNumber, address }]);
-  // If not needed, you can safely remove this block:
-  // if (profileData && "address" in profileData) {
-  //   const { id, email, name, contactNumber, address } = profileData;
-  //   await index.updateDocuments([{ id, email, name, contactNumber, address }]);
-  // }
-
-  return { ...profileData, ...userData };
+  return { profileData };
 };
 
 export const userService = {
