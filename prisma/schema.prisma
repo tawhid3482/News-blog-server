@@ -3,7 +3,9 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// npx prisma migrate dev
+// npx prisma generate
+ 
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -32,6 +34,8 @@ model User {
   Author             Author?
   Editor             Editor?
   Post               Post[]
+  Reaction           Reaction[]
+  Comment            Comment[]
 
   @@map("users")
 }
@@ -132,6 +136,7 @@ model Reaction {
   type      ReactionType
   userId    String
   postId    String
+  user      User         @relation(fields: [userId], references: [id])
   post      Post         @relation(fields: [postId], references: [id])
   createdAt DateTime     @default(now())
 }
@@ -143,6 +148,7 @@ model Comment {
   userId    String
   userImage String
   content   String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
 

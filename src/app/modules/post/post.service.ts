@@ -25,7 +25,16 @@ const createPostIntoDB = async (req: Request, userId: string) => {
 
   const { title, slug, summary, content, categoryId, tags } = req.body;
 
-  // 🧠 Ensure tags exist or create them if not
+  // Check if this user is an author
+  const author = await prisma.author.findUnique({
+    where: { email: (await prisma.user.findUnique({ where: { id: userId } }))?.email || undefined },
+  });
+
+  if (!author) {
+    throw new Error("User is not a verified author. Only authors can publish posts.");
+  }
+
+  // Ensure tags exist or create them if not
   const tagRecords = await Promise.all(
     tags?.map(async (tag: { name: string }) => {
       const existingTag = await prisma.tag.findUnique({
@@ -51,6 +60,7 @@ const createPostIntoDB = async (req: Request, userId: string) => {
       coverImage,
       categoryId,
       authorId: userId,
+      authorAuthorId: author.id, // ✅ Set Author's ID here if user is author
       tags: {
         connect: tagRecords,
       },
@@ -60,6 +70,7 @@ const createPostIntoDB = async (req: Request, userId: string) => {
       tags: true,
     },
   });
+
   return post;
 };
 

@@ -32,6 +32,8 @@ model User {
   Author             Author?
   Editor             Editor?
   Post               Post[]
+  Reaction           Reaction[]
+  Comment            Comment[]
 
   @@map("users")
 }
@@ -132,6 +134,7 @@ model Reaction {
   type      ReactionType
   userId    String
   postId    String
+  user      User         @relation(fields: [userId], references: [id])
   post      Post         @relation(fields: [postId], references: [id])
   createdAt DateTime     @default(now())
 }
@@ -143,6 +146,7 @@ model Comment {
   userId    String
   userImage String
   content   String
+  user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
 
