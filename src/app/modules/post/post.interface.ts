@@ -37,3 +37,10 @@ export type TPost = {
   updatedAt: Date;
 };
  
+
+export interface ITrackPostViewPayload {
+  postId: string;
+  userId: string | null;
+  ipAddress: string | null;
+  userAgent: string;
+}

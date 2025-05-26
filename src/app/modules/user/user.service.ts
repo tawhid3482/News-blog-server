@@ -140,6 +140,7 @@ const createAdminIntoDB = async (req: Request): Promise<Admin> => {
   }
 
   const hash = await hashedPassword(req.body.password);
+
   const result = await prisma.$transaction(async (transactionClient) => {
     const newUser = await transactionClient.user.create({
       data: {
@@ -158,10 +159,18 @@ const createAdminIntoDB = async (req: Request): Promise<Admin> => {
         name: req.body.name,
         profilePhoto: req.body.profilePhoto,
         contactNumber: req.body.contactNumber,
+        address: req.body.address,
+        bio: req.body.bio,
+        socialLinks:
+          typeof req.body.socialLinks === "string"
+            ? JSON.parse(req.body.socialLinks)
+            : req.body.socialLinks,
       },
     });
+
     return newAdmin;
   });
+
   return result;
 };
 
@@ -404,12 +413,13 @@ const userStats = async (userId: string): Promise<UserStats> => {
   });
 
   // 3. Total reading time
-  const readingTimes = await prisma.postView.aggregate({
+  const readingTimes = await prisma.postReading.aggregate({
     where: { userId },
-    _sum: { readingTime: true },
+    _sum: { duration: true },
   });
+  const totalReadingTimeInSeconds = readingTimes._sum.duration ?? 0;
 
-  const totalReadingTime = readingTimes._sum.readingTime ?? 0;
+  const totalReadingTime = (totalReadingTimeInSeconds / 60).toFixed(2);
 
   // 4. Last interaction (reaction or comment)
   const lastReaction = await prisma.reaction.findFirst({
@@ -528,7 +538,6 @@ const updateMyProfile = async (authUser: any, req: Request) => {
     req.body.profilePhoto = uploadedProfileImage?.secure_url;
   }
 
-
   let profileData;
   if (userData?.role === UserRole.ADMIN) {
     profileData = await prisma.admin.update({
@@ -559,10 +568,10 @@ const updateMyProfile = async (authUser: any, req: Request) => {
       data: req.body,
     });
   }
-//  if (profileData && 'gender' in profileData) {
-//     const { email, name, gender } = profileData;
-//     await index.updateDocuments([{ email, name, gender }]);
-//   }
+  //  if (profileData && 'gender' in profileData) {
+  //     const { email, name, gender } = profileData;
+  //     await index.updateDocuments([{ email, name, gender }]);
+  //   }
 
   return { profileData };
 };

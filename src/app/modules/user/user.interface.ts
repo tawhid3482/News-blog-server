@@ -24,7 +24,7 @@ export type UserStats = {
   reactionCount: number;
   reactionTypeCounts: Record<string, number>;
   commentCount: number;
-  totalReadingTime: number;
+  totalReadingTime: string;
   lastInteraction: {
     postId: string;
     postTitle: string;

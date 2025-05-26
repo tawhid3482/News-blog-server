@@ -140,6 +140,11 @@ exports.Prisma.AdminScalarFieldEnum = {
   name: 'name',
   profilePhoto: 'profilePhoto',
   contactNumber: 'contactNumber',
+  address: 'address',
+  bio: 'bio',
+  isActive: 'isActive',
+  isVerified: 'isVerified',
+  socialLinks: 'socialLinks',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -264,6 +269,14 @@ exports.Prisma.PostViewScalarFieldEnum = {
   readingTime: 'readingTime'
 };
 
+exports.Prisma.PostReadingScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  postId: 'postId',
+  duration: 'duration',
+  readAt: 'readAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -364,7 +377,8 @@ exports.Prisma.ModelName = {
   WebsiteReview: 'WebsiteReview',
   Subscriber: 'Subscriber',
   ContactMessage: 'ContactMessage',
-  PostView: 'PostView'
+  PostView: 'PostView',
+  PostReading: 'PostReading'
 };
 
 /**

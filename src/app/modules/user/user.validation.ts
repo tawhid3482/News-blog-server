@@ -43,9 +43,11 @@ export const createAdminValidation = z.object({
   status: UserStatusEnum.optional(),
   contactNumber: z
     .string()
-    .min(10, { message: "Contact number must be at least 10 digits" })
-    .optional(),
+    .min(10, { message: "Contact number must be at least 10 digits" }),
+  address: z.string().optional(),
+  bio: z.string().optional(),
   profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
+  socialLinks: z.union([z.record(z.string()), z.array(z.any())]).optional(),
 });
 
 export const createAuthorValidation = z.object({

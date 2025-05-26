@@ -37,6 +37,25 @@ const getAuthorDashboardOverview = async (userId: string) => {
     where: { post: { authorAuthorId: author.id } },
   });
 
+  // ✅ Total reading time calculation
+  const readingTimeSum = await prisma.post.aggregate({
+    where: { authorAuthorId: author.id },
+    _sum: {
+      readingTime: true,
+    },
+  });
+
+  const totalReadingTimeInSeconds = readingTimeSum._sum.readingTime ?? 0;
+
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}m ${remainingSeconds}s`;
+  };
+
+  const formattedTime = formatTime(totalReadingTimeInSeconds);
+
+  // ✅ Recent Posts
   const recentPostsRaw = await prisma.post.findMany({
     where: { authorAuthorId: author.id },
     orderBy: { createdAt: "desc" },
@@ -149,6 +168,7 @@ const getAuthorDashboardOverview = async (userId: string) => {
     { label: "Total Views", value: totalViews, icon: "Eye" },
     { label: "Total Reactions", value: totalReactions, icon: "ThumbsUp" },
     { label: "Total Comments", value: totalComments, icon: "MessageCircle" },
+    { label: "Total Read Time", value: formattedTime, icon: "Clock" },
   ];
 
   return {
