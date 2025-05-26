@@ -8,6 +8,7 @@ import { ReactionRoutes } from "../modules/reaction/reaction.route";
 import { commentRoutes } from "../modules/comment/comment.route";
 import { ReviewRoutes } from "../modules/websiteReview/review.route";
 import { AuthorRoutes } from "../modules/author/author.route";
+import { adminRoutes } from "../modules/admin/admin.route";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -46,6 +47,10 @@ const moduleRoutes = [
   {
     path: "/author",
     route: AuthorRoutes,
+  },
+  {
+    path: "/admin",
+    route: adminRoutes,
   },
 ];
 
