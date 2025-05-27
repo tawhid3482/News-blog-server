@@ -725,6 +725,43 @@ export const updateSuperUser = async (
   throw new ApiError(httpStatus.BAD_REQUEST, "Unsupported role or field.");
 };
 
+
+export const updateUserStatus = async (
+  userId: string,
+  newStatus: UserStatus // eg: "BLOCKED", "DELETED"
+) => {
+  // Step 1: User খুঁজে বের করো
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+      role: "USER", // শুধু সাধারণ ইউজার
+    },
+  });
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found.");
+  }
+
+  // Step 2: একই status আবার set করলে error দেবো
+  if (user.status === newStatus) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      `User is already in ${newStatus} status.`
+    );
+  }
+
+  // Step 3: Update করে নতুন ডেটা রিটার্ন করো
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: { status: newStatus },
+  });
+
+  return {
+    message: `User status updated to ${newStatus}`,
+    data: updatedUser,
+  };
+};
+
 export const userService = {
   createUserIntoDB,
   createAdminIntoDB,
@@ -737,4 +774,5 @@ export const userService = {
   updateMyProfile,
   getAllSuperUser,
   updateSuperUser,
+  updateUserStatus
 };

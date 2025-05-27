@@ -137,6 +137,21 @@ const result = await userService.updateSuperUser(userId, field);
   });
 });
 
+const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
+  const { id: userId } = req.params;
+  const { status: newStatus } = req.body; 
+
+  const result = await userService.updateUserStatus(userId, newStatus);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "User status updated successfully!",
+    data: result,
+  });
+});
+
+
 export const userController = {
   createUser,
   createAdmin,
@@ -149,4 +164,5 @@ export const userController = {
   updateMyProfile,
   getAllSuperUser,
   updateSuperUser,
+  updateUserStatus
 };

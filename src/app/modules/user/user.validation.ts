@@ -91,6 +91,16 @@ export const updateSuperUserValidation = z.object({
 });
 
 
+ const updateUserStatusValidation = z.object({
+  body: z.object({
+    status: z.enum(["BLOCKED", "ACTIVE", "PENDING", "DELETED"], {
+      required_error: "Status is required",
+      invalid_type_error: "Invalid status type",
+    }),
+  }),
+});
+
+
 export const UserValidation = {
   createUserValidation,
   createAdminValidation,
@@ -99,4 +109,5 @@ export const UserValidation = {
   createSocialUserValidation,
   updateUserValidation,
   updateSuperUserValidation,
+  updateUserStatusValidation
 };

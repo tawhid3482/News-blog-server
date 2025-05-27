@@ -74,10 +74,46 @@ const deleteReviewFromDB = async (id: string) => {
   return deleted;
 };
 
+
+const updateReviewStatusIntoDB = async (req: Request, userId: string, id:string) => {
+  const { isApproved, isDeleted } = req.body;
+
+  // Check user
+  const existingUser = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!existingUser) {
+    throw new Error("User does not exist!");
+  }
+
+  // Check review existence
+  const existingReview = await prisma.websiteReview.findUnique({
+    where: { id },
+  });
+
+  if (!existingReview) {
+    throw new Error("Review does not exist!");
+  }
+
+  const updatedReview = await prisma.websiteReview.update({
+    where: { id },
+    data: {
+      isApproved: typeof isApproved === "boolean" ? isApproved : existingReview.isApproved,
+      isDeleted: typeof isDeleted === "boolean" ? isDeleted : existingReview.isDeleted,
+    },
+  });
+
+  return updatedReview;
+};
+
+
+
 export const ReviewService = {
   createReviewIntoDB,
   getAllReviewFromDB,
   updateReviewIntoDB,
   deleteReviewFromDB,
   getMyReviewFromDB,
+  updateReviewStatusIntoDB
 };

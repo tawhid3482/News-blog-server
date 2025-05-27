@@ -94,7 +94,8 @@ const getAllMyPosts = catchAsync(async (req: Request, res: Response) => {
 
 const trackPostView = catchAsync(async (req: Request, res: Response) => {
   const postId = req.params.id;
-  const userId = req.user?.userId || null;
+  const userId = req.user?.id || null;
+  console.log("User ID:", userId);
   const ipAddress = req.ip || req.headers["x-forwarded-for"] || null;
   const userAgent = req.headers["user-agent"] || "unknown";
 
@@ -154,6 +155,19 @@ const updatedPost = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const managePost = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.user;
+  const { postId } = req.params;
+
+  const result = await postService.managePostIntoDB(req, postId, userId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Post status updated successfully!",
+    data: result,
+  });
+});
 
 export const postController = {
   createPost,
@@ -163,4 +177,5 @@ export const postController = {
   updateReadingTime,
   updatedPost,
   getSinglePost,
+  managePost,
 };

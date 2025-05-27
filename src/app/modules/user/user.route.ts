@@ -84,22 +84,25 @@ router.patch(
     USER_ROLE.EDITOR,
     USER_ROLE.USER
   ),
-  FileUploadHelper.upload.single('file'),
+  FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
-    req.body = JSON.parse(req.body.data)
+    req.body = JSON.parse(req.body.data);
     return userController.updateMyProfile(req, res, next);
-  },
+  }
+);
+
+router.patch(
+  "/:id/update-status",
+  auth(USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN),
+  validateRequest(UserValidation.updateUserStatusValidation),
+  userController.updateUserStatus
 );
 
 router.patch(
   "/update-super-user/:id",
-  auth(
-    USER_ROLE.SUPER_ADMIN,
-    USER_ROLE.ADMIN,
-  ),
+  auth(USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN),
   validateRequest(UserValidation.updateSuperUserValidation),
   userController.updateSuperUser
 );
-
 
 export const userRoutes = router;

@@ -26,7 +26,17 @@ import { z } from "zod";
   ).optional(),
 });
 
+
+export const updatePostStatusValidation = z.object({
+  body: z.object({
+    isPublished: z.boolean().optional(),
+    status: z.enum(["DRAFT", "PUBLISHED", "BLOCKED"]).optional(),
+  }),
+});
+
+
 export const PostValidation = {
   createPostValidation,
-  updatePostValidation
+  updatePostValidation,
+  updatePostStatusValidation
 };

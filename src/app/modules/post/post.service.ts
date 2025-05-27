@@ -248,7 +248,6 @@ const getSinglePostFromDb = async (id: string) => {
   return result;
 };
 
-
 const getAllMyPostsFromDb = async (
   filters: IPostFilterRequest,
   options: IPaginationOptions,
@@ -403,23 +402,25 @@ const trackPostViewInDB = async ({
   const ONE_DAY_MS = 24 * 60 * 60 * 1000;
   const cutoffDate = new Date(Date.now() - ONE_DAY_MS);
 
-  // Duplicate check: userId or ipAddress must match and viewedAt in last 24h
+  // Duplicate check: যদি userId থাকে, userId দিয়ে চেক, নাইলে ipAddress দিয়ে চেক
   const existingView = await prisma.postView.findFirst({
     where: {
       postId,
       viewedAt: { gte: cutoffDate },
-      OR: [
-        ...(userId ? [{ userId }] : []),
-        ...(ipAddress ? [{ ipAddress }] : []),
-      ],
+      ...(userId
+        ? { userId }  // userId থাকলে userId দিয়ে চেক করো
+        : ipAddress
+        ? { ipAddress } // userId না থাকলে ip দিয়ে চেক করো
+        : {}),
     },
   });
 
   if (existingView) {
+    // ২৪ ঘন্টার মধ্যে আগেও দেখা হয়েছে - কাউন্ট হবে না
     return { counted: false };
   }
 
-  // Create new postView record
+  // নতুন ভিউ রেকর্ড তৈরি করো
   await prisma.postView.create({
     data: {
       postId,
@@ -430,7 +431,7 @@ const trackPostViewInDB = async ({
     },
   });
 
-  // Increment viewsCount on post
+  // পোস্টের ভিউ কাউন্ট ১ বাড়াও
   await prisma.post.update({
     where: { id: postId },
     data: { viewsCount: { increment: 1 } },
@@ -556,6 +557,47 @@ const updatePostIntoDB = async (
   return post;
 };
 
+const managePostIntoDB = async (
+  req: Request,
+  postId: string,
+  userId: string
+) => {
+  // Check user is active
+  const user = await prisma.user.findUnique({
+    where: { id: userId, status: "ACTIVE" },
+  });
+  if (!user) throw new Error("Unauthorized: Inactive or missing user");
+
+  const { isPublished, status } = req.body as {
+    isPublished?: boolean;
+    status?: "DRAFT" | "PUBLISHED" | "BLOCKED";
+  };
+
+  const updateData: Prisma.PostUpdateInput = {};
+
+  if (typeof isPublished === "boolean") {
+    updateData.isPublished = isPublished;
+    updateData.publishedAt = isPublished ? new Date() : null;
+
+    // Auto update status based on isPublished unless status is BLOCKED manually set
+    if (status === "BLOCKED") {
+      updateData.status = "BLOCKED";
+    } else {
+      updateData.status = isPublished ? "PUBLISHED" : "DRAFT";
+    }
+  } else if (status) {
+    // If only status is given (e.g., BLOCKED), update it
+    updateData.status = status;
+  }
+
+  const updatedPost = await prisma.post.update({
+    where: { id: postId },
+    data: updateData,
+  });
+
+  return updatedPost;
+};
+
 export const postService = {
   createPostIntoDB,
   getAllPostFromDb,
@@ -564,4 +606,5 @@ export const postService = {
   updateReadingTime,
   updatePostIntoDB,
   getSinglePostFromDb,
+  managePostIntoDB
 };

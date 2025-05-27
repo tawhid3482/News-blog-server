@@ -4,6 +4,8 @@ import { PostValidation } from "./post.validation";
 import { postController } from "./post.controller";
 import auth from "../../middlewares/auth";
 import { USER_ROLE } from "../../../enums/user";
+import validateRequest from "../../middlewares/validationRequest";
+import optionalAuth from "../../middlewares/optionalAuth";
 
 const router = express.Router();
 router.get("/", postController.getAllPost);
@@ -27,13 +29,9 @@ router.post(
 );
 router.get("/:id", postController.getSinglePost);
 
-router.post("/:id/view", postController.trackPostView);
+router.post("/:id/view", optionalAuth, postController.trackPostView);
 
-
-router.post(
-  "/:id/reading-time",
-  postController.updateReadingTime
-);
+router.post("/:id/reading-time", postController.updateReadingTime);
 
 router.patch(
   "/:postId/update-news",
@@ -47,5 +45,11 @@ router.patch(
   }
 );
 
+router.patch(
+  "/:postId/manage-news",
+  auth(USER_ROLE.ADMIN, USER_ROLE.EDITOR, USER_ROLE.SUPER_ADMIN),
+  validateRequest(PostValidation.updatePostStatusValidation),
+  postController.managePost
+);
 
 export const PostRoutes = router;

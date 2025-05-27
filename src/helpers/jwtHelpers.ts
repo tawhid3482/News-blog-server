@@ -1,5 +1,6 @@
-import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
+import jwt, { Secret } from 'jsonwebtoken';
 import config from '../config';
+import { JwtCustomPayload } from '../app/types/types';
 
 const createToken = (
   payload: Record<string, unknown>,
@@ -12,8 +13,8 @@ const createToken = (
   });
 };
 
-const verifyToken = (token: string, secret: Secret): JwtPayload => {
-  return jwt.verify(token, secret) as JwtPayload;
+const verifyToken = (token: string, secret: Secret): JwtCustomPayload => {
+  return jwt.verify(token, secret) as JwtCustomPayload;
 };
 
 const createPasswordResetToken = (payload: object) => {

@@ -21,6 +21,14 @@ router.patch(
   auth(USER_ROLE.ADMIN, USER_ROLE.EDITOR, USER_ROLE.USER),
   ReviewController.updateReview
 );
+
+router.patch(
+  "/:id/update-review-status",
+  auth(USER_ROLE.ADMIN, USER_ROLE.EDITOR, USER_ROLE.SUPER_ADMIN),
+  validateRequest(ReviewValidation.updateReviewStatusValidation),
+  ReviewController.updateReviewStatus
+);
+
 router.delete(
   "/delete-review/:id",
   auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN, USER_ROLE.EDITOR),
