@@ -6,12 +6,18 @@ import auth from "../../middlewares/auth";
 import { USER_ROLE } from "../../../enums/user";
 import { validateHeaderName } from "http";
 import ApiError from "../../../errors/ApiError";
+import validateRequest from "../../middlewares/validationRequest";
 const router = express.Router();
 
 router.get(
   "/",
   auth(USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN),
   userController.getAllUser
+);
+router.get(
+  "/super-users",
+  auth(USER_ROLE.SUPER_ADMIN, USER_ROLE.ADMIN),
+  userController.getAllSuperUser
 );
 router.get(
   "/me",
@@ -83,6 +89,16 @@ router.patch(
     req.body = JSON.parse(req.body.data)
     return userController.updateMyProfile(req, res, next);
   },
+);
+
+router.patch(
+  "/update-super-user/:id",
+  auth(
+    USER_ROLE.SUPER_ADMIN,
+    USER_ROLE.ADMIN,
+  ),
+  validateRequest(UserValidation.updateSuperUserValidation),
+  userController.updateSuperUser
 );
 
 

@@ -84,11 +84,19 @@ export const createEditorValidation = z.object({
   socialLinks: z.union([z.record(z.string()), z.array(z.any())]).optional(),
 });
 
+export const updateSuperUserValidation = z.object({
+  body: z.object({
+    field: z.enum(["isActive", "isVerified", "isDeleted"]),
+  }),
+});
+
+
 export const UserValidation = {
   createUserValidation,
   createAdminValidation,
   createAuthorValidation,
   createEditorValidation,
   createSocialUserValidation,
-  updateUserValidation
+  updateUserValidation,
+  updateSuperUserValidation,
 };

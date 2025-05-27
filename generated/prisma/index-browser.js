@@ -162,7 +162,7 @@ exports.Prisma.AuthorScalarFieldEnum = {
   isVerified: 'isVerified',
   totalPosts: 'totalPosts',
   totalReacts: 'totalReacts',
-  status: 'status',
+  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -321,12 +321,6 @@ exports.Gender = exports.$Enums.Gender = {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
   OTHER: 'OTHER'
-};
-
-exports.AuthorStatus = exports.$Enums.AuthorStatus = {
-  ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
-  BLOCKED: 'BLOCKED'
 };
 
 exports.EditorRole = exports.$Enums.EditorRole = {

@@ -404,6 +404,31 @@
             "date": 1748253845863,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-26-05-16-error.log",
             "hash": "ff5754ab66e8901e3253dd7eba6da8a6dd444af499fc27db56d64e927a11a78f"
+        },
+        {
+            "date": 1748264142465,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-26-05-18-error.log",
+            "hash": "a3d967beca980772011ca1db6db78339e01d3f61dd2ce54786ee356d15889a25"
+        },
+        {
+            "date": 1748264648990,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-26-05-19-error.log",
+            "hash": "38b46e16a9e15875123997574411577e27aea6654c9e5f3b2171f3a2e4e9a8cf"
+        },
+        {
+            "date": 1748268132680,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-26-05-20-error.log",
+            "hash": "a1e9d890f1d491b0a7fee344d457588f675c08b0821ddbfa9cbb1d65007e4ecc"
+        },
+        {
+            "date": 1748301513591,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-27-05-05-error.log",
+            "hash": "0b4229c418c328ace8de90346c5b1a0f817a13ba9b64a5829c7ef77e9ee61475"
+        },
+        {
+            "date": 1748304210634,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-27-05-06-error.log",
+            "hash": "ecfcf24c7c43ea2c39963652278f07e91e5a47f51db0d7f8c7f7841e8b10319e"
         }
     ],
     "hashType": "sha256"

@@ -130,15 +130,6 @@ export const Gender: {
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
 
-export const AuthorStatus: {
-  ACTIVE: 'ACTIVE',
-  INACTIVE: 'INACTIVE',
-  BLOCKED: 'BLOCKED'
-};
-
-export type AuthorStatus = (typeof AuthorStatus)[keyof typeof AuthorStatus]
-
-
 export const EditorRole: {
   STANDARD: 'STANDARD',
   SENIOR: 'SENIOR',
@@ -190,10 +181,6 @@ export const UserStatus: typeof $Enums.UserStatus
 export type Gender = $Enums.Gender
 
 export const Gender: typeof $Enums.Gender
-
-export type AuthorStatus = $Enums.AuthorStatus
-
-export const AuthorStatus: typeof $Enums.AuthorStatus
 
 export type EditorRole = $Enums.EditorRole
 
@@ -4958,7 +4945,7 @@ export namespace Prisma {
     isVerified: boolean | null
     totalPosts: number | null
     totalReacts: number | null
-    status: $Enums.AuthorStatus | null
+    isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4974,7 +4961,7 @@ export namespace Prisma {
     isVerified: boolean | null
     totalPosts: number | null
     totalReacts: number | null
-    status: $Enums.AuthorStatus | null
+    isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4991,7 +4978,7 @@ export namespace Prisma {
     isVerified: number
     totalPosts: number
     totalReacts: number
-    status: number
+    isActive: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5019,7 +5006,7 @@ export namespace Prisma {
     isVerified?: true
     totalPosts?: true
     totalReacts?: true
-    status?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5035,7 +5022,7 @@ export namespace Prisma {
     isVerified?: true
     totalPosts?: true
     totalReacts?: true
-    status?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5052,7 +5039,7 @@ export namespace Prisma {
     isVerified?: true
     totalPosts?: true
     totalReacts?: true
-    status?: true
+    isActive?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5156,7 +5143,7 @@ export namespace Prisma {
     isVerified: boolean
     totalPosts: number
     totalReacts: number
-    status: $Enums.AuthorStatus
+    isActive: boolean
     createdAt: Date
     updatedAt: Date
     _count: AuthorCountAggregateOutputType | null
@@ -5192,7 +5179,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: boolean
     totalReacts?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5212,7 +5199,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: boolean
     totalReacts?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5230,7 +5217,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: boolean
     totalReacts?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -5248,12 +5235,12 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: boolean
     totalReacts?: boolean
-    status?: boolean
+    isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AuthorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "profilePhoto" | "contactNumber" | "address" | "bio" | "socialLinks" | "isVerified" | "totalPosts" | "totalReacts" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["author"]>
+  export type AuthorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "profilePhoto" | "contactNumber" | "address" | "bio" | "socialLinks" | "isVerified" | "totalPosts" | "totalReacts" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["author"]>
   export type AuthorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     Post?: boolean | Author$PostArgs<ExtArgs>
@@ -5284,7 +5271,7 @@ export namespace Prisma {
       isVerified: boolean
       totalPosts: number
       totalReacts: number
-      status: $Enums.AuthorStatus
+      isActive: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["author"]>
@@ -5723,7 +5710,7 @@ export namespace Prisma {
     readonly isVerified: FieldRef<"Author", 'Boolean'>
     readonly totalPosts: FieldRef<"Author", 'Int'>
     readonly totalReacts: FieldRef<"Author", 'Int'>
-    readonly status: FieldRef<"Author", 'AuthorStatus'>
+    readonly isActive: FieldRef<"Author", 'Boolean'>
     readonly createdAt: FieldRef<"Author", 'DateTime'>
     readonly updatedAt: FieldRef<"Author", 'DateTime'>
   }
@@ -18431,7 +18418,7 @@ export namespace Prisma {
     isVerified: 'isVerified',
     totalPosts: 'totalPosts',
     totalReacts: 'totalReacts',
-    status: 'status',
+    isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -18734,20 +18721,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'AuthorStatus'
-   */
-  export type EnumAuthorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthorStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'AuthorStatus[]'
-   */
-  export type ListEnumAuthorStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthorStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'EditorRole'
    */
   export type EnumEditorRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EditorRole'>
@@ -19039,7 +19012,7 @@ export namespace Prisma {
     isVerified?: BoolFilter<"Author"> | boolean
     totalPosts?: IntFilter<"Author"> | number
     totalReacts?: IntFilter<"Author"> | number
-    status?: EnumAuthorStatusFilter<"Author"> | $Enums.AuthorStatus
+    isActive?: BoolFilter<"Author"> | boolean
     createdAt?: DateTimeFilter<"Author"> | Date | string
     updatedAt?: DateTimeFilter<"Author"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -19058,7 +19031,7 @@ export namespace Prisma {
     isVerified?: SortOrder
     totalPosts?: SortOrder
     totalReacts?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -19080,7 +19053,7 @@ export namespace Prisma {
     isVerified?: BoolFilter<"Author"> | boolean
     totalPosts?: IntFilter<"Author"> | number
     totalReacts?: IntFilter<"Author"> | number
-    status?: EnumAuthorStatusFilter<"Author"> | $Enums.AuthorStatus
+    isActive?: BoolFilter<"Author"> | boolean
     createdAt?: DateTimeFilter<"Author"> | Date | string
     updatedAt?: DateTimeFilter<"Author"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -19099,7 +19072,7 @@ export namespace Prisma {
     isVerified?: SortOrder
     totalPosts?: SortOrder
     totalReacts?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AuthorCountOrderByAggregateInput
@@ -19124,7 +19097,7 @@ export namespace Prisma {
     isVerified?: BoolWithAggregatesFilter<"Author"> | boolean
     totalPosts?: IntWithAggregatesFilter<"Author"> | number
     totalReacts?: IntWithAggregatesFilter<"Author"> | number
-    status?: EnumAuthorStatusWithAggregatesFilter<"Author"> | $Enums.AuthorStatus
+    isActive?: BoolWithAggregatesFilter<"Author"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Author"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Author"> | Date | string
   }
@@ -20135,7 +20108,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAuthorInput
@@ -20154,7 +20127,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     Post?: PostUncheckedCreateNestedManyWithoutAuthorAuthorInput
@@ -20171,7 +20144,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAuthorNestedInput
@@ -20190,7 +20163,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Post?: PostUncheckedUpdateManyWithoutAuthorAuthorNestedInput
@@ -20208,7 +20181,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20224,7 +20197,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20241,7 +20214,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21432,13 +21405,6 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type EnumAuthorStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.AuthorStatus | EnumAuthorStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAuthorStatusFilter<$PrismaModel> | $Enums.AuthorStatus
-  }
-
   export type AuthorCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
@@ -21451,7 +21417,7 @@ export namespace Prisma {
     isVerified?: SortOrder
     totalPosts?: SortOrder
     totalReacts?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21472,7 +21438,7 @@ export namespace Prisma {
     isVerified?: SortOrder
     totalPosts?: SortOrder
     totalReacts?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21488,7 +21454,7 @@ export namespace Prisma {
     isVerified?: SortOrder
     totalPosts?: SortOrder
     totalReacts?: SortOrder
-    status?: SortOrder
+    isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -21512,16 +21478,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type EnumAuthorStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AuthorStatus | EnumAuthorStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAuthorStatusWithAggregatesFilter<$PrismaModel> | $Enums.AuthorStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAuthorStatusFilter<$PrismaModel>
-    _max?: NestedEnumAuthorStatusFilter<$PrismaModel>
   }
 
   export type EnumEditorRoleFilter<$PrismaModel = never> = {
@@ -22453,10 +22409,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type EnumAuthorStatusFieldUpdateOperationsInput = {
-    set?: $Enums.AuthorStatus
-  }
-
   export type UserUpdateOneRequiredWithoutAuthorNestedInput = {
     create?: XOR<UserCreateWithoutAuthorInput, UserUncheckedCreateWithoutAuthorInput>
     connectOrCreate?: UserCreateOrConnectWithoutAuthorInput
@@ -23204,13 +23156,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type NestedEnumAuthorStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.AuthorStatus | EnumAuthorStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAuthorStatusFilter<$PrismaModel> | $Enums.AuthorStatus
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -23236,16 +23181,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedEnumAuthorStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AuthorStatus | EnumAuthorStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AuthorStatus[] | ListEnumAuthorStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAuthorStatusWithAggregatesFilter<$PrismaModel> | $Enums.AuthorStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAuthorStatusFilter<$PrismaModel>
-    _max?: NestedEnumAuthorStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumEditorRoleFilter<$PrismaModel = never> = {
@@ -23474,7 +23409,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     Post?: PostCreateNestedManyWithoutAuthorAuthorInput
@@ -23491,7 +23426,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     Post?: PostUncheckedCreateNestedManyWithoutAuthorAuthorInput
@@ -23790,7 +23725,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Post?: PostUpdateManyWithoutAuthorAuthorNestedInput
@@ -23807,7 +23742,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Post?: PostUncheckedUpdateManyWithoutAuthorAuthorNestedInput
@@ -24418,7 +24353,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAuthorInput
@@ -24436,7 +24371,7 @@ export namespace Prisma {
     isVerified?: boolean
     totalPosts?: number
     totalReacts?: number
-    status?: $Enums.AuthorStatus
+    isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24657,7 +24592,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAuthorNestedInput
@@ -24675,7 +24610,7 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     totalPosts?: IntFieldUpdateOperationsInput | number
     totalReacts?: IntFieldUpdateOperationsInput | number
-    status?: EnumAuthorStatusFieldUpdateOperationsInput | $Enums.AuthorStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

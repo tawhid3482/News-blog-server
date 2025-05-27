@@ -79,6 +79,15 @@ const getAllUser = catchAsync(async (req: Request, res: Response) => {
     data: result.data,
   });
 });
+const getAllSuperUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.getAllSuperUser();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Users retrieval successfully",
+    data: result,
+  });
+});
 
 const getMe = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user;
@@ -115,6 +124,19 @@ const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const updateSuperUser = catchAsync(async (req: Request, res: Response) => {
+const { id: userId } = req.params;
+const { field } = req.body; 
+const result = await userService.updateSuperUser(userId, field);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "super user updated!!",
+    data: result,
+  });
+});
+
 export const userController = {
   createUser,
   createAdmin,
@@ -125,4 +147,6 @@ export const userController = {
   userStats,
   getMe,
   updateMyProfile,
+  getAllSuperUser,
+  updateSuperUser,
 };

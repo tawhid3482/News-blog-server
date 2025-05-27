@@ -21,6 +21,7 @@ import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
 import ApiError from "../../../errors/ApiError";
+import { userRoutes } from "./user.route";
 
 interface AuthResponse {
   accessToken: string;
@@ -284,11 +285,17 @@ const getAllUser = async (
     });
   }
 
-  if (Object.keys(filterData).length > 0) {
+  // ✅ এখানে ফোর্স করছি role = 'user'
+  const finalFilterData = {
+    ...filterData,
+    role: "USER" as UserRole, // Force role to 'USER'
+  };
+
+  if (Object.keys(finalFilterData).length > 0) {
     andConditions.push({
-      AND: Object.keys(filterData).map((key) => ({
+      AND: Object.keys(finalFilterData).map((key) => ({
         [key]: {
-          equals: (filterData as any)[key],
+          equals: (finalFilterData as any)[key],
         },
       })),
     });
@@ -319,6 +326,7 @@ const getAllUser = async (
       updatedAt: true,
     },
   });
+
   const total = await prisma.user.count({
     where: whereConditions,
   });
@@ -332,6 +340,58 @@ const getAllUser = async (
     data: result,
   };
 };
+
+const getAllSuperUser = async () => {
+  const result = await prisma.user.findMany({
+    where: {
+      NOT: {
+        OR: [{ role: "USER" }, { role: "SUPER_ADMIN" }],
+      },
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      profilePhoto: true,
+      role: true,
+      // Relationship-based select
+      admin: {
+        select: {
+          contactNumber: true,
+          address: true,
+          isActive: true,
+          isVerified: true,
+          socialLinks: true,
+          isDeleted: true,
+          createdAt: true,
+        },
+      },
+      Author: {
+        select: {
+          contactNumber: true,
+          address: true,
+          isActive: true,
+          isVerified: true,
+          socialLinks: true,
+          createdAt: true,
+        },
+      },
+      Editor: {
+        select: {
+          contactNumber: true,
+          address: true,
+          isActive: true,
+          isVerified: true,
+          socialLinks: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+
 const getMe = async (userId: string) => {
   const userData = await prisma.user.findUnique({
     where: {
@@ -576,6 +636,95 @@ const updateMyProfile = async (authUser: any, req: Request) => {
   return { profileData };
 };
 
+export const updateSuperUser = async (
+  userId: string,
+  field: "isActive" | "isVerified" | "isDeleted"
+) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+      status: UserStatus.ACTIVE,
+    },
+    include: {
+      admin: true,
+      Author: true,
+      Editor: true,
+    },
+  });
+
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found or inactive.");
+  }
+
+  const { role } = user;
+
+  // ✅ Admin Update
+  if (role === UserRole.ADMIN) {
+    if (!user.admin)
+      throw new ApiError(httpStatus.NOT_FOUND, "Admin data not found.");
+    if (!(field in user.admin)) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        `Field ${field} does not exist in Admin.`
+      );
+    }
+
+    const updated = await prisma.admin.update({
+      where: { email: user.email },
+      data: { [field]: !user.admin[field] },
+    });
+    return { message: `Admin ${field} toggled`, data: updated };
+  }
+
+  // ✅ Author Update
+  if (role === UserRole.AUTHOR) {
+    if (!user.Author)
+      throw new ApiError(httpStatus.NOT_FOUND, "Author data not found.");
+    if (!(field in user.Author)) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        `Field ${field} does not exist in Author.`
+      );
+    }
+    // Type guard to ensure field is keyof typeof user.Author and is boolean
+    type AuthorBooleanField = "isVerified" | "isActive";
+    if (!["isVerified", "isActive"].includes(field)) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        `Field ${field} is not a valid boolean field for Author.`
+      );
+    }
+    const authorField = field as AuthorBooleanField;
+    const updated = await prisma.author.update({
+      where: { email: user.email },
+      data: { [authorField]: !(user.Author as any)[authorField] },
+    });
+    return { message: `Author ${field} toggled`, data: updated };
+  }
+
+  // ✅ Editor Update
+  if (role === UserRole.EDITOR) {
+    if (!user.Editor)
+      throw new ApiError(httpStatus.NOT_FOUND, "Editor data not found.");
+    // Only allow toggling isActive or isVerified for Editor
+    type EditorBooleanField = "isActive" | "isVerified";
+    if (!["isActive", "isVerified"].includes(field)) {
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        `Field ${field} is not a valid boolean field for Editor.`
+      );
+    }
+    const editorField = field as EditorBooleanField;
+    const updated = await prisma.editor.update({
+      where: { email: user.email },
+      data: { [editorField]: !user.Editor[editorField] },
+    });
+    return { message: `Editor ${field} toggled`, data: updated };
+  }
+
+  throw new ApiError(httpStatus.BAD_REQUEST, "Unsupported role or field.");
+};
+
 export const userService = {
   createUserIntoDB,
   createAdminIntoDB,
@@ -586,4 +735,6 @@ export const userService = {
   getMe,
   userStats,
   updateMyProfile,
+  getAllSuperUser,
+  updateSuperUser,
 };
