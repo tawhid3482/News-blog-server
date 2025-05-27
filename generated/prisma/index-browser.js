@@ -202,6 +202,31 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OpinionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  authorId: 'authorId',
+  categoryId: 'categoryId',
+  isPublished: 'isPublished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.VideoNewsScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  videoUrl: 'videoUrl',
+  isVideoNews: 'isVideoNews',
+  authorId: 'authorId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -210,7 +235,9 @@ exports.Prisma.CategoryScalarFieldEnum = {
 
 exports.Prisma.TagScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  opinionId: 'opinionId',
+  videoNewsId: 'videoNewsId'
 };
 
 exports.Prisma.ReactionScalarFieldEnum = {
@@ -364,6 +391,8 @@ exports.Prisma.ModelName = {
   Author: 'Author',
   Editor: 'Editor',
   Post: 'Post',
+  Opinion: 'Opinion',
+  VideoNews: 'VideoNews',
   Category: 'Category',
   Tag: 'Tag',
   Reaction: 'Reaction',

@@ -39,6 +39,16 @@ export type Editor = $Result.DefaultSelection<Prisma.$EditorPayload>
  */
 export type Post = $Result.DefaultSelection<Prisma.$PostPayload>
 /**
+ * Model Opinion
+ * 
+ */
+export type Opinion = $Result.DefaultSelection<Prisma.$OpinionPayload>
+/**
+ * Model VideoNews
+ * 
+ */
+export type VideoNews = $Result.DefaultSelection<Prisma.$VideoNewsPayload>
+/**
  * Model Category
  * 
  */
@@ -368,6 +378,26 @@ export class PrismaClient<
     * ```
     */
   get post(): Prisma.PostDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.opinion`: Exposes CRUD operations for the **Opinion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Opinions
+    * const opinions = await prisma.opinion.findMany()
+    * ```
+    */
+  get opinion(): Prisma.OpinionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.videoNews`: Exposes CRUD operations for the **VideoNews** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VideoNews
+    * const videoNews = await prisma.videoNews.findMany()
+    * ```
+    */
+  get videoNews(): Prisma.VideoNewsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.category`: Exposes CRUD operations for the **Category** model.
@@ -903,6 +933,8 @@ export namespace Prisma {
     Author: 'Author',
     Editor: 'Editor',
     Post: 'Post',
+    Opinion: 'Opinion',
+    VideoNews: 'VideoNews',
     Category: 'Category',
     Tag: 'Tag',
     Reaction: 'Reaction',
@@ -930,7 +962,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "admin" | "author" | "editor" | "post" | "category" | "tag" | "reaction" | "comment" | "websiteReview" | "subscriber" | "contactMessage" | "postView" | "postReading"
+      modelProps: "user" | "admin" | "author" | "editor" | "post" | "opinion" | "videoNews" | "category" | "tag" | "reaction" | "comment" | "websiteReview" | "subscriber" | "contactMessage" | "postView" | "postReading"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1301,6 +1333,154 @@ export namespace Prisma {
           count: {
             args: Prisma.PostCountArgs<ExtArgs>
             result: $Utils.Optional<PostCountAggregateOutputType> | number
+          }
+        }
+      }
+      Opinion: {
+        payload: Prisma.$OpinionPayload<ExtArgs>
+        fields: Prisma.OpinionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OpinionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OpinionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          findFirst: {
+            args: Prisma.OpinionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OpinionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          findMany: {
+            args: Prisma.OpinionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          create: {
+            args: Prisma.OpinionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          createMany: {
+            args: Prisma.OpinionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OpinionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          delete: {
+            args: Prisma.OpinionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          update: {
+            args: Prisma.OpinionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          deleteMany: {
+            args: Prisma.OpinionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OpinionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OpinionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>[]
+          }
+          upsert: {
+            args: Prisma.OpinionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OpinionPayload>
+          }
+          aggregate: {
+            args: Prisma.OpinionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOpinion>
+          }
+          groupBy: {
+            args: Prisma.OpinionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OpinionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OpinionCountArgs<ExtArgs>
+            result: $Utils.Optional<OpinionCountAggregateOutputType> | number
+          }
+        }
+      }
+      VideoNews: {
+        payload: Prisma.$VideoNewsPayload<ExtArgs>
+        fields: Prisma.VideoNewsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VideoNewsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VideoNewsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          findFirst: {
+            args: Prisma.VideoNewsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VideoNewsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          findMany: {
+            args: Prisma.VideoNewsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>[]
+          }
+          create: {
+            args: Prisma.VideoNewsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          createMany: {
+            args: Prisma.VideoNewsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VideoNewsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>[]
+          }
+          delete: {
+            args: Prisma.VideoNewsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          update: {
+            args: Prisma.VideoNewsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          deleteMany: {
+            args: Prisma.VideoNewsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VideoNewsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VideoNewsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>[]
+          }
+          upsert: {
+            args: Prisma.VideoNewsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VideoNewsPayload>
+          }
+          aggregate: {
+            args: Prisma.VideoNewsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVideoNews>
+          }
+          groupBy: {
+            args: Prisma.VideoNewsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VideoNewsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VideoNewsCountArgs<ExtArgs>
+            result: $Utils.Optional<VideoNewsCountAggregateOutputType> | number
           }
         }
       }
@@ -2059,6 +2239,8 @@ export namespace Prisma {
     author?: AuthorOmit
     editor?: EditorOmit
     post?: PostOmit
+    opinion?: OpinionOmit
+    videoNews?: VideoNewsOmit
     category?: CategoryOmit
     tag?: TagOmit
     reaction?: ReactionOmit
@@ -2168,6 +2350,8 @@ export namespace Prisma {
     Reaction: number
     Comment: number
     PostReading: number
+    Opinion: number
+    VideoNews: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2177,6 +2361,8 @@ export namespace Prisma {
     Reaction?: boolean | UserCountOutputTypeCountReactionArgs
     Comment?: boolean | UserCountOutputTypeCountCommentArgs
     PostReading?: boolean | UserCountOutputTypeCountPostReadingArgs
+    Opinion?: boolean | UserCountOutputTypeCountOpinionArgs
+    VideoNews?: boolean | UserCountOutputTypeCountVideoNewsArgs
   }
 
   // Custom InputTypes
@@ -2230,6 +2416,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPostReadingArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostReadingWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOpinionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpinionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoNewsWhereInput
   }
 
 
@@ -2332,15 +2532,99 @@ export namespace Prisma {
 
 
   /**
+   * Count Type OpinionCountOutputType
+   */
+
+  export type OpinionCountOutputType = {
+    tags: number
+    Tag: number
+  }
+
+  export type OpinionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | OpinionCountOutputTypeCountTagsArgs
+    Tag?: boolean | OpinionCountOutputTypeCountTagArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OpinionCountOutputType without action
+   */
+  export type OpinionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OpinionCountOutputType
+     */
+    select?: OpinionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OpinionCountOutputType without action
+   */
+  export type OpinionCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+  /**
+   * OpinionCountOutputType without action
+   */
+  export type OpinionCountOutputTypeCountTagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+
+  /**
+   * Count Type VideoNewsCountOutputType
+   */
+
+  export type VideoNewsCountOutputType = {
+    tags: number
+    Tag: number
+  }
+
+  export type VideoNewsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tags?: boolean | VideoNewsCountOutputTypeCountTagsArgs
+    Tag?: boolean | VideoNewsCountOutputTypeCountTagArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VideoNewsCountOutputType without action
+   */
+  export type VideoNewsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNewsCountOutputType
+     */
+    select?: VideoNewsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VideoNewsCountOutputType without action
+   */
+  export type VideoNewsCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+  /**
+   * VideoNewsCountOutputType without action
+   */
+  export type VideoNewsCountOutputTypeCountTagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+  }
+
+
+  /**
    * Count Type CategoryCountOutputType
    */
 
   export type CategoryCountOutputType = {
     posts: number
+    Opinion: number
+    VideoNews: number
   }
 
   export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | CategoryCountOutputTypeCountPostsArgs
+    Opinion?: boolean | CategoryCountOutputTypeCountOpinionArgs
+    VideoNews?: boolean | CategoryCountOutputTypeCountVideoNewsArgs
   }
 
   // Custom InputTypes
@@ -2361,6 +2645,20 @@ export namespace Prisma {
     where?: PostWhereInput
   }
 
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountOpinionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpinionWhereInput
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountVideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoNewsWhereInput
+  }
+
 
   /**
    * Count Type TagCountOutputType
@@ -2368,10 +2666,14 @@ export namespace Prisma {
 
   export type TagCountOutputType = {
     posts: number
+    videoNews: number
+    opinions: number
   }
 
   export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | TagCountOutputTypeCountPostsArgs
+    videoNews?: boolean | TagCountOutputTypeCountVideoNewsArgs
+    opinions?: boolean | TagCountOutputTypeCountOpinionsArgs
   }
 
   // Custom InputTypes
@@ -2390,6 +2692,20 @@ export namespace Prisma {
    */
   export type TagCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PostWhereInput
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountVideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoNewsWhereInput
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountOpinionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpinionWhereInput
   }
 
 
@@ -2618,6 +2934,8 @@ export namespace Prisma {
     Reaction?: boolean | User$ReactionArgs<ExtArgs>
     Comment?: boolean | User$CommentArgs<ExtArgs>
     PostReading?: boolean | User$PostReadingArgs<ExtArgs>
+    Opinion?: boolean | User$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | User$VideoNewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2674,6 +2992,8 @@ export namespace Prisma {
     Reaction?: boolean | User$ReactionArgs<ExtArgs>
     Comment?: boolean | User$CommentArgs<ExtArgs>
     PostReading?: boolean | User$PostReadingArgs<ExtArgs>
+    Opinion?: boolean | User$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | User$VideoNewsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2691,6 +3011,8 @@ export namespace Prisma {
       Reaction: Prisma.$ReactionPayload<ExtArgs>[]
       Comment: Prisma.$CommentPayload<ExtArgs>[]
       PostReading: Prisma.$PostReadingPayload<ExtArgs>[]
+      Opinion: Prisma.$OpinionPayload<ExtArgs>[]
+      VideoNews: Prisma.$VideoNewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3107,6 +3429,8 @@ export namespace Prisma {
     Reaction<T extends User$ReactionArgs<ExtArgs> = {}>(args?: Subset<T, User$ReactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Comment<T extends User$CommentArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     PostReading<T extends User$PostReadingArgs<ExtArgs> = {}>(args?: Subset<T, User$PostReadingArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostReadingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Opinion<T extends User$OpinionArgs<ExtArgs> = {}>(args?: Subset<T, User$OpinionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    VideoNews<T extends User$VideoNewsArgs<ExtArgs> = {}>(args?: Subset<T, User$VideoNewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3733,6 +4057,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostReadingScalarFieldEnum | PostReadingScalarFieldEnum[]
+  }
+
+  /**
+   * User.Opinion
+   */
+  export type User$OpinionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    where?: OpinionWhereInput
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    cursor?: OpinionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * User.VideoNews
+   */
+  export type User$VideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    where?: VideoNewsWhereInput
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    cursor?: VideoNewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
   }
 
   /**
@@ -8726,6 +9098,2371 @@ export namespace Prisma {
 
 
   /**
+   * Model Opinion
+   */
+
+  export type AggregateOpinion = {
+    _count: OpinionCountAggregateOutputType | null
+    _min: OpinionMinAggregateOutputType | null
+    _max: OpinionMaxAggregateOutputType | null
+  }
+
+  export type OpinionMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    authorId: string | null
+    categoryId: string | null
+    isPublished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OpinionMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    authorId: string | null
+    categoryId: string | null
+    isPublished: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type OpinionCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    content: number
+    authorId: number
+    categoryId: number
+    isPublished: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type OpinionMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    authorId?: true
+    categoryId?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OpinionMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    authorId?: true
+    categoryId?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type OpinionCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    authorId?: true
+    categoryId?: true
+    isPublished?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type OpinionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Opinion to aggregate.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Opinions
+    **/
+    _count?: true | OpinionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OpinionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OpinionMaxAggregateInputType
+  }
+
+  export type GetOpinionAggregateType<T extends OpinionAggregateArgs> = {
+        [P in keyof T & keyof AggregateOpinion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOpinion[P]>
+      : GetScalarType<T[P], AggregateOpinion[P]>
+  }
+
+
+
+
+  export type OpinionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpinionWhereInput
+    orderBy?: OpinionOrderByWithAggregationInput | OpinionOrderByWithAggregationInput[]
+    by: OpinionScalarFieldEnum[] | OpinionScalarFieldEnum
+    having?: OpinionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OpinionCountAggregateInputType | true
+    _min?: OpinionMinAggregateInputType
+    _max?: OpinionMaxAggregateInputType
+  }
+
+  export type OpinionGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    categoryId: string
+    isPublished: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: OpinionCountAggregateOutputType | null
+    _min: OpinionMinAggregateOutputType | null
+    _max: OpinionMaxAggregateOutputType | null
+  }
+
+  type GetOpinionGroupByPayload<T extends OpinionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OpinionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OpinionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OpinionGroupByOutputType[P]>
+            : GetScalarType<T[P], OpinionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OpinionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    tags?: boolean | Opinion$tagsArgs<ExtArgs>
+    Tag?: boolean | Opinion$TagArgs<ExtArgs>
+    _count?: boolean | OpinionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["opinion"]>
+
+  export type OpinionSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    isPublished?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type OpinionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "content" | "authorId" | "categoryId" | "isPublished" | "createdAt" | "updatedAt", ExtArgs["result"]["opinion"]>
+  export type OpinionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    tags?: boolean | Opinion$tagsArgs<ExtArgs>
+    Tag?: boolean | Opinion$TagArgs<ExtArgs>
+    _count?: boolean | OpinionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type OpinionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+  export type OpinionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $OpinionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Opinion"
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+      category: Prisma.$CategoryPayload<ExtArgs>
+      tags: Prisma.$TagPayload<ExtArgs>[]
+      Tag: Prisma.$TagPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      content: string
+      authorId: string
+      categoryId: string
+      isPublished: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["opinion"]>
+    composites: {}
+  }
+
+  type OpinionGetPayload<S extends boolean | null | undefined | OpinionDefaultArgs> = $Result.GetResult<Prisma.$OpinionPayload, S>
+
+  type OpinionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OpinionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OpinionCountAggregateInputType | true
+    }
+
+  export interface OpinionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Opinion'], meta: { name: 'Opinion' } }
+    /**
+     * Find zero or one Opinion that matches the filter.
+     * @param {OpinionFindUniqueArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OpinionFindUniqueArgs>(args: SelectSubset<T, OpinionFindUniqueArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Opinion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OpinionFindUniqueOrThrowArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OpinionFindUniqueOrThrowArgs>(args: SelectSubset<T, OpinionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Opinion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindFirstArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OpinionFindFirstArgs>(args?: SelectSubset<T, OpinionFindFirstArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Opinion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindFirstOrThrowArgs} args - Arguments to find a Opinion
+     * @example
+     * // Get one Opinion
+     * const opinion = await prisma.opinion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OpinionFindFirstOrThrowArgs>(args?: SelectSubset<T, OpinionFindFirstOrThrowArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Opinions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Opinions
+     * const opinions = await prisma.opinion.findMany()
+     * 
+     * // Get first 10 Opinions
+     * const opinions = await prisma.opinion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const opinionWithIdOnly = await prisma.opinion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OpinionFindManyArgs>(args?: SelectSubset<T, OpinionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Opinion.
+     * @param {OpinionCreateArgs} args - Arguments to create a Opinion.
+     * @example
+     * // Create one Opinion
+     * const Opinion = await prisma.opinion.create({
+     *   data: {
+     *     // ... data to create a Opinion
+     *   }
+     * })
+     * 
+     */
+    create<T extends OpinionCreateArgs>(args: SelectSubset<T, OpinionCreateArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Opinions.
+     * @param {OpinionCreateManyArgs} args - Arguments to create many Opinions.
+     * @example
+     * // Create many Opinions
+     * const opinion = await prisma.opinion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OpinionCreateManyArgs>(args?: SelectSubset<T, OpinionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Opinions and returns the data saved in the database.
+     * @param {OpinionCreateManyAndReturnArgs} args - Arguments to create many Opinions.
+     * @example
+     * // Create many Opinions
+     * const opinion = await prisma.opinion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Opinions and only return the `id`
+     * const opinionWithIdOnly = await prisma.opinion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OpinionCreateManyAndReturnArgs>(args?: SelectSubset<T, OpinionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Opinion.
+     * @param {OpinionDeleteArgs} args - Arguments to delete one Opinion.
+     * @example
+     * // Delete one Opinion
+     * const Opinion = await prisma.opinion.delete({
+     *   where: {
+     *     // ... filter to delete one Opinion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OpinionDeleteArgs>(args: SelectSubset<T, OpinionDeleteArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Opinion.
+     * @param {OpinionUpdateArgs} args - Arguments to update one Opinion.
+     * @example
+     * // Update one Opinion
+     * const opinion = await prisma.opinion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OpinionUpdateArgs>(args: SelectSubset<T, OpinionUpdateArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Opinions.
+     * @param {OpinionDeleteManyArgs} args - Arguments to filter Opinions to delete.
+     * @example
+     * // Delete a few Opinions
+     * const { count } = await prisma.opinion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OpinionDeleteManyArgs>(args?: SelectSubset<T, OpinionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Opinions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Opinions
+     * const opinion = await prisma.opinion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OpinionUpdateManyArgs>(args: SelectSubset<T, OpinionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Opinions and returns the data updated in the database.
+     * @param {OpinionUpdateManyAndReturnArgs} args - Arguments to update many Opinions.
+     * @example
+     * // Update many Opinions
+     * const opinion = await prisma.opinion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Opinions and only return the `id`
+     * const opinionWithIdOnly = await prisma.opinion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OpinionUpdateManyAndReturnArgs>(args: SelectSubset<T, OpinionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Opinion.
+     * @param {OpinionUpsertArgs} args - Arguments to update or create a Opinion.
+     * @example
+     * // Update or create a Opinion
+     * const opinion = await prisma.opinion.upsert({
+     *   create: {
+     *     // ... data to create a Opinion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Opinion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OpinionUpsertArgs>(args: SelectSubset<T, OpinionUpsertArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Opinions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionCountArgs} args - Arguments to filter Opinions to count.
+     * @example
+     * // Count the number of Opinions
+     * const count = await prisma.opinion.count({
+     *   where: {
+     *     // ... the filter for the Opinions we want to count
+     *   }
+     * })
+    **/
+    count<T extends OpinionCountArgs>(
+      args?: Subset<T, OpinionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OpinionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Opinion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OpinionAggregateArgs>(args: Subset<T, OpinionAggregateArgs>): Prisma.PrismaPromise<GetOpinionAggregateType<T>>
+
+    /**
+     * Group by Opinion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OpinionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OpinionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OpinionGroupByArgs['orderBy'] }
+        : { orderBy?: OpinionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OpinionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOpinionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Opinion model
+   */
+  readonly fields: OpinionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Opinion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OpinionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tags<T extends Opinion$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Opinion$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Tag<T extends Opinion$TagArgs<ExtArgs> = {}>(args?: Subset<T, Opinion$TagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Opinion model
+   */
+  interface OpinionFieldRefs {
+    readonly id: FieldRef<"Opinion", 'String'>
+    readonly title: FieldRef<"Opinion", 'String'>
+    readonly slug: FieldRef<"Opinion", 'String'>
+    readonly content: FieldRef<"Opinion", 'String'>
+    readonly authorId: FieldRef<"Opinion", 'String'>
+    readonly categoryId: FieldRef<"Opinion", 'String'>
+    readonly isPublished: FieldRef<"Opinion", 'Boolean'>
+    readonly createdAt: FieldRef<"Opinion", 'DateTime'>
+    readonly updatedAt: FieldRef<"Opinion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Opinion findUnique
+   */
+  export type OpinionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion findUniqueOrThrow
+   */
+  export type OpinionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion findFirst
+   */
+  export type OpinionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Opinions.
+     */
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion findFirstOrThrow
+   */
+  export type OpinionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter, which Opinion to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Opinions.
+     */
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion findMany
+   */
+  export type OpinionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter, which Opinions to fetch.
+     */
+    where?: OpinionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Opinions to fetch.
+     */
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Opinions.
+     */
+    cursor?: OpinionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Opinions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Opinions.
+     */
+    skip?: number
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion create
+   */
+  export type OpinionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Opinion.
+     */
+    data: XOR<OpinionCreateInput, OpinionUncheckedCreateInput>
+  }
+
+  /**
+   * Opinion createMany
+   */
+  export type OpinionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Opinions.
+     */
+    data: OpinionCreateManyInput | OpinionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Opinion createManyAndReturn
+   */
+  export type OpinionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Opinions.
+     */
+    data: OpinionCreateManyInput | OpinionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Opinion update
+   */
+  export type OpinionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Opinion.
+     */
+    data: XOR<OpinionUpdateInput, OpinionUncheckedUpdateInput>
+    /**
+     * Choose, which Opinion to update.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion updateMany
+   */
+  export type OpinionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Opinions.
+     */
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyInput>
+    /**
+     * Filter which Opinions to update
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Opinion updateManyAndReturn
+   */
+  export type OpinionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * The data used to update Opinions.
+     */
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyInput>
+    /**
+     * Filter which Opinions to update
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Opinion upsert
+   */
+  export type OpinionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Opinion to update in case it exists.
+     */
+    where: OpinionWhereUniqueInput
+    /**
+     * In case the Opinion found by the `where` argument doesn't exist, create a new Opinion with this data.
+     */
+    create: XOR<OpinionCreateInput, OpinionUncheckedCreateInput>
+    /**
+     * In case the Opinion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OpinionUpdateInput, OpinionUncheckedUpdateInput>
+  }
+
+  /**
+   * Opinion delete
+   */
+  export type OpinionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    /**
+     * Filter which Opinion to delete.
+     */
+    where: OpinionWhereUniqueInput
+  }
+
+  /**
+   * Opinion deleteMany
+   */
+  export type OpinionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Opinions to delete
+     */
+    where?: OpinionWhereInput
+    /**
+     * Limit how many Opinions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Opinion.tags
+   */
+  export type Opinion$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion.Tag
+   */
+  export type Opinion$TagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Opinion without action
+   */
+  export type OpinionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VideoNews
+   */
+
+  export type AggregateVideoNews = {
+    _count: VideoNewsCountAggregateOutputType | null
+    _min: VideoNewsMinAggregateOutputType | null
+    _max: VideoNewsMaxAggregateOutputType | null
+  }
+
+  export type VideoNewsMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    videoUrl: string | null
+    isVideoNews: boolean | null
+    authorId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VideoNewsMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    slug: string | null
+    content: string | null
+    videoUrl: string | null
+    isVideoNews: boolean | null
+    authorId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VideoNewsCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    content: number
+    videoUrl: number
+    isVideoNews: number
+    authorId: number
+    categoryId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VideoNewsMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    videoUrl?: true
+    isVideoNews?: true
+    authorId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VideoNewsMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    videoUrl?: true
+    isVideoNews?: true
+    authorId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VideoNewsCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    content?: true
+    videoUrl?: true
+    isVideoNews?: true
+    authorId?: true
+    categoryId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VideoNewsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VideoNews to aggregate.
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoNews to fetch.
+     */
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VideoNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VideoNews
+    **/
+    _count?: true | VideoNewsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VideoNewsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VideoNewsMaxAggregateInputType
+  }
+
+  export type GetVideoNewsAggregateType<T extends VideoNewsAggregateArgs> = {
+        [P in keyof T & keyof AggregateVideoNews]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVideoNews[P]>
+      : GetScalarType<T[P], AggregateVideoNews[P]>
+  }
+
+
+
+
+  export type VideoNewsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VideoNewsWhereInput
+    orderBy?: VideoNewsOrderByWithAggregationInput | VideoNewsOrderByWithAggregationInput[]
+    by: VideoNewsScalarFieldEnum[] | VideoNewsScalarFieldEnum
+    having?: VideoNewsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VideoNewsCountAggregateInputType | true
+    _min?: VideoNewsMinAggregateInputType
+    _max?: VideoNewsMaxAggregateInputType
+  }
+
+  export type VideoNewsGroupByOutputType = {
+    id: string
+    title: string
+    slug: string
+    content: string
+    videoUrl: string | null
+    isVideoNews: boolean
+    authorId: string
+    categoryId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: VideoNewsCountAggregateOutputType | null
+    _min: VideoNewsMinAggregateOutputType | null
+    _max: VideoNewsMaxAggregateOutputType | null
+  }
+
+  type GetVideoNewsGroupByPayload<T extends VideoNewsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VideoNewsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VideoNewsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VideoNewsGroupByOutputType[P]>
+            : GetScalarType<T[P], VideoNewsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VideoNewsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    videoUrl?: boolean
+    isVideoNews?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    tags?: boolean | VideoNews$tagsArgs<ExtArgs>
+    Tag?: boolean | VideoNews$TagArgs<ExtArgs>
+    _count?: boolean | VideoNewsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoNews"]>
+
+  export type VideoNewsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    videoUrl?: boolean
+    isVideoNews?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoNews"]>
+
+  export type VideoNewsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    videoUrl?: boolean
+    isVideoNews?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["videoNews"]>
+
+  export type VideoNewsSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    content?: boolean
+    videoUrl?: boolean
+    isVideoNews?: boolean
+    authorId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VideoNewsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "content" | "videoUrl" | "isVideoNews" | "authorId" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["videoNews"]>
+  export type VideoNewsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    tags?: boolean | VideoNews$tagsArgs<ExtArgs>
+    Tag?: boolean | VideoNews$TagArgs<ExtArgs>
+    _count?: boolean | VideoNewsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VideoNewsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+  export type VideoNewsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    author?: boolean | UserDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $VideoNewsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VideoNews"
+    objects: {
+      author: Prisma.$UserPayload<ExtArgs>
+      category: Prisma.$CategoryPayload<ExtArgs>
+      tags: Prisma.$TagPayload<ExtArgs>[]
+      Tag: Prisma.$TagPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      slug: string
+      content: string
+      videoUrl: string | null
+      isVideoNews: boolean
+      authorId: string
+      categoryId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["videoNews"]>
+    composites: {}
+  }
+
+  type VideoNewsGetPayload<S extends boolean | null | undefined | VideoNewsDefaultArgs> = $Result.GetResult<Prisma.$VideoNewsPayload, S>
+
+  type VideoNewsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VideoNewsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VideoNewsCountAggregateInputType | true
+    }
+
+  export interface VideoNewsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VideoNews'], meta: { name: 'VideoNews' } }
+    /**
+     * Find zero or one VideoNews that matches the filter.
+     * @param {VideoNewsFindUniqueArgs} args - Arguments to find a VideoNews
+     * @example
+     * // Get one VideoNews
+     * const videoNews = await prisma.videoNews.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VideoNewsFindUniqueArgs>(args: SelectSubset<T, VideoNewsFindUniqueArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VideoNews that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VideoNewsFindUniqueOrThrowArgs} args - Arguments to find a VideoNews
+     * @example
+     * // Get one VideoNews
+     * const videoNews = await prisma.videoNews.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VideoNewsFindUniqueOrThrowArgs>(args: SelectSubset<T, VideoNewsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VideoNews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsFindFirstArgs} args - Arguments to find a VideoNews
+     * @example
+     * // Get one VideoNews
+     * const videoNews = await prisma.videoNews.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VideoNewsFindFirstArgs>(args?: SelectSubset<T, VideoNewsFindFirstArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VideoNews that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsFindFirstOrThrowArgs} args - Arguments to find a VideoNews
+     * @example
+     * // Get one VideoNews
+     * const videoNews = await prisma.videoNews.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VideoNewsFindFirstOrThrowArgs>(args?: SelectSubset<T, VideoNewsFindFirstOrThrowArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VideoNews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VideoNews
+     * const videoNews = await prisma.videoNews.findMany()
+     * 
+     * // Get first 10 VideoNews
+     * const videoNews = await prisma.videoNews.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const videoNewsWithIdOnly = await prisma.videoNews.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VideoNewsFindManyArgs>(args?: SelectSubset<T, VideoNewsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VideoNews.
+     * @param {VideoNewsCreateArgs} args - Arguments to create a VideoNews.
+     * @example
+     * // Create one VideoNews
+     * const VideoNews = await prisma.videoNews.create({
+     *   data: {
+     *     // ... data to create a VideoNews
+     *   }
+     * })
+     * 
+     */
+    create<T extends VideoNewsCreateArgs>(args: SelectSubset<T, VideoNewsCreateArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VideoNews.
+     * @param {VideoNewsCreateManyArgs} args - Arguments to create many VideoNews.
+     * @example
+     * // Create many VideoNews
+     * const videoNews = await prisma.videoNews.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VideoNewsCreateManyArgs>(args?: SelectSubset<T, VideoNewsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VideoNews and returns the data saved in the database.
+     * @param {VideoNewsCreateManyAndReturnArgs} args - Arguments to create many VideoNews.
+     * @example
+     * // Create many VideoNews
+     * const videoNews = await prisma.videoNews.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VideoNews and only return the `id`
+     * const videoNewsWithIdOnly = await prisma.videoNews.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VideoNewsCreateManyAndReturnArgs>(args?: SelectSubset<T, VideoNewsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VideoNews.
+     * @param {VideoNewsDeleteArgs} args - Arguments to delete one VideoNews.
+     * @example
+     * // Delete one VideoNews
+     * const VideoNews = await prisma.videoNews.delete({
+     *   where: {
+     *     // ... filter to delete one VideoNews
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VideoNewsDeleteArgs>(args: SelectSubset<T, VideoNewsDeleteArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VideoNews.
+     * @param {VideoNewsUpdateArgs} args - Arguments to update one VideoNews.
+     * @example
+     * // Update one VideoNews
+     * const videoNews = await prisma.videoNews.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VideoNewsUpdateArgs>(args: SelectSubset<T, VideoNewsUpdateArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VideoNews.
+     * @param {VideoNewsDeleteManyArgs} args - Arguments to filter VideoNews to delete.
+     * @example
+     * // Delete a few VideoNews
+     * const { count } = await prisma.videoNews.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VideoNewsDeleteManyArgs>(args?: SelectSubset<T, VideoNewsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VideoNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VideoNews
+     * const videoNews = await prisma.videoNews.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VideoNewsUpdateManyArgs>(args: SelectSubset<T, VideoNewsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VideoNews and returns the data updated in the database.
+     * @param {VideoNewsUpdateManyAndReturnArgs} args - Arguments to update many VideoNews.
+     * @example
+     * // Update many VideoNews
+     * const videoNews = await prisma.videoNews.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VideoNews and only return the `id`
+     * const videoNewsWithIdOnly = await prisma.videoNews.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VideoNewsUpdateManyAndReturnArgs>(args: SelectSubset<T, VideoNewsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VideoNews.
+     * @param {VideoNewsUpsertArgs} args - Arguments to update or create a VideoNews.
+     * @example
+     * // Update or create a VideoNews
+     * const videoNews = await prisma.videoNews.upsert({
+     *   create: {
+     *     // ... data to create a VideoNews
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VideoNews we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VideoNewsUpsertArgs>(args: SelectSubset<T, VideoNewsUpsertArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VideoNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsCountArgs} args - Arguments to filter VideoNews to count.
+     * @example
+     * // Count the number of VideoNews
+     * const count = await prisma.videoNews.count({
+     *   where: {
+     *     // ... the filter for the VideoNews we want to count
+     *   }
+     * })
+    **/
+    count<T extends VideoNewsCountArgs>(
+      args?: Subset<T, VideoNewsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VideoNewsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VideoNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VideoNewsAggregateArgs>(args: Subset<T, VideoNewsAggregateArgs>): Prisma.PrismaPromise<GetVideoNewsAggregateType<T>>
+
+    /**
+     * Group by VideoNews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VideoNewsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VideoNewsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VideoNewsGroupByArgs['orderBy'] }
+        : { orderBy?: VideoNewsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VideoNewsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVideoNewsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VideoNews model
+   */
+  readonly fields: VideoNewsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VideoNews.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VideoNewsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tags<T extends VideoNews$tagsArgs<ExtArgs> = {}>(args?: Subset<T, VideoNews$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Tag<T extends VideoNews$TagArgs<ExtArgs> = {}>(args?: Subset<T, VideoNews$TagArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VideoNews model
+   */
+  interface VideoNewsFieldRefs {
+    readonly id: FieldRef<"VideoNews", 'String'>
+    readonly title: FieldRef<"VideoNews", 'String'>
+    readonly slug: FieldRef<"VideoNews", 'String'>
+    readonly content: FieldRef<"VideoNews", 'String'>
+    readonly videoUrl: FieldRef<"VideoNews", 'String'>
+    readonly isVideoNews: FieldRef<"VideoNews", 'Boolean'>
+    readonly authorId: FieldRef<"VideoNews", 'String'>
+    readonly categoryId: FieldRef<"VideoNews", 'String'>
+    readonly createdAt: FieldRef<"VideoNews", 'DateTime'>
+    readonly updatedAt: FieldRef<"VideoNews", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VideoNews findUnique
+   */
+  export type VideoNewsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoNews to fetch.
+     */
+    where: VideoNewsWhereUniqueInput
+  }
+
+  /**
+   * VideoNews findUniqueOrThrow
+   */
+  export type VideoNewsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoNews to fetch.
+     */
+    where: VideoNewsWhereUniqueInput
+  }
+
+  /**
+   * VideoNews findFirst
+   */
+  export type VideoNewsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoNews to fetch.
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoNews to fetch.
+     */
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VideoNews.
+     */
+    cursor?: VideoNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VideoNews.
+     */
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
+  }
+
+  /**
+   * VideoNews findFirstOrThrow
+   */
+  export type VideoNewsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoNews to fetch.
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoNews to fetch.
+     */
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VideoNews.
+     */
+    cursor?: VideoNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoNews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VideoNews.
+     */
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
+  }
+
+  /**
+   * VideoNews findMany
+   */
+  export type VideoNewsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter, which VideoNews to fetch.
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VideoNews to fetch.
+     */
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VideoNews.
+     */
+    cursor?: VideoNewsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VideoNews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VideoNews.
+     */
+    skip?: number
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
+  }
+
+  /**
+   * VideoNews create
+   */
+  export type VideoNewsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VideoNews.
+     */
+    data: XOR<VideoNewsCreateInput, VideoNewsUncheckedCreateInput>
+  }
+
+  /**
+   * VideoNews createMany
+   */
+  export type VideoNewsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VideoNews.
+     */
+    data: VideoNewsCreateManyInput | VideoNewsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VideoNews createManyAndReturn
+   */
+  export type VideoNewsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * The data used to create many VideoNews.
+     */
+    data: VideoNewsCreateManyInput | VideoNewsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VideoNews update
+   */
+  export type VideoNewsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VideoNews.
+     */
+    data: XOR<VideoNewsUpdateInput, VideoNewsUncheckedUpdateInput>
+    /**
+     * Choose, which VideoNews to update.
+     */
+    where: VideoNewsWhereUniqueInput
+  }
+
+  /**
+   * VideoNews updateMany
+   */
+  export type VideoNewsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VideoNews.
+     */
+    data: XOR<VideoNewsUpdateManyMutationInput, VideoNewsUncheckedUpdateManyInput>
+    /**
+     * Filter which VideoNews to update
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * Limit how many VideoNews to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VideoNews updateManyAndReturn
+   */
+  export type VideoNewsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * The data used to update VideoNews.
+     */
+    data: XOR<VideoNewsUpdateManyMutationInput, VideoNewsUncheckedUpdateManyInput>
+    /**
+     * Filter which VideoNews to update
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * Limit how many VideoNews to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VideoNews upsert
+   */
+  export type VideoNewsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VideoNews to update in case it exists.
+     */
+    where: VideoNewsWhereUniqueInput
+    /**
+     * In case the VideoNews found by the `where` argument doesn't exist, create a new VideoNews with this data.
+     */
+    create: XOR<VideoNewsCreateInput, VideoNewsUncheckedCreateInput>
+    /**
+     * In case the VideoNews was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VideoNewsUpdateInput, VideoNewsUncheckedUpdateInput>
+  }
+
+  /**
+   * VideoNews delete
+   */
+  export type VideoNewsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    /**
+     * Filter which VideoNews to delete.
+     */
+    where: VideoNewsWhereUniqueInput
+  }
+
+  /**
+   * VideoNews deleteMany
+   */
+  export type VideoNewsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VideoNews to delete
+     */
+    where?: VideoNewsWhereInput
+    /**
+     * Limit how many VideoNews to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VideoNews.tags
+   */
+  export type VideoNews$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * VideoNews.Tag
+   */
+  export type VideoNews$TagArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    cursor?: TagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * VideoNews without action
+   */
+  export type VideoNewsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Category
    */
 
@@ -8874,6 +11611,8 @@ export namespace Prisma {
     name?: boolean
     slug?: boolean
     posts?: boolean | Category$postsArgs<ExtArgs>
+    Opinion?: boolean | Category$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Category$VideoNewsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
@@ -8898,6 +11637,8 @@ export namespace Prisma {
   export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | Category$postsArgs<ExtArgs>
+    Opinion?: boolean | Category$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Category$VideoNewsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8907,6 +11648,8 @@ export namespace Prisma {
     name: "Category"
     objects: {
       posts: Prisma.$PostPayload<ExtArgs>[]
+      Opinion: Prisma.$OpinionPayload<ExtArgs>[]
+      VideoNews: Prisma.$VideoNewsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9307,6 +12050,8 @@ export namespace Prisma {
   export interface Prisma__CategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posts<T extends Category$postsArgs<ExtArgs> = {}>(args?: Subset<T, Category$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Opinion<T extends Category$OpinionArgs<ExtArgs> = {}>(args?: Subset<T, Category$OpinionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    VideoNews<T extends Category$VideoNewsArgs<ExtArgs> = {}>(args?: Subset<T, Category$VideoNewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9751,6 +12496,54 @@ export namespace Prisma {
   }
 
   /**
+   * Category.Opinion
+   */
+  export type Category$OpinionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    where?: OpinionWhereInput
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    cursor?: OpinionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
+  }
+
+  /**
+   * Category.VideoNews
+   */
+  export type Category$VideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    where?: VideoNewsWhereInput
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    cursor?: VideoNewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
+  }
+
+  /**
    * Category without action
    */
   export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9782,16 +12575,22 @@ export namespace Prisma {
   export type TagMinAggregateOutputType = {
     id: string | null
     name: string | null
+    opinionId: string | null
+    videoNewsId: string | null
   }
 
   export type TagMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    opinionId: string | null
+    videoNewsId: string | null
   }
 
   export type TagCountAggregateOutputType = {
     id: number
     name: number
+    opinionId: number
+    videoNewsId: number
     _all: number
   }
 
@@ -9799,16 +12598,22 @@ export namespace Prisma {
   export type TagMinAggregateInputType = {
     id?: true
     name?: true
+    opinionId?: true
+    videoNewsId?: true
   }
 
   export type TagMaxAggregateInputType = {
     id?: true
     name?: true
+    opinionId?: true
+    videoNewsId?: true
   }
 
   export type TagCountAggregateInputType = {
     id?: true
     name?: true
+    opinionId?: true
+    videoNewsId?: true
     _all?: true
   }
 
@@ -9887,6 +12692,8 @@ export namespace Prisma {
   export type TagGroupByOutputType = {
     id: string
     name: string
+    opinionId: string | null
+    videoNewsId: string | null
     _count: TagCountAggregateOutputType | null
     _min: TagMinAggregateOutputType | null
     _max: TagMaxAggregateOutputType | null
@@ -9909,41 +12716,73 @@ export namespace Prisma {
   export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    opinionId?: boolean
+    videoNewsId?: boolean
     posts?: boolean | Tag$postsArgs<ExtArgs>
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
+    videoNews?: boolean | Tag$videoNewsArgs<ExtArgs>
+    opinions?: boolean | Tag$opinionsArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
   export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    opinionId?: boolean
+    videoNewsId?: boolean
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
   export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    opinionId?: boolean
+    videoNewsId?: boolean
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
   }, ExtArgs["result"]["tag"]>
 
   export type TagSelectScalar = {
     id?: boolean
     name?: boolean
+    opinionId?: boolean
+    videoNewsId?: boolean
   }
 
-  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["tag"]>
+  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "opinionId" | "videoNewsId", ExtArgs["result"]["tag"]>
   export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | Tag$postsArgs<ExtArgs>
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
+    videoNews?: boolean | Tag$videoNewsArgs<ExtArgs>
+    opinions?: boolean | Tag$opinionsArgs<ExtArgs>
     _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
+  }
+  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Opinion?: boolean | Tag$OpinionArgs<ExtArgs>
+    VideoNews?: boolean | Tag$VideoNewsArgs<ExtArgs>
+  }
 
   export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Tag"
     objects: {
       posts: Prisma.$PostPayload<ExtArgs>[]
+      Opinion: Prisma.$OpinionPayload<ExtArgs> | null
+      VideoNews: Prisma.$VideoNewsPayload<ExtArgs> | null
+      videoNews: Prisma.$VideoNewsPayload<ExtArgs>[]
+      opinions: Prisma.$OpinionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      opinionId: string | null
+      videoNewsId: string | null
     }, ExtArgs["result"]["tag"]>
     composites: {}
   }
@@ -10339,6 +13178,10 @@ export namespace Prisma {
   export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     posts<T extends Tag$postsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Opinion<T extends Tag$OpinionArgs<ExtArgs> = {}>(args?: Subset<T, Tag$OpinionArgs<ExtArgs>>): Prisma__OpinionClient<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    VideoNews<T extends Tag$VideoNewsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$VideoNewsArgs<ExtArgs>>): Prisma__VideoNewsClient<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    videoNews<T extends Tag$videoNewsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$videoNewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VideoNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    opinions<T extends Tag$opinionsArgs<ExtArgs> = {}>(args?: Subset<T, Tag$opinionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpinionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10370,6 +13213,8 @@ export namespace Prisma {
   interface TagFieldRefs {
     readonly id: FieldRef<"Tag", 'String'>
     readonly name: FieldRef<"Tag", 'String'>
+    readonly opinionId: FieldRef<"Tag", 'String'>
+    readonly videoNewsId: FieldRef<"Tag", 'String'>
   }
     
 
@@ -10619,6 +13464,10 @@ export namespace Prisma {
      */
     data: TagCreateManyInput | TagCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10689,6 +13538,10 @@ export namespace Prisma {
      * Limit how many Tags to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10779,6 +13632,92 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
+  }
+
+  /**
+   * Tag.Opinion
+   */
+  export type Tag$OpinionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    where?: OpinionWhereInput
+  }
+
+  /**
+   * Tag.VideoNews
+   */
+  export type Tag$VideoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    where?: VideoNewsWhereInput
+  }
+
+  /**
+   * Tag.videoNews
+   */
+  export type Tag$videoNewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VideoNews
+     */
+    select?: VideoNewsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VideoNews
+     */
+    omit?: VideoNewsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VideoNewsInclude<ExtArgs> | null
+    where?: VideoNewsWhereInput
+    orderBy?: VideoNewsOrderByWithRelationInput | VideoNewsOrderByWithRelationInput[]
+    cursor?: VideoNewsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VideoNewsScalarFieldEnum | VideoNewsScalarFieldEnum[]
+  }
+
+  /**
+   * Tag.opinions
+   */
+  export type Tag$opinionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opinion
+     */
+    select?: OpinionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opinion
+     */
+    omit?: OpinionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpinionInclude<ExtArgs> | null
+    where?: OpinionWhereInput
+    orderBy?: OpinionOrderByWithRelationInput | OpinionOrderByWithRelationInput[]
+    cursor?: OpinionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OpinionScalarFieldEnum | OpinionScalarFieldEnum[]
   }
 
   /**
@@ -18467,6 +21406,37 @@ export namespace Prisma {
   export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
 
 
+  export const OpinionScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    content: 'content',
+    authorId: 'authorId',
+    categoryId: 'categoryId',
+    isPublished: 'isPublished',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type OpinionScalarFieldEnum = (typeof OpinionScalarFieldEnum)[keyof typeof OpinionScalarFieldEnum]
+
+
+  export const VideoNewsScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    content: 'content',
+    videoUrl: 'videoUrl',
+    isVideoNews: 'isVideoNews',
+    authorId: 'authorId',
+    categoryId: 'categoryId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VideoNewsScalarFieldEnum = (typeof VideoNewsScalarFieldEnum)[keyof typeof VideoNewsScalarFieldEnum]
+
+
   export const CategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -18478,7 +21448,9 @@ export namespace Prisma {
 
   export const TagScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    opinionId: 'opinionId',
+    videoNewsId: 'videoNewsId'
   };
 
   export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
@@ -18817,6 +21789,8 @@ export namespace Prisma {
     Reaction?: ReactionListRelationFilter
     Comment?: CommentListRelationFilter
     PostReading?: PostReadingListRelationFilter
+    Opinion?: OpinionListRelationFilter
+    VideoNews?: VideoNewsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -18840,6 +21814,8 @@ export namespace Prisma {
     Reaction?: ReactionOrderByRelationAggregateInput
     Comment?: CommentOrderByRelationAggregateInput
     PostReading?: PostReadingOrderByRelationAggregateInput
+    Opinion?: OpinionOrderByRelationAggregateInput
+    VideoNews?: VideoNewsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -18866,6 +21842,8 @@ export namespace Prisma {
     Reaction?: ReactionListRelationFilter
     Comment?: CommentListRelationFilter
     PostReading?: PostReadingListRelationFilter
+    Opinion?: OpinionListRelationFilter
+    VideoNews?: VideoNewsListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -19330,6 +22308,179 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
   }
 
+  export type OpinionWhereInput = {
+    AND?: OpinionWhereInput | OpinionWhereInput[]
+    OR?: OpinionWhereInput[]
+    NOT?: OpinionWhereInput | OpinionWhereInput[]
+    id?: StringFilter<"Opinion"> | string
+    title?: StringFilter<"Opinion"> | string
+    slug?: StringFilter<"Opinion"> | string
+    content?: StringFilter<"Opinion"> | string
+    authorId?: StringFilter<"Opinion"> | string
+    categoryId?: StringFilter<"Opinion"> | string
+    isPublished?: BoolFilter<"Opinion"> | boolean
+    createdAt?: DateTimeFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeFilter<"Opinion"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    tags?: TagListRelationFilter
+    Tag?: TagListRelationFilter
+  }
+
+  export type OpinionOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    author?: UserOrderByWithRelationInput
+    category?: CategoryOrderByWithRelationInput
+    tags?: TagOrderByRelationAggregateInput
+    Tag?: TagOrderByRelationAggregateInput
+  }
+
+  export type OpinionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: OpinionWhereInput | OpinionWhereInput[]
+    OR?: OpinionWhereInput[]
+    NOT?: OpinionWhereInput | OpinionWhereInput[]
+    title?: StringFilter<"Opinion"> | string
+    content?: StringFilter<"Opinion"> | string
+    authorId?: StringFilter<"Opinion"> | string
+    categoryId?: StringFilter<"Opinion"> | string
+    isPublished?: BoolFilter<"Opinion"> | boolean
+    createdAt?: DateTimeFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeFilter<"Opinion"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    tags?: TagListRelationFilter
+    Tag?: TagListRelationFilter
+  }, "id" | "slug">
+
+  export type OpinionOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: OpinionCountOrderByAggregateInput
+    _max?: OpinionMaxOrderByAggregateInput
+    _min?: OpinionMinOrderByAggregateInput
+  }
+
+  export type OpinionScalarWhereWithAggregatesInput = {
+    AND?: OpinionScalarWhereWithAggregatesInput | OpinionScalarWhereWithAggregatesInput[]
+    OR?: OpinionScalarWhereWithAggregatesInput[]
+    NOT?: OpinionScalarWhereWithAggregatesInput | OpinionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Opinion"> | string
+    title?: StringWithAggregatesFilter<"Opinion"> | string
+    slug?: StringWithAggregatesFilter<"Opinion"> | string
+    content?: StringWithAggregatesFilter<"Opinion"> | string
+    authorId?: StringWithAggregatesFilter<"Opinion"> | string
+    categoryId?: StringWithAggregatesFilter<"Opinion"> | string
+    isPublished?: BoolWithAggregatesFilter<"Opinion"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Opinion"> | Date | string
+  }
+
+  export type VideoNewsWhereInput = {
+    AND?: VideoNewsWhereInput | VideoNewsWhereInput[]
+    OR?: VideoNewsWhereInput[]
+    NOT?: VideoNewsWhereInput | VideoNewsWhereInput[]
+    id?: StringFilter<"VideoNews"> | string
+    title?: StringFilter<"VideoNews"> | string
+    slug?: StringFilter<"VideoNews"> | string
+    content?: StringFilter<"VideoNews"> | string
+    videoUrl?: StringNullableFilter<"VideoNews"> | string | null
+    isVideoNews?: BoolFilter<"VideoNews"> | boolean
+    authorId?: StringFilter<"VideoNews"> | string
+    categoryId?: StringFilter<"VideoNews"> | string
+    createdAt?: DateTimeFilter<"VideoNews"> | Date | string
+    updatedAt?: DateTimeFilter<"VideoNews"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    tags?: TagListRelationFilter
+    Tag?: TagListRelationFilter
+  }
+
+  export type VideoNewsOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    isVideoNews?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    author?: UserOrderByWithRelationInput
+    category?: CategoryOrderByWithRelationInput
+    tags?: TagOrderByRelationAggregateInput
+    Tag?: TagOrderByRelationAggregateInput
+  }
+
+  export type VideoNewsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: VideoNewsWhereInput | VideoNewsWhereInput[]
+    OR?: VideoNewsWhereInput[]
+    NOT?: VideoNewsWhereInput | VideoNewsWhereInput[]
+    title?: StringFilter<"VideoNews"> | string
+    content?: StringFilter<"VideoNews"> | string
+    videoUrl?: StringNullableFilter<"VideoNews"> | string | null
+    isVideoNews?: BoolFilter<"VideoNews"> | boolean
+    authorId?: StringFilter<"VideoNews"> | string
+    categoryId?: StringFilter<"VideoNews"> | string
+    createdAt?: DateTimeFilter<"VideoNews"> | Date | string
+    updatedAt?: DateTimeFilter<"VideoNews"> | Date | string
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    tags?: TagListRelationFilter
+    Tag?: TagListRelationFilter
+  }, "id" | "slug">
+
+  export type VideoNewsOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    isVideoNews?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VideoNewsCountOrderByAggregateInput
+    _max?: VideoNewsMaxOrderByAggregateInput
+    _min?: VideoNewsMinOrderByAggregateInput
+  }
+
+  export type VideoNewsScalarWhereWithAggregatesInput = {
+    AND?: VideoNewsScalarWhereWithAggregatesInput | VideoNewsScalarWhereWithAggregatesInput[]
+    OR?: VideoNewsScalarWhereWithAggregatesInput[]
+    NOT?: VideoNewsScalarWhereWithAggregatesInput | VideoNewsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VideoNews"> | string
+    title?: StringWithAggregatesFilter<"VideoNews"> | string
+    slug?: StringWithAggregatesFilter<"VideoNews"> | string
+    content?: StringWithAggregatesFilter<"VideoNews"> | string
+    videoUrl?: StringNullableWithAggregatesFilter<"VideoNews"> | string | null
+    isVideoNews?: BoolWithAggregatesFilter<"VideoNews"> | boolean
+    authorId?: StringWithAggregatesFilter<"VideoNews"> | string
+    categoryId?: StringWithAggregatesFilter<"VideoNews"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"VideoNews"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VideoNews"> | Date | string
+  }
+
   export type CategoryWhereInput = {
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
@@ -19338,6 +22489,8 @@ export namespace Prisma {
     name?: EnumSetNewsTypeFilter<"Category"> | $Enums.SetNewsType
     slug?: StringFilter<"Category"> | string
     posts?: PostListRelationFilter
+    Opinion?: OpinionListRelationFilter
+    VideoNews?: VideoNewsListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
@@ -19345,6 +22498,8 @@ export namespace Prisma {
     name?: SortOrder
     slug?: SortOrder
     posts?: PostOrderByRelationAggregateInput
+    Opinion?: OpinionOrderByRelationAggregateInput
+    VideoNews?: VideoNewsOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -19355,6 +22510,8 @@ export namespace Prisma {
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     name?: EnumSetNewsTypeFilter<"Category"> | $Enums.SetNewsType
     posts?: PostListRelationFilter
+    Opinion?: OpinionListRelationFilter
+    VideoNews?: VideoNewsListRelationFilter
   }, "id" | "slug">
 
   export type CategoryOrderByWithAggregationInput = {
@@ -19381,13 +22538,25 @@ export namespace Prisma {
     NOT?: TagWhereInput | TagWhereInput[]
     id?: StringFilter<"Tag"> | string
     name?: StringFilter<"Tag"> | string
+    opinionId?: StringNullableFilter<"Tag"> | string | null
+    videoNewsId?: StringNullableFilter<"Tag"> | string | null
     posts?: PostListRelationFilter
+    Opinion?: XOR<OpinionNullableScalarRelationFilter, OpinionWhereInput> | null
+    VideoNews?: XOR<VideoNewsNullableScalarRelationFilter, VideoNewsWhereInput> | null
+    videoNews?: VideoNewsListRelationFilter
+    opinions?: OpinionListRelationFilter
   }
 
   export type TagOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    opinionId?: SortOrderInput | SortOrder
+    videoNewsId?: SortOrderInput | SortOrder
     posts?: PostOrderByRelationAggregateInput
+    Opinion?: OpinionOrderByWithRelationInput
+    VideoNews?: VideoNewsOrderByWithRelationInput
+    videoNews?: VideoNewsOrderByRelationAggregateInput
+    opinions?: OpinionOrderByRelationAggregateInput
   }
 
   export type TagWhereUniqueInput = Prisma.AtLeast<{
@@ -19396,12 +22565,20 @@ export namespace Prisma {
     AND?: TagWhereInput | TagWhereInput[]
     OR?: TagWhereInput[]
     NOT?: TagWhereInput | TagWhereInput[]
+    opinionId?: StringNullableFilter<"Tag"> | string | null
+    videoNewsId?: StringNullableFilter<"Tag"> | string | null
     posts?: PostListRelationFilter
+    Opinion?: XOR<OpinionNullableScalarRelationFilter, OpinionWhereInput> | null
+    VideoNews?: XOR<VideoNewsNullableScalarRelationFilter, VideoNewsWhereInput> | null
+    videoNews?: VideoNewsListRelationFilter
+    opinions?: OpinionListRelationFilter
   }, "id" | "name">
 
   export type TagOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    opinionId?: SortOrderInput | SortOrder
+    videoNewsId?: SortOrderInput | SortOrder
     _count?: TagCountOrderByAggregateInput
     _max?: TagMaxOrderByAggregateInput
     _min?: TagMinOrderByAggregateInput
@@ -19413,6 +22590,8 @@ export namespace Prisma {
     NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Tag"> | string
     name?: StringWithAggregatesFilter<"Tag"> | string
+    opinionId?: StringNullableWithAggregatesFilter<"Tag"> | string | null
+    videoNewsId?: StringNullableWithAggregatesFilter<"Tag"> | string | null
   }
 
   export type ReactionWhereInput = {
@@ -19873,6 +23052,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19896,6 +23077,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUpdateInput = {
@@ -19919,6 +23102,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19942,6 +23127,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -20480,11 +23667,200 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OpinionCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutOpinionInput
+    category: CategoryCreateNestedOneWithoutOpinionInput
+    tags?: TagCreateNestedManyWithoutOpinionsInput
+    Tag?: TagCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutOpinionsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutOpinionNestedInput
+    category?: CategoryUpdateOneRequiredWithoutOpinionNestedInput
+    tags?: TagUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OpinionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpinionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoNewsCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutVideoNewsInput
+    category: CategoryCreateNestedOneWithoutVideoNewsInput
+    tags?: TagCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUncheckedCreateInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutVideoNewsNestedInput
+    category?: CategoryUpdateOneRequiredWithoutVideoNewsNestedInput
+    tags?: TagUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsCreateManyInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideoNewsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoNewsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CategoryCreateInput = {
     id?: string
     name: $Enums.SetNewsType
     slug: string
     posts?: PostCreateNestedManyWithoutCategoryInput
+    Opinion?: OpinionCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
@@ -20492,6 +23868,8 @@ export namespace Prisma {
     name: $Enums.SetNewsType
     slug: string
     posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
@@ -20499,6 +23877,8 @@ export namespace Prisma {
     name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
     posts?: PostUpdateManyWithoutCategoryNestedInput
+    Opinion?: OpinionUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
@@ -20506,6 +23886,8 @@ export namespace Prisma {
     name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
     posts?: PostUncheckedUpdateManyWithoutCategoryNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
@@ -20530,29 +23912,47 @@ export namespace Prisma {
     id?: string
     name: string
     posts?: PostCreateNestedManyWithoutTagsInput
+    Opinion?: OpinionCreateNestedOneWithoutTagInput
+    VideoNews?: VideoNewsCreateNestedOneWithoutTagInput
+    videoNews?: VideoNewsCreateNestedManyWithoutTagsInput
+    opinions?: OpinionCreateNestedManyWithoutTagsInput
   }
 
   export type TagUncheckedCreateInput = {
     id?: string
     name: string
+    opinionId?: string | null
+    videoNewsId?: string | null
     posts?: PostUncheckedCreateNestedManyWithoutTagsInput
+    videoNews?: VideoNewsUncheckedCreateNestedManyWithoutTagsInput
+    opinions?: OpinionUncheckedCreateNestedManyWithoutTagsInput
   }
 
   export type TagUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     posts?: PostUpdateManyWithoutTagsNestedInput
+    Opinion?: OpinionUpdateOneWithoutTagNestedInput
+    VideoNews?: VideoNewsUpdateOneWithoutTagNestedInput
+    videoNews?: VideoNewsUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUpdateManyWithoutTagsNestedInput
   }
 
   export type TagUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
     posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
+    videoNews?: VideoNewsUncheckedUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUncheckedUpdateManyWithoutTagsNestedInput
   }
 
   export type TagCreateManyInput = {
     id?: string
     name: string
+    opinionId?: string | null
+    videoNewsId?: string | null
   }
 
   export type TagUpdateManyMutationInput = {
@@ -20563,6 +23963,8 @@ export namespace Prisma {
   export type TagUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReactionCreateInput = {
@@ -21122,6 +24524,18 @@ export namespace Prisma {
     none?: PostReadingWhereInput
   }
 
+  export type OpinionListRelationFilter = {
+    every?: OpinionWhereInput
+    some?: OpinionWhereInput
+    none?: OpinionWhereInput
+  }
+
+  export type VideoNewsListRelationFilter = {
+    every?: VideoNewsWhereInput
+    some?: VideoNewsWhereInput
+    none?: VideoNewsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -21148,6 +24562,14 @@ export namespace Prisma {
   }
 
   export type PostReadingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OpinionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VideoNewsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21694,6 +25116,81 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type OpinionCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OpinionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OpinionMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    isPublished?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideoNewsCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    videoUrl?: SortOrder
+    isVideoNews?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideoNewsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    videoUrl?: SortOrder
+    isVideoNews?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VideoNewsMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    content?: SortOrder
+    videoUrl?: SortOrder
+    isVideoNews?: SortOrder
+    authorId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type EnumSetNewsTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.SetNewsType | EnumSetNewsTypeFieldRefInput<$PrismaModel>
     in?: $Enums.SetNewsType[] | ListEnumSetNewsTypeFieldRefInput<$PrismaModel>
@@ -21729,19 +25226,35 @@ export namespace Prisma {
     _max?: NestedEnumSetNewsTypeFilter<$PrismaModel>
   }
 
+  export type OpinionNullableScalarRelationFilter = {
+    is?: OpinionWhereInput | null
+    isNot?: OpinionWhereInput | null
+  }
+
+  export type VideoNewsNullableScalarRelationFilter = {
+    is?: VideoNewsWhereInput | null
+    isNot?: VideoNewsWhereInput | null
+  }
+
   export type TagCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    opinionId?: SortOrder
+    videoNewsId?: SortOrder
   }
 
   export type TagMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    opinionId?: SortOrder
+    videoNewsId?: SortOrder
   }
 
   export type TagMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    opinionId?: SortOrder
+    videoNewsId?: SortOrder
   }
 
   export type EnumReactionTypeFilter<$PrismaModel = never> = {
@@ -22047,6 +25560,20 @@ export namespace Prisma {
     connect?: PostReadingWhereUniqueInput | PostReadingWhereUniqueInput[]
   }
 
+  export type OpinionCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput> | OpinionCreateWithoutAuthorInput[] | OpinionUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutAuthorInput | OpinionCreateOrConnectWithoutAuthorInput[]
+    createMany?: OpinionCreateManyAuthorInputEnvelope
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+  }
+
+  export type VideoNewsCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput> | VideoNewsCreateWithoutAuthorInput[] | VideoNewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutAuthorInput | VideoNewsCreateOrConnectWithoutAuthorInput[]
+    createMany?: VideoNewsCreateManyAuthorInputEnvelope
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+  }
+
   export type AdminUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -22105,6 +25632,20 @@ export namespace Prisma {
     connectOrCreate?: PostReadingCreateOrConnectWithoutUserInput | PostReadingCreateOrConnectWithoutUserInput[]
     createMany?: PostReadingCreateManyUserInputEnvelope
     connect?: PostReadingWhereUniqueInput | PostReadingWhereUniqueInput[]
+  }
+
+  export type OpinionUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput> | OpinionCreateWithoutAuthorInput[] | OpinionUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutAuthorInput | OpinionCreateOrConnectWithoutAuthorInput[]
+    createMany?: OpinionCreateManyAuthorInputEnvelope
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+  }
+
+  export type VideoNewsUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput> | VideoNewsCreateWithoutAuthorInput[] | VideoNewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutAuthorInput | VideoNewsCreateOrConnectWithoutAuthorInput[]
+    createMany?: VideoNewsCreateManyAuthorInputEnvelope
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -22249,6 +25790,34 @@ export namespace Prisma {
     deleteMany?: PostReadingScalarWhereInput | PostReadingScalarWhereInput[]
   }
 
+  export type OpinionUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput> | OpinionCreateWithoutAuthorInput[] | OpinionUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutAuthorInput | OpinionCreateOrConnectWithoutAuthorInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutAuthorInput | OpinionUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: OpinionCreateManyAuthorInputEnvelope
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutAuthorInput | OpinionUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutAuthorInput | OpinionUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+  }
+
+  export type VideoNewsUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput> | VideoNewsCreateWithoutAuthorInput[] | VideoNewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutAuthorInput | VideoNewsCreateOrConnectWithoutAuthorInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutAuthorInput | VideoNewsUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: VideoNewsCreateManyAuthorInputEnvelope
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutAuthorInput | VideoNewsUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutAuthorInput | VideoNewsUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+  }
+
   export type AdminUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
     connectOrCreate?: AdminCreateOrConnectWithoutUserInput
@@ -22361,6 +25930,34 @@ export namespace Prisma {
     update?: PostReadingUpdateWithWhereUniqueWithoutUserInput | PostReadingUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PostReadingUpdateManyWithWhereWithoutUserInput | PostReadingUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PostReadingScalarWhereInput | PostReadingScalarWhereInput[]
+  }
+
+  export type OpinionUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput> | OpinionCreateWithoutAuthorInput[] | OpinionUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutAuthorInput | OpinionCreateOrConnectWithoutAuthorInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutAuthorInput | OpinionUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: OpinionCreateManyAuthorInputEnvelope
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutAuthorInput | OpinionUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutAuthorInput | OpinionUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput> | VideoNewsCreateWithoutAuthorInput[] | VideoNewsUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutAuthorInput | VideoNewsCreateOrConnectWithoutAuthorInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutAuthorInput | VideoNewsUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: VideoNewsCreateManyAuthorInputEnvelope
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutAuthorInput | VideoNewsUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutAuthorInput | VideoNewsUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAdminInput = {
@@ -22729,6 +26326,222 @@ export namespace Prisma {
     deleteMany?: PostReadingScalarWhereInput | PostReadingScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutOpinionInput = {
+    create?: XOR<UserCreateWithoutOpinionInput, UserUncheckedCreateWithoutOpinionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOpinionInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CategoryCreateNestedOneWithoutOpinionInput = {
+    create?: XOR<CategoryCreateWithoutOpinionInput, CategoryUncheckedCreateWithoutOpinionInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutOpinionInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type TagCreateNestedManyWithoutOpinionsInput = {
+    create?: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput> | TagCreateWithoutOpinionsInput[] | TagUncheckedCreateWithoutOpinionsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionsInput | TagCreateOrConnectWithoutOpinionsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagCreateNestedManyWithoutOpinionInput = {
+    create?: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput> | TagCreateWithoutOpinionInput[] | TagUncheckedCreateWithoutOpinionInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionInput | TagCreateOrConnectWithoutOpinionInput[]
+    createMany?: TagCreateManyOpinionInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutOpinionsInput = {
+    create?: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput> | TagCreateWithoutOpinionsInput[] | TagUncheckedCreateWithoutOpinionsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionsInput | TagCreateOrConnectWithoutOpinionsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutOpinionInput = {
+    create?: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput> | TagCreateWithoutOpinionInput[] | TagUncheckedCreateWithoutOpinionInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionInput | TagCreateOrConnectWithoutOpinionInput[]
+    createMany?: TagCreateManyOpinionInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutOpinionNestedInput = {
+    create?: XOR<UserCreateWithoutOpinionInput, UserUncheckedCreateWithoutOpinionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOpinionInput
+    upsert?: UserUpsertWithoutOpinionInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOpinionInput, UserUpdateWithoutOpinionInput>, UserUncheckedUpdateWithoutOpinionInput>
+  }
+
+  export type CategoryUpdateOneRequiredWithoutOpinionNestedInput = {
+    create?: XOR<CategoryCreateWithoutOpinionInput, CategoryUncheckedCreateWithoutOpinionInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutOpinionInput
+    upsert?: CategoryUpsertWithoutOpinionInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutOpinionInput, CategoryUpdateWithoutOpinionInput>, CategoryUncheckedUpdateWithoutOpinionInput>
+  }
+
+  export type TagUpdateManyWithoutOpinionsNestedInput = {
+    create?: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput> | TagCreateWithoutOpinionsInput[] | TagUncheckedCreateWithoutOpinionsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionsInput | TagCreateOrConnectWithoutOpinionsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutOpinionsInput | TagUpsertWithWhereUniqueWithoutOpinionsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutOpinionsInput | TagUpdateWithWhereUniqueWithoutOpinionsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutOpinionsInput | TagUpdateManyWithWhereWithoutOpinionsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUpdateManyWithoutOpinionNestedInput = {
+    create?: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput> | TagCreateWithoutOpinionInput[] | TagUncheckedCreateWithoutOpinionInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionInput | TagCreateOrConnectWithoutOpinionInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutOpinionInput | TagUpsertWithWhereUniqueWithoutOpinionInput[]
+    createMany?: TagCreateManyOpinionInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutOpinionInput | TagUpdateWithWhereUniqueWithoutOpinionInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutOpinionInput | TagUpdateManyWithWhereWithoutOpinionInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutOpinionsNestedInput = {
+    create?: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput> | TagCreateWithoutOpinionsInput[] | TagUncheckedCreateWithoutOpinionsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionsInput | TagCreateOrConnectWithoutOpinionsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutOpinionsInput | TagUpsertWithWhereUniqueWithoutOpinionsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutOpinionsInput | TagUpdateWithWhereUniqueWithoutOpinionsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutOpinionsInput | TagUpdateManyWithWhereWithoutOpinionsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutOpinionNestedInput = {
+    create?: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput> | TagCreateWithoutOpinionInput[] | TagUncheckedCreateWithoutOpinionInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutOpinionInput | TagCreateOrConnectWithoutOpinionInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutOpinionInput | TagUpsertWithWhereUniqueWithoutOpinionInput[]
+    createMany?: TagCreateManyOpinionInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutOpinionInput | TagUpdateWithWhereUniqueWithoutOpinionInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutOpinionInput | TagUpdateManyWithWhereWithoutOpinionInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutVideoNewsInput = {
+    create?: XOR<UserCreateWithoutVideoNewsInput, UserUncheckedCreateWithoutVideoNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoNewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type CategoryCreateNestedOneWithoutVideoNewsInput = {
+    create?: XOR<CategoryCreateWithoutVideoNewsInput, CategoryUncheckedCreateWithoutVideoNewsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutVideoNewsInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type TagCreateNestedManyWithoutVideoNewsInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagCreateNestedManyWithoutVideoNewsInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    createMany?: TagCreateManyVideoNewsInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutVideoNewsInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type TagUncheckedCreateNestedManyWithoutVideoNewsInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    createMany?: TagCreateManyVideoNewsInputEnvelope
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutVideoNewsNestedInput = {
+    create?: XOR<UserCreateWithoutVideoNewsInput, UserUncheckedCreateWithoutVideoNewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutVideoNewsInput
+    upsert?: UserUpsertWithoutVideoNewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVideoNewsInput, UserUpdateWithoutVideoNewsInput>, UserUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type CategoryUpdateOneRequiredWithoutVideoNewsNestedInput = {
+    create?: XOR<CategoryCreateWithoutVideoNewsInput, CategoryUncheckedCreateWithoutVideoNewsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutVideoNewsInput
+    upsert?: CategoryUpsertWithoutVideoNewsInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutVideoNewsInput, CategoryUpdateWithoutVideoNewsInput>, CategoryUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type TagUpdateManyWithoutVideoNewsNestedInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutVideoNewsInput | TagUpsertWithWhereUniqueWithoutVideoNewsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutVideoNewsInput | TagUpdateWithWhereUniqueWithoutVideoNewsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutVideoNewsInput | TagUpdateManyWithWhereWithoutVideoNewsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUpdateManyWithoutVideoNewsNestedInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutVideoNewsInput | TagUpsertWithWhereUniqueWithoutVideoNewsInput[]
+    createMany?: TagCreateManyVideoNewsInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutVideoNewsInput | TagUpdateWithWhereUniqueWithoutVideoNewsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutVideoNewsInput | TagUpdateManyWithWhereWithoutVideoNewsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutVideoNewsNestedInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutVideoNewsInput | TagUpsertWithWhereUniqueWithoutVideoNewsInput[]
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutVideoNewsInput | TagUpdateWithWhereUniqueWithoutVideoNewsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutVideoNewsInput | TagUpdateManyWithWhereWithoutVideoNewsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
+  export type TagUncheckedUpdateManyWithoutVideoNewsNestedInput = {
+    create?: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput> | TagCreateWithoutVideoNewsInput[] | TagUncheckedCreateWithoutVideoNewsInput[]
+    connectOrCreate?: TagCreateOrConnectWithoutVideoNewsInput | TagCreateOrConnectWithoutVideoNewsInput[]
+    upsert?: TagUpsertWithWhereUniqueWithoutVideoNewsInput | TagUpsertWithWhereUniqueWithoutVideoNewsInput[]
+    createMany?: TagCreateManyVideoNewsInputEnvelope
+    set?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    disconnect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    delete?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    connect?: TagWhereUniqueInput | TagWhereUniqueInput[]
+    update?: TagUpdateWithWhereUniqueWithoutVideoNewsInput | TagUpdateWithWhereUniqueWithoutVideoNewsInput[]
+    updateMany?: TagUpdateManyWithWhereWithoutVideoNewsInput | TagUpdateManyWithWhereWithoutVideoNewsInput[]
+    deleteMany?: TagScalarWhereInput | TagScalarWhereInput[]
+  }
+
   export type PostCreateNestedManyWithoutCategoryInput = {
     create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
@@ -22736,11 +26549,39 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type OpinionCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput> | OpinionCreateWithoutCategoryInput[] | OpinionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutCategoryInput | OpinionCreateOrConnectWithoutCategoryInput[]
+    createMany?: OpinionCreateManyCategoryInputEnvelope
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+  }
+
+  export type VideoNewsCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput> | VideoNewsCreateWithoutCategoryInput[] | VideoNewsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutCategoryInput | VideoNewsCreateOrConnectWithoutCategoryInput[]
+    createMany?: VideoNewsCreateManyCategoryInputEnvelope
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+  }
+
   export type PostUncheckedCreateNestedManyWithoutCategoryInput = {
     create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
     createMany?: PostCreateManyCategoryInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type OpinionUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput> | OpinionCreateWithoutCategoryInput[] | OpinionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutCategoryInput | OpinionCreateOrConnectWithoutCategoryInput[]
+    createMany?: OpinionCreateManyCategoryInputEnvelope
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+  }
+
+  export type VideoNewsUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput> | VideoNewsCreateWithoutCategoryInput[] | VideoNewsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutCategoryInput | VideoNewsCreateOrConnectWithoutCategoryInput[]
+    createMany?: VideoNewsCreateManyCategoryInputEnvelope
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
   }
 
   export type EnumSetNewsTypeFieldUpdateOperationsInput = {
@@ -22761,6 +26602,34 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type OpinionUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput> | OpinionCreateWithoutCategoryInput[] | OpinionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutCategoryInput | OpinionCreateOrConnectWithoutCategoryInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutCategoryInput | OpinionUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: OpinionCreateManyCategoryInputEnvelope
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutCategoryInput | OpinionUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutCategoryInput | OpinionUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+  }
+
+  export type VideoNewsUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput> | VideoNewsCreateWithoutCategoryInput[] | VideoNewsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutCategoryInput | VideoNewsCreateOrConnectWithoutCategoryInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutCategoryInput | VideoNewsUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: VideoNewsCreateManyCategoryInputEnvelope
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutCategoryInput | VideoNewsUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutCategoryInput | VideoNewsUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+  }
+
   export type PostUncheckedUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<PostCreateWithoutCategoryInput, PostUncheckedCreateWithoutCategoryInput> | PostCreateWithoutCategoryInput[] | PostUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: PostCreateOrConnectWithoutCategoryInput | PostCreateOrConnectWithoutCategoryInput[]
@@ -22775,16 +26644,80 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type OpinionUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput> | OpinionCreateWithoutCategoryInput[] | OpinionUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutCategoryInput | OpinionCreateOrConnectWithoutCategoryInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutCategoryInput | OpinionUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: OpinionCreateManyCategoryInputEnvelope
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutCategoryInput | OpinionUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutCategoryInput | OpinionUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput> | VideoNewsCreateWithoutCategoryInput[] | VideoNewsUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutCategoryInput | VideoNewsCreateOrConnectWithoutCategoryInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutCategoryInput | VideoNewsUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: VideoNewsCreateManyCategoryInputEnvelope
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutCategoryInput | VideoNewsUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutCategoryInput | VideoNewsUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+  }
+
   export type PostCreateNestedManyWithoutTagsInput = {
     create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
     connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
+  export type OpinionCreateNestedOneWithoutTagInput = {
+    create?: XOR<OpinionCreateWithoutTagInput, OpinionUncheckedCreateWithoutTagInput>
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagInput
+    connect?: OpinionWhereUniqueInput
+  }
+
+  export type VideoNewsCreateNestedOneWithoutTagInput = {
+    create?: XOR<VideoNewsCreateWithoutTagInput, VideoNewsUncheckedCreateWithoutTagInput>
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagInput
+    connect?: VideoNewsWhereUniqueInput
+  }
+
+  export type VideoNewsCreateNestedManyWithoutTagsInput = {
+    create?: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput> | VideoNewsCreateWithoutTagsInput[] | VideoNewsUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagsInput | VideoNewsCreateOrConnectWithoutTagsInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+  }
+
+  export type OpinionCreateNestedManyWithoutTagsInput = {
+    create?: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput> | OpinionCreateWithoutTagsInput[] | OpinionUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagsInput | OpinionCreateOrConnectWithoutTagsInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+  }
+
   export type PostUncheckedCreateNestedManyWithoutTagsInput = {
     create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
     connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
+  }
+
+  export type VideoNewsUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput> | VideoNewsCreateWithoutTagsInput[] | VideoNewsUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagsInput | VideoNewsCreateOrConnectWithoutTagsInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+  }
+
+  export type OpinionUncheckedCreateNestedManyWithoutTagsInput = {
+    create?: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput> | OpinionCreateWithoutTagsInput[] | OpinionUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagsInput | OpinionCreateOrConnectWithoutTagsInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
   }
 
   export type PostUpdateManyWithoutTagsNestedInput = {
@@ -22800,6 +26733,52 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
+  export type OpinionUpdateOneWithoutTagNestedInput = {
+    create?: XOR<OpinionCreateWithoutTagInput, OpinionUncheckedCreateWithoutTagInput>
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagInput
+    upsert?: OpinionUpsertWithoutTagInput
+    disconnect?: OpinionWhereInput | boolean
+    delete?: OpinionWhereInput | boolean
+    connect?: OpinionWhereUniqueInput
+    update?: XOR<XOR<OpinionUpdateToOneWithWhereWithoutTagInput, OpinionUpdateWithoutTagInput>, OpinionUncheckedUpdateWithoutTagInput>
+  }
+
+  export type VideoNewsUpdateOneWithoutTagNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutTagInput, VideoNewsUncheckedCreateWithoutTagInput>
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagInput
+    upsert?: VideoNewsUpsertWithoutTagInput
+    disconnect?: VideoNewsWhereInput | boolean
+    delete?: VideoNewsWhereInput | boolean
+    connect?: VideoNewsWhereUniqueInput
+    update?: XOR<XOR<VideoNewsUpdateToOneWithWhereWithoutTagInput, VideoNewsUpdateWithoutTagInput>, VideoNewsUncheckedUpdateWithoutTagInput>
+  }
+
+  export type VideoNewsUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput> | VideoNewsCreateWithoutTagsInput[] | VideoNewsUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagsInput | VideoNewsCreateOrConnectWithoutTagsInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutTagsInput | VideoNewsUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutTagsInput | VideoNewsUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutTagsInput | VideoNewsUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+  }
+
+  export type OpinionUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput> | OpinionCreateWithoutTagsInput[] | OpinionUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagsInput | OpinionCreateOrConnectWithoutTagsInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutTagsInput | OpinionUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutTagsInput | OpinionUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutTagsInput | OpinionUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+  }
+
   export type PostUncheckedUpdateManyWithoutTagsNestedInput = {
     create?: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput> | PostCreateWithoutTagsInput[] | PostUncheckedCreateWithoutTagsInput[]
     connectOrCreate?: PostCreateOrConnectWithoutTagsInput | PostCreateOrConnectWithoutTagsInput[]
@@ -22811,6 +26790,32 @@ export namespace Prisma {
     update?: PostUpdateWithWhereUniqueWithoutTagsInput | PostUpdateWithWhereUniqueWithoutTagsInput[]
     updateMany?: PostUpdateManyWithWhereWithoutTagsInput | PostUpdateManyWithWhereWithoutTagsInput[]
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput> | VideoNewsCreateWithoutTagsInput[] | VideoNewsUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: VideoNewsCreateOrConnectWithoutTagsInput | VideoNewsCreateOrConnectWithoutTagsInput[]
+    upsert?: VideoNewsUpsertWithWhereUniqueWithoutTagsInput | VideoNewsUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    disconnect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    delete?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    connect?: VideoNewsWhereUniqueInput | VideoNewsWhereUniqueInput[]
+    update?: VideoNewsUpdateWithWhereUniqueWithoutTagsInput | VideoNewsUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: VideoNewsUpdateManyWithWhereWithoutTagsInput | VideoNewsUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+  }
+
+  export type OpinionUncheckedUpdateManyWithoutTagsNestedInput = {
+    create?: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput> | OpinionCreateWithoutTagsInput[] | OpinionUncheckedCreateWithoutTagsInput[]
+    connectOrCreate?: OpinionCreateOrConnectWithoutTagsInput | OpinionCreateOrConnectWithoutTagsInput[]
+    upsert?: OpinionUpsertWithWhereUniqueWithoutTagsInput | OpinionUpsertWithWhereUniqueWithoutTagsInput[]
+    set?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    disconnect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    delete?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    connect?: OpinionWhereUniqueInput | OpinionWhereUniqueInput[]
+    update?: OpinionUpdateWithWhereUniqueWithoutTagsInput | OpinionUpdateWithWhereUniqueWithoutTagsInput[]
+    updateMany?: OpinionUpdateManyWithWhereWithoutTagsInput | OpinionUpdateManyWithWhereWithoutTagsInput[]
+    deleteMany?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutReactionInput = {
@@ -23602,6 +27607,80 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OpinionCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: CategoryCreateNestedOneWithoutOpinionInput
+    tags?: TagCreateNestedManyWithoutOpinionsInput
+    Tag?: TagCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutOpinionsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionCreateOrConnectWithoutAuthorInput = {
+    where: OpinionWhereUniqueInput
+    create: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type OpinionCreateManyAuthorInputEnvelope = {
+    data: OpinionCreateManyAuthorInput | OpinionCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VideoNewsCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: CategoryCreateNestedOneWithoutVideoNewsInput
+    tags?: TagCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsCreateOrConnectWithoutAuthorInput = {
+    where: VideoNewsWhereUniqueInput
+    create: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type VideoNewsCreateManyAuthorInputEnvelope = {
+    data: VideoNewsCreateManyAuthorInput | VideoNewsCreateManyAuthorInput[]
+    skipDuplicates?: boolean
+  }
+
   export type AdminUpsertWithoutUserInput = {
     update: XOR<AdminUpdateWithoutUserInput, AdminUncheckedUpdateWithoutUserInput>
     create: XOR<AdminCreateWithoutUserInput, AdminUncheckedCreateWithoutUserInput>
@@ -23909,6 +27988,69 @@ export namespace Prisma {
     readAt?: DateTimeFilter<"PostReading"> | Date | string
   }
 
+  export type OpinionUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: OpinionWhereUniqueInput
+    update: XOR<OpinionUpdateWithoutAuthorInput, OpinionUncheckedUpdateWithoutAuthorInput>
+    create: XOR<OpinionCreateWithoutAuthorInput, OpinionUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type OpinionUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: OpinionWhereUniqueInput
+    data: XOR<OpinionUpdateWithoutAuthorInput, OpinionUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type OpinionUpdateManyWithWhereWithoutAuthorInput = {
+    where: OpinionScalarWhereInput
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type OpinionScalarWhereInput = {
+    AND?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+    OR?: OpinionScalarWhereInput[]
+    NOT?: OpinionScalarWhereInput | OpinionScalarWhereInput[]
+    id?: StringFilter<"Opinion"> | string
+    title?: StringFilter<"Opinion"> | string
+    slug?: StringFilter<"Opinion"> | string
+    content?: StringFilter<"Opinion"> | string
+    authorId?: StringFilter<"Opinion"> | string
+    categoryId?: StringFilter<"Opinion"> | string
+    isPublished?: BoolFilter<"Opinion"> | boolean
+    createdAt?: DateTimeFilter<"Opinion"> | Date | string
+    updatedAt?: DateTimeFilter<"Opinion"> | Date | string
+  }
+
+  export type VideoNewsUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: VideoNewsWhereUniqueInput
+    update: XOR<VideoNewsUpdateWithoutAuthorInput, VideoNewsUncheckedUpdateWithoutAuthorInput>
+    create: XOR<VideoNewsCreateWithoutAuthorInput, VideoNewsUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type VideoNewsUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: VideoNewsWhereUniqueInput
+    data: XOR<VideoNewsUpdateWithoutAuthorInput, VideoNewsUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type VideoNewsUpdateManyWithWhereWithoutAuthorInput = {
+    where: VideoNewsScalarWhereInput
+    data: XOR<VideoNewsUpdateManyMutationInput, VideoNewsUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type VideoNewsScalarWhereInput = {
+    AND?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+    OR?: VideoNewsScalarWhereInput[]
+    NOT?: VideoNewsScalarWhereInput | VideoNewsScalarWhereInput[]
+    id?: StringFilter<"VideoNews"> | string
+    title?: StringFilter<"VideoNews"> | string
+    slug?: StringFilter<"VideoNews"> | string
+    content?: StringFilter<"VideoNews"> | string
+    videoUrl?: StringNullableFilter<"VideoNews"> | string | null
+    isVideoNews?: BoolFilter<"VideoNews"> | boolean
+    authorId?: StringFilter<"VideoNews"> | string
+    categoryId?: StringFilter<"VideoNews"> | string
+    createdAt?: DateTimeFilter<"VideoNews"> | Date | string
+    updatedAt?: DateTimeFilter<"VideoNews"> | Date | string
+  }
+
   export type UserCreateWithoutAdminInput = {
     id?: string
     email: string
@@ -23929,6 +28071,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutAdminInput = {
@@ -23951,6 +28095,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutAdminInput = {
@@ -23989,6 +28135,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminInput = {
@@ -24011,6 +28159,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateWithoutAuthorInput = {
@@ -24033,6 +28183,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutAuthorInput = {
@@ -24055,6 +28207,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutAuthorInput = {
@@ -24149,6 +28303,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthorInput = {
@@ -24171,6 +28327,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostUpsertWithWhereUniqueWithoutAuthorAuthorInput = {
@@ -24209,6 +28367,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutEditorInput = {
@@ -24231,6 +28391,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutEditorInput = {
@@ -24269,6 +28431,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEditorInput = {
@@ -24291,6 +28455,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateWithoutPostInput = {
@@ -24313,6 +28479,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostInput = {
@@ -24335,6 +28503,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostInput = {
@@ -24385,12 +28555,16 @@ export namespace Prisma {
     id?: string
     name: $Enums.SetNewsType
     slug: string
+    Opinion?: OpinionCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateWithoutPostsInput = {
     id?: string
     name: $Enums.SetNewsType
     slug: string
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutPostsInput = {
@@ -24401,11 +28575,19 @@ export namespace Prisma {
   export type TagCreateWithoutPostsInput = {
     id?: string
     name: string
+    Opinion?: OpinionCreateNestedOneWithoutTagInput
+    VideoNews?: VideoNewsCreateNestedOneWithoutTagInput
+    videoNews?: VideoNewsCreateNestedManyWithoutTagsInput
+    opinions?: OpinionCreateNestedManyWithoutTagsInput
   }
 
   export type TagUncheckedCreateWithoutPostsInput = {
     id?: string
     name: string
+    opinionId?: string | null
+    videoNewsId?: string | null
+    videoNews?: VideoNewsUncheckedCreateNestedManyWithoutTagsInput
+    opinions?: OpinionUncheckedCreateNestedManyWithoutTagsInput
   }
 
   export type TagCreateOrConnectWithoutPostsInput = {
@@ -24546,6 +28728,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostInput = {
@@ -24568,6 +28752,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AuthorUpsertWithoutPostInput = {
@@ -24630,12 +28816,16 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
+    Opinion?: OpinionUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
     slug?: StringFieldUpdateOperationsInput | string
+    Opinion?: OpinionUncheckedUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type TagUpsertWithWhereUniqueWithoutPostsInput = {
@@ -24660,6 +28850,8 @@ export namespace Prisma {
     NOT?: TagScalarWhereInput | TagScalarWhereInput[]
     id?: StringFilter<"Tag"> | string
     name?: StringFilter<"Tag"> | string
+    opinionId?: StringNullableFilter<"Tag"> | string | null
+    videoNewsId?: StringNullableFilter<"Tag"> | string | null
   }
 
   export type ReactionUpsertWithWhereUniqueWithoutPostInput = {
@@ -24726,6 +28918,487 @@ export namespace Prisma {
     data: XOR<PostReadingUpdateManyMutationInput, PostReadingUncheckedUpdateManyWithoutPostInput>
   }
 
+  export type UserCreateWithoutOpinionInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
+    Reaction?: ReactionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
+    PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutOpinionInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutOpinionInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOpinionInput, UserUncheckedCreateWithoutOpinionInput>
+  }
+
+  export type CategoryCreateWithoutOpinionInput = {
+    id?: string
+    name: $Enums.SetNewsType
+    slug: string
+    posts?: PostCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutOpinionInput = {
+    id?: string
+    name: $Enums.SetNewsType
+    slug: string
+    posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutOpinionInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutOpinionInput, CategoryUncheckedCreateWithoutOpinionInput>
+  }
+
+  export type TagCreateWithoutOpinionsInput = {
+    id?: string
+    name: string
+    posts?: PostCreateNestedManyWithoutTagsInput
+    Opinion?: OpinionCreateNestedOneWithoutTagInput
+    VideoNews?: VideoNewsCreateNestedOneWithoutTagInput
+    videoNews?: VideoNewsCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateWithoutOpinionsInput = {
+    id?: string
+    name: string
+    opinionId?: string | null
+    videoNewsId?: string | null
+    posts?: PostUncheckedCreateNestedManyWithoutTagsInput
+    videoNews?: VideoNewsUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagCreateOrConnectWithoutOpinionsInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput>
+  }
+
+  export type TagCreateWithoutOpinionInput = {
+    id?: string
+    name: string
+    posts?: PostCreateNestedManyWithoutTagsInput
+    VideoNews?: VideoNewsCreateNestedOneWithoutTagInput
+    videoNews?: VideoNewsCreateNestedManyWithoutTagsInput
+    opinions?: OpinionCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateWithoutOpinionInput = {
+    id?: string
+    name: string
+    videoNewsId?: string | null
+    posts?: PostUncheckedCreateNestedManyWithoutTagsInput
+    videoNews?: VideoNewsUncheckedCreateNestedManyWithoutTagsInput
+    opinions?: OpinionUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagCreateOrConnectWithoutOpinionInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput>
+  }
+
+  export type TagCreateManyOpinionInputEnvelope = {
+    data: TagCreateManyOpinionInput | TagCreateManyOpinionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutOpinionInput = {
+    update: XOR<UserUpdateWithoutOpinionInput, UserUncheckedUpdateWithoutOpinionInput>
+    create: XOR<UserCreateWithoutOpinionInput, UserUncheckedCreateWithoutOpinionInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOpinionInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOpinionInput, UserUncheckedUpdateWithoutOpinionInput>
+  }
+
+  export type UserUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Reaction?: ReactionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
+    PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type CategoryUpsertWithoutOpinionInput = {
+    update: XOR<CategoryUpdateWithoutOpinionInput, CategoryUncheckedUpdateWithoutOpinionInput>
+    create: XOR<CategoryCreateWithoutOpinionInput, CategoryUncheckedCreateWithoutOpinionInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutOpinionInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutOpinionInput, CategoryUncheckedUpdateWithoutOpinionInput>
+  }
+
+  export type CategoryUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
+    slug?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
+    slug?: StringFieldUpdateOperationsInput | string
+    posts?: PostUncheckedUpdateManyWithoutCategoryNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutOpinionsInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutOpinionsInput, TagUncheckedUpdateWithoutOpinionsInput>
+    create: XOR<TagCreateWithoutOpinionsInput, TagUncheckedCreateWithoutOpinionsInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutOpinionsInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutOpinionsInput, TagUncheckedUpdateWithoutOpinionsInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutOpinionsInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutOpinionsInput>
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutOpinionInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutOpinionInput, TagUncheckedUpdateWithoutOpinionInput>
+    create: XOR<TagCreateWithoutOpinionInput, TagUncheckedCreateWithoutOpinionInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutOpinionInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutOpinionInput, TagUncheckedUpdateWithoutOpinionInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutOpinionInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutOpinionInput>
+  }
+
+  export type UserCreateWithoutVideoNewsInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewCreateNestedManyWithoutUserInput
+    Author?: AuthorCreateNestedOneWithoutUserInput
+    Editor?: EditorCreateNestedOneWithoutUserInput
+    Post?: PostCreateNestedManyWithoutAuthorInput
+    Reaction?: ReactionCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
+    PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserUncheckedCreateWithoutVideoNewsInput = {
+    id?: string
+    email: string
+    password: string
+    name: string
+    profilePhoto?: string | null
+    role: $Enums.UserRole
+    status?: $Enums.UserStatus
+    gender: $Enums.Gender
+    needPasswordChange?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    admin?: AdminUncheckedCreateNestedOneWithoutUserInput
+    WebsiteReview?: WebsiteReviewUncheckedCreateNestedManyWithoutReviewerInput
+    postViews?: PostViewUncheckedCreateNestedManyWithoutUserInput
+    Author?: AuthorUncheckedCreateNestedOneWithoutUserInput
+    Editor?: EditorUncheckedCreateNestedOneWithoutUserInput
+    Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
+    Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+  }
+
+  export type UserCreateOrConnectWithoutVideoNewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVideoNewsInput, UserUncheckedCreateWithoutVideoNewsInput>
+  }
+
+  export type CategoryCreateWithoutVideoNewsInput = {
+    id?: string
+    name: $Enums.SetNewsType
+    slug: string
+    posts?: PostCreateNestedManyWithoutCategoryInput
+    Opinion?: OpinionCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutVideoNewsInput = {
+    id?: string
+    name: $Enums.SetNewsType
+    slug: string
+    posts?: PostUncheckedCreateNestedManyWithoutCategoryInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutVideoNewsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutVideoNewsInput, CategoryUncheckedCreateWithoutVideoNewsInput>
+  }
+
+  export type TagCreateWithoutVideoNewsInput = {
+    id?: string
+    name: string
+    posts?: PostCreateNestedManyWithoutTagsInput
+    Opinion?: OpinionCreateNestedOneWithoutTagInput
+    VideoNews?: VideoNewsCreateNestedOneWithoutTagInput
+    opinions?: OpinionCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateWithoutVideoNewsInput = {
+    id?: string
+    name: string
+    opinionId?: string | null
+    videoNewsId?: string | null
+    posts?: PostUncheckedCreateNestedManyWithoutTagsInput
+    opinions?: OpinionUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagCreateOrConnectWithoutVideoNewsInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput>
+  }
+
+  export type TagCreateWithoutVideoNewsInput = {
+    id?: string
+    name: string
+    posts?: PostCreateNestedManyWithoutTagsInput
+    Opinion?: OpinionCreateNestedOneWithoutTagInput
+    videoNews?: VideoNewsCreateNestedManyWithoutTagsInput
+    opinions?: OpinionCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagUncheckedCreateWithoutVideoNewsInput = {
+    id?: string
+    name: string
+    opinionId?: string | null
+    posts?: PostUncheckedCreateNestedManyWithoutTagsInput
+    videoNews?: VideoNewsUncheckedCreateNestedManyWithoutTagsInput
+    opinions?: OpinionUncheckedCreateNestedManyWithoutTagsInput
+  }
+
+  export type TagCreateManyVideoNewsInputEnvelope = {
+    data: TagCreateManyVideoNewsInput | TagCreateManyVideoNewsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutVideoNewsInput = {
+    update: XOR<UserUpdateWithoutVideoNewsInput, UserUncheckedUpdateWithoutVideoNewsInput>
+    create: XOR<UserCreateWithoutVideoNewsInput, UserUncheckedCreateWithoutVideoNewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutVideoNewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutVideoNewsInput, UserUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type UserUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUpdateManyWithoutUserNestedInput
+    Author?: AuthorUpdateOneWithoutUserNestedInput
+    Editor?: EditorUpdateOneWithoutUserNestedInput
+    Post?: PostUpdateManyWithoutAuthorNestedInput
+    Reaction?: ReactionUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
+    PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    needPasswordChange?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUncheckedUpdateOneWithoutUserNestedInput
+    WebsiteReview?: WebsiteReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    postViews?: PostViewUncheckedUpdateManyWithoutUserNestedInput
+    Author?: AuthorUncheckedUpdateOneWithoutUserNestedInput
+    Editor?: EditorUncheckedUpdateOneWithoutUserNestedInput
+    Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
+    Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type CategoryUpsertWithoutVideoNewsInput = {
+    update: XOR<CategoryUpdateWithoutVideoNewsInput, CategoryUncheckedUpdateWithoutVideoNewsInput>
+    create: XOR<CategoryCreateWithoutVideoNewsInput, CategoryUncheckedCreateWithoutVideoNewsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutVideoNewsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutVideoNewsInput, CategoryUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type CategoryUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
+    slug?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutCategoryNestedInput
+    Opinion?: OpinionUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: EnumSetNewsTypeFieldUpdateOperationsInput | $Enums.SetNewsType
+    slug?: StringFieldUpdateOperationsInput | string
+    posts?: PostUncheckedUpdateManyWithoutCategoryNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutVideoNewsInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutVideoNewsInput, TagUncheckedUpdateWithoutVideoNewsInput>
+    create: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutVideoNewsInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutVideoNewsInput, TagUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutVideoNewsInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutVideoNewsInput>
+  }
+
+  export type TagUpsertWithWhereUniqueWithoutVideoNewsInput = {
+    where: TagWhereUniqueInput
+    update: XOR<TagUpdateWithoutVideoNewsInput, TagUncheckedUpdateWithoutVideoNewsInput>
+    create: XOR<TagCreateWithoutVideoNewsInput, TagUncheckedCreateWithoutVideoNewsInput>
+  }
+
+  export type TagUpdateWithWhereUniqueWithoutVideoNewsInput = {
+    where: TagWhereUniqueInput
+    data: XOR<TagUpdateWithoutVideoNewsInput, TagUncheckedUpdateWithoutVideoNewsInput>
+  }
+
+  export type TagUpdateManyWithWhereWithoutVideoNewsInput = {
+    where: TagScalarWhereInput
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyWithoutVideoNewsInput>
+  }
+
   export type PostCreateWithoutCategoryInput = {
     id?: string
     title: string
@@ -24782,6 +29455,80 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OpinionCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutOpinionInput
+    tags?: TagCreateNestedManyWithoutOpinionsInput
+    Tag?: TagCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutOpinionsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionCreateOrConnectWithoutCategoryInput = {
+    where: OpinionWhereUniqueInput
+    create: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type OpinionCreateManyCategoryInputEnvelope = {
+    data: OpinionCreateManyCategoryInput | OpinionCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VideoNewsCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutVideoNewsInput
+    tags?: TagCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+    Tag?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsCreateOrConnectWithoutCategoryInput = {
+    where: VideoNewsWhereUniqueInput
+    create: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type VideoNewsCreateManyCategoryInputEnvelope = {
+    data: VideoNewsCreateManyCategoryInput | VideoNewsCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PostUpsertWithWhereUniqueWithoutCategoryInput = {
     where: PostWhereUniqueInput
     update: XOR<PostUpdateWithoutCategoryInput, PostUncheckedUpdateWithoutCategoryInput>
@@ -24796,6 +29543,38 @@ export namespace Prisma {
   export type PostUpdateManyWithWhereWithoutCategoryInput = {
     where: PostScalarWhereInput
     data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type OpinionUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: OpinionWhereUniqueInput
+    update: XOR<OpinionUpdateWithoutCategoryInput, OpinionUncheckedUpdateWithoutCategoryInput>
+    create: XOR<OpinionCreateWithoutCategoryInput, OpinionUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type OpinionUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: OpinionWhereUniqueInput
+    data: XOR<OpinionUpdateWithoutCategoryInput, OpinionUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type OpinionUpdateManyWithWhereWithoutCategoryInput = {
+    where: OpinionScalarWhereInput
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type VideoNewsUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: VideoNewsWhereUniqueInput
+    update: XOR<VideoNewsUpdateWithoutCategoryInput, VideoNewsUncheckedUpdateWithoutCategoryInput>
+    create: XOR<VideoNewsCreateWithoutCategoryInput, VideoNewsUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type VideoNewsUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: VideoNewsWhereUniqueInput
+    data: XOR<VideoNewsUpdateWithoutCategoryInput, VideoNewsUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type VideoNewsUpdateManyWithWhereWithoutCategoryInput = {
+    where: VideoNewsScalarWhereInput
+    data: XOR<VideoNewsUpdateManyMutationInput, VideoNewsUncheckedUpdateManyWithoutCategoryInput>
   }
 
   export type PostCreateWithoutTagsInput = {
@@ -24849,6 +29628,134 @@ export namespace Prisma {
     create: XOR<PostCreateWithoutTagsInput, PostUncheckedCreateWithoutTagsInput>
   }
 
+  export type OpinionCreateWithoutTagInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutOpinionInput
+    category: CategoryCreateNestedOneWithoutOpinionInput
+    tags?: TagCreateNestedManyWithoutOpinionsInput
+  }
+
+  export type OpinionUncheckedCreateWithoutTagInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutOpinionsInput
+  }
+
+  export type OpinionCreateOrConnectWithoutTagInput = {
+    where: OpinionWhereUniqueInput
+    create: XOR<OpinionCreateWithoutTagInput, OpinionUncheckedCreateWithoutTagInput>
+  }
+
+  export type VideoNewsCreateWithoutTagInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutVideoNewsInput
+    category: CategoryCreateNestedOneWithoutVideoNewsInput
+    tags?: TagCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUncheckedCreateWithoutTagInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsCreateOrConnectWithoutTagInput = {
+    where: VideoNewsWhereUniqueInput
+    create: XOR<VideoNewsCreateWithoutTagInput, VideoNewsUncheckedCreateWithoutTagInput>
+  }
+
+  export type VideoNewsCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutVideoNewsInput
+    category: CategoryCreateNestedOneWithoutVideoNewsInput
+    Tag?: TagCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsUncheckedCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Tag?: TagUncheckedCreateNestedManyWithoutVideoNewsInput
+  }
+
+  export type VideoNewsCreateOrConnectWithoutTagsInput = {
+    where: VideoNewsWhereUniqueInput
+    create: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput>
+  }
+
+  export type OpinionCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    author: UserCreateNestedOneWithoutOpinionInput
+    category: CategoryCreateNestedOneWithoutOpinionInput
+    Tag?: TagCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionUncheckedCreateWithoutTagsInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Tag?: TagUncheckedCreateNestedManyWithoutOpinionInput
+  }
+
+  export type OpinionCreateOrConnectWithoutTagsInput = {
+    where: OpinionWhereUniqueInput
+    create: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput>
+  }
+
   export type PostUpsertWithWhereUniqueWithoutTagsInput = {
     where: PostWhereUniqueInput
     update: XOR<PostUpdateWithoutTagsInput, PostUncheckedUpdateWithoutTagsInput>
@@ -24863,6 +29770,114 @@ export namespace Prisma {
   export type PostUpdateManyWithWhereWithoutTagsInput = {
     where: PostScalarWhereInput
     data: XOR<PostUpdateManyMutationInput, PostUncheckedUpdateManyWithoutTagsInput>
+  }
+
+  export type OpinionUpsertWithoutTagInput = {
+    update: XOR<OpinionUpdateWithoutTagInput, OpinionUncheckedUpdateWithoutTagInput>
+    create: XOR<OpinionCreateWithoutTagInput, OpinionUncheckedCreateWithoutTagInput>
+    where?: OpinionWhereInput
+  }
+
+  export type OpinionUpdateToOneWithWhereWithoutTagInput = {
+    where?: OpinionWhereInput
+    data: XOR<OpinionUpdateWithoutTagInput, OpinionUncheckedUpdateWithoutTagInput>
+  }
+
+  export type OpinionUpdateWithoutTagInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutOpinionNestedInput
+    category?: CategoryUpdateOneRequiredWithoutOpinionNestedInput
+    tags?: TagUpdateManyWithoutOpinionsNestedInput
+  }
+
+  export type OpinionUncheckedUpdateWithoutTagInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutOpinionsNestedInput
+  }
+
+  export type VideoNewsUpsertWithoutTagInput = {
+    update: XOR<VideoNewsUpdateWithoutTagInput, VideoNewsUncheckedUpdateWithoutTagInput>
+    create: XOR<VideoNewsCreateWithoutTagInput, VideoNewsUncheckedCreateWithoutTagInput>
+    where?: VideoNewsWhereInput
+  }
+
+  export type VideoNewsUpdateToOneWithWhereWithoutTagInput = {
+    where?: VideoNewsWhereInput
+    data: XOR<VideoNewsUpdateWithoutTagInput, VideoNewsUncheckedUpdateWithoutTagInput>
+  }
+
+  export type VideoNewsUpdateWithoutTagInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutVideoNewsNestedInput
+    category?: CategoryUpdateOneRequiredWithoutVideoNewsNestedInput
+    tags?: TagUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateWithoutTagInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUpsertWithWhereUniqueWithoutTagsInput = {
+    where: VideoNewsWhereUniqueInput
+    update: XOR<VideoNewsUpdateWithoutTagsInput, VideoNewsUncheckedUpdateWithoutTagsInput>
+    create: XOR<VideoNewsCreateWithoutTagsInput, VideoNewsUncheckedCreateWithoutTagsInput>
+  }
+
+  export type VideoNewsUpdateWithWhereUniqueWithoutTagsInput = {
+    where: VideoNewsWhereUniqueInput
+    data: XOR<VideoNewsUpdateWithoutTagsInput, VideoNewsUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type VideoNewsUpdateManyWithWhereWithoutTagsInput = {
+    where: VideoNewsScalarWhereInput
+    data: XOR<VideoNewsUpdateManyMutationInput, VideoNewsUncheckedUpdateManyWithoutTagsInput>
+  }
+
+  export type OpinionUpsertWithWhereUniqueWithoutTagsInput = {
+    where: OpinionWhereUniqueInput
+    update: XOR<OpinionUpdateWithoutTagsInput, OpinionUncheckedUpdateWithoutTagsInput>
+    create: XOR<OpinionCreateWithoutTagsInput, OpinionUncheckedCreateWithoutTagsInput>
+  }
+
+  export type OpinionUpdateWithWhereUniqueWithoutTagsInput = {
+    where: OpinionWhereUniqueInput
+    data: XOR<OpinionUpdateWithoutTagsInput, OpinionUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type OpinionUpdateManyWithWhereWithoutTagsInput = {
+    where: OpinionScalarWhereInput
+    data: XOR<OpinionUpdateManyMutationInput, OpinionUncheckedUpdateManyWithoutTagsInput>
   }
 
   export type UserCreateWithoutReactionInput = {
@@ -24885,6 +29900,8 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutReactionInput = {
@@ -24907,6 +29924,8 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutReactionInput = {
@@ -24996,6 +30015,8 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReactionInput = {
@@ -25018,6 +30039,8 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostUpsertWithoutReactionsInput = {
@@ -25148,6 +30171,8 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -25170,6 +30195,8 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -25265,6 +30292,8 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -25287,6 +30316,8 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateWithoutWebsiteReviewInput = {
@@ -25309,6 +30340,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutWebsiteReviewInput = {
@@ -25331,6 +30364,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutWebsiteReviewInput = {
@@ -25369,6 +30404,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsiteReviewInput = {
@@ -25391,6 +30428,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostCreateWithoutPostViewsInput = {
@@ -25464,6 +30503,8 @@ export namespace Prisma {
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
     PostReading?: PostReadingCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostViewsInput = {
@@ -25486,6 +30527,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     PostReading?: PostReadingUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostViewsInput = {
@@ -25581,6 +30624,8 @@ export namespace Prisma {
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostViewsInput = {
@@ -25603,6 +30648,8 @@ export namespace Prisma {
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     PostReading?: PostReadingUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserCreateWithoutPostReadingInput = {
@@ -25625,6 +30672,8 @@ export namespace Prisma {
     Post?: PostCreateNestedManyWithoutAuthorInput
     Reaction?: ReactionCreateNestedManyWithoutUserInput
     Comment?: CommentCreateNestedManyWithoutUserInput
+    Opinion?: OpinionCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsCreateNestedManyWithoutAuthorInput
   }
 
   export type UserUncheckedCreateWithoutPostReadingInput = {
@@ -25647,6 +30696,8 @@ export namespace Prisma {
     Post?: PostUncheckedCreateNestedManyWithoutAuthorInput
     Reaction?: ReactionUncheckedCreateNestedManyWithoutUserInput
     Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    Opinion?: OpinionUncheckedCreateNestedManyWithoutAuthorInput
+    VideoNews?: VideoNewsUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type UserCreateOrConnectWithoutPostReadingInput = {
@@ -25736,6 +30787,8 @@ export namespace Prisma {
     Post?: PostUpdateManyWithoutAuthorNestedInput
     Reaction?: ReactionUpdateManyWithoutUserNestedInput
     Comment?: CommentUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUpdateManyWithoutAuthorNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostReadingInput = {
@@ -25758,6 +30811,8 @@ export namespace Prisma {
     Post?: PostUncheckedUpdateManyWithoutAuthorNestedInput
     Reaction?: ReactionUncheckedUpdateManyWithoutUserNestedInput
     Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    Opinion?: OpinionUncheckedUpdateManyWithoutAuthorNestedInput
+    VideoNews?: VideoNewsUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type PostUpsertWithoutPostReadingInput = {
@@ -25875,6 +30930,29 @@ export namespace Prisma {
     postId: string
     duration: number
     readAt?: Date | string
+  }
+
+  export type OpinionCreateManyAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    categoryId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideoNewsCreateManyAuthorInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    categoryId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type WebsiteReviewUpdateWithoutReviewerInput = {
@@ -26067,6 +31145,83 @@ export namespace Prisma {
     readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OpinionUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneRequiredWithoutOpinionNestedInput
+    tags?: TagUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoNewsUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneRequiredWithoutVideoNewsNestedInput
+    tags?: TagUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PostCreateManyAuthorAuthorInput = {
     id?: string
     title: string
@@ -26183,16 +31338,26 @@ export namespace Prisma {
   export type TagUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    Opinion?: OpinionUpdateOneWithoutTagNestedInput
+    VideoNews?: VideoNewsUpdateOneWithoutTagNestedInput
+    videoNews?: VideoNewsUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUpdateManyWithoutTagsNestedInput
   }
 
   export type TagUncheckedUpdateWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNews?: VideoNewsUncheckedUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUncheckedUpdateManyWithoutTagsNestedInput
   }
 
   export type TagUncheckedUpdateManyWithoutPostsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReactionUpdateWithoutPostInput = {
@@ -26288,6 +31453,116 @@ export namespace Prisma {
     readAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TagCreateManyOpinionInput = {
+    id?: string
+    name: string
+    videoNewsId?: string | null
+  }
+
+  export type TagUpdateWithoutOpinionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutTagsNestedInput
+    Opinion?: OpinionUpdateOneWithoutTagNestedInput
+    VideoNews?: VideoNewsUpdateOneWithoutTagNestedInput
+    videoNews?: VideoNewsUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutOpinionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+    posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
+    videoNews?: VideoNewsUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutOpinionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TagUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutTagsNestedInput
+    VideoNews?: VideoNewsUpdateOneWithoutTagNestedInput
+    videoNews?: VideoNewsUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+    posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
+    videoNews?: VideoNewsUncheckedUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutOpinionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TagCreateManyVideoNewsInput = {
+    id?: string
+    name: string
+    opinionId?: string | null
+  }
+
+  export type TagUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutTagsNestedInput
+    Opinion?: OpinionUpdateOneWithoutTagNestedInput
+    VideoNews?: VideoNewsUpdateOneWithoutTagNestedInput
+    opinions?: OpinionUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+    posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    videoNewsId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type TagUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    posts?: PostUpdateManyWithoutTagsNestedInput
+    Opinion?: OpinionUpdateOneWithoutTagNestedInput
+    videoNews?: VideoNewsUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+    posts?: PostUncheckedUpdateManyWithoutTagsNestedInput
+    videoNews?: VideoNewsUncheckedUpdateManyWithoutTagsNestedInput
+    opinions?: OpinionUncheckedUpdateManyWithoutTagsNestedInput
+  }
+
+  export type TagUncheckedUpdateManyWithoutVideoNewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    opinionId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type PostCreateManyCategoryInput = {
     id?: string
     title: string
@@ -26302,6 +31577,29 @@ export namespace Prisma {
     status?: $Enums.PostStatus
     viewsCount?: number
     readingTime?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OpinionCreateManyCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    authorId: string
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VideoNewsCreateManyCategoryInput = {
+    id?: string
+    title: string
+    slug: string
+    content: string
+    videoUrl?: string | null
+    isVideoNews?: boolean
+    authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26370,6 +31668,83 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type OpinionUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutOpinionNestedInput
+    tags?: TagUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutOpinionsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoNewsUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutVideoNewsNestedInput
+    tags?: TagUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+    Tag?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PostUpdateWithoutTagsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
@@ -26431,6 +31806,85 @@ export namespace Prisma {
     status?: EnumPostStatusFieldUpdateOperationsInput | $Enums.PostStatus
     viewsCount?: IntFieldUpdateOperationsInput | number
     readingTime?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VideoNewsUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutVideoNewsNestedInput
+    category?: CategoryUpdateOneRequiredWithoutVideoNewsNestedInput
+    Tag?: TagUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Tag?: TagUncheckedUpdateManyWithoutVideoNewsNestedInput
+  }
+
+  export type VideoNewsUncheckedUpdateManyWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isVideoNews?: BoolFieldUpdateOperationsInput | boolean
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OpinionUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: UserUpdateOneRequiredWithoutOpinionNestedInput
+    category?: CategoryUpdateOneRequiredWithoutOpinionNestedInput
+    Tag?: TagUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Tag?: TagUncheckedUpdateManyWithoutOpinionNestedInput
+  }
+
+  export type OpinionUncheckedUpdateManyWithoutTagsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

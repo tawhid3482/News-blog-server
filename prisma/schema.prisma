@@ -37,6 +37,8 @@ model User {
   Reaction           Reaction[]
   Comment            Comment[]
   PostReading        PostReading[]
+  Opinion            Opinion[]
+  VideoNews          VideoNews[]
 
   @@map("users")
 }
@@ -59,21 +61,21 @@ model Admin {
 }
 
 model Author {
-  id            String       @id @default(uuid())
-  email         String       @unique
+  id            String   @id @default(uuid())
+  email         String   @unique
   name          String
   profilePhoto  String
   contactNumber String
   address       String?
   bio           String?
   socialLinks   Json?
-  isVerified    Boolean      @default(false)
-  totalPosts    Int          @default(0)
-  totalReacts   Int          @default(0)
-   isActive      Boolean    @default(true)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  user          User         @relation(fields: [email], references: [email])
+  isVerified    Boolean  @default(false)
+  totalPosts    Int      @default(0)
+  totalReacts   Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [email], references: [email])
 
   // posts Post[]
   Post Post[] @relation("AuthorPosts")
@@ -125,17 +127,58 @@ model Post {
   PostReading    PostReading[]
 }
 
+model Opinion {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  content     String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  category    Category @relation(fields: [categoryId], references: [id])
+  tags        Tag[]    @relation("OpinionTags")
+  categoryId  String
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Tag         Tag[]
+}
+
+model VideoNews {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  content     String
+  videoUrl    String?
+  isVideoNews Boolean  @default(false)
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  category    Category @relation(fields: [categoryId], references: [id])
+  tags        Tag[]    @relation("VideoNewsTags")
+  categoryId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Tag         Tag[]
+}
+
 model Category {
-  id    String      @id @default(uuid())
-  name  SetNewsType
-  slug  String      @unique
-  posts Post[]
+  id        String      @id @default(uuid())
+  name      SetNewsType
+  slug      String      @unique
+  posts     Post[]
+  Opinion   Opinion[]
+  VideoNews VideoNews[]
 }
 
 model Tag {
-  id    String @id @default(uuid())
-  name  String @unique
-  posts Post[] @relation("PostTags")
+  id          String      @id @default(uuid())
+  name        String      @unique
+  posts       Post[]      @relation("PostTags")
+  opinionId   String?
+  videoNewsId String?
+  Opinion     Opinion?    @relation(fields: [opinionId], references: [id])
+  VideoNews   VideoNews?  @relation(fields: [videoNewsId], references: [id])
+  videoNews   VideoNews[] @relation("VideoNewsTags")
+  opinions    Opinion[]   @relation("OpinionTags")
 }
 
 model Reaction {
@@ -245,7 +288,6 @@ enum Gender {
   FEMALE
   OTHER
 }
-
 
 enum EditorRole {
   STANDARD
