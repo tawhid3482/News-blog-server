@@ -29,22 +29,32 @@ const createPostIntoDB = async (req: Request, userId: string) => {
 
   const { title, slug, summary, content, categoryId, tags } = req.body;
 
-  // Check if this user is an author
-  const author = await prisma.author.findUnique({
-    where: {
-      email:
-        (await prisma.user.findUnique({ where: { id: userId } }))?.email ||
-        undefined,
-    },
+  // ✅ Fetch the user
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
   });
 
-  if (!author) {
+  if (!user?.email) {
+    throw new Error("User not found or invalid.");
+  }
+
+  // ✅ Check if user is a verified author
+  const author = await prisma.author.findUnique({
+    where: { email: user.email, isVerified: true },
+  });
+
+  // ✅ Check if user is an admin
+  const admin = await prisma.admin.findUnique({
+    where: { email: user.email },
+  });
+
+  if (!author && !admin) {
     throw new Error(
-      "User is not a verified author. Only authors can publish posts."
+      "User is neither a verified author nor an admin. Only authors or admins can publish posts."
     );
   }
 
-  // Ensure tags exist or create them if not
+  // ✅ Ensure tags exist or create them if not
   const tagRecords = await Promise.all(
     tags?.map(async (tag: { name: string }) => {
       const existingTag = await prisma.tag.findUnique({
@@ -61,6 +71,7 @@ const createPostIntoDB = async (req: Request, userId: string) => {
     }) || []
   );
 
+  // ✅ Create the post
   const post = await prisma.post.create({
     data: {
       title,
@@ -70,7 +81,7 @@ const createPostIntoDB = async (req: Request, userId: string) => {
       coverImage,
       categoryId,
       authorId: userId,
-      authorAuthorId: author.id, // ✅ Set Author's ID here if user is author
+      authorAuthorId: author?.id, // set only if author exists
       tags: {
         connect: tagRecords,
       },
@@ -196,7 +207,11 @@ const getAllPostFromDb = async (
     andConditions.length > 0 ? { AND: andConditions } : {};
 
   const result = await prisma.post.findMany({
-    where: whereConditions,
+    where: {
+      ...whereConditions,
+      isPublished: true,
+      status: "PUBLISHED",
+    },
     skip,
     take: limit,
     orderBy:
@@ -408,7 +423,7 @@ const trackPostViewInDB = async ({
       postId,
       viewedAt: { gte: cutoffDate },
       ...(userId
-        ? { userId }  // userId থাকলে userId দিয়ে চেক করো
+        ? { userId } // userId থাকলে userId দিয়ে চেক করো
         : ipAddress
         ? { ipAddress } // userId না থাকলে ip দিয়ে চেক করো
         : {}),
@@ -598,6 +613,23 @@ const managePostIntoDB = async (
   return updatedPost;
 };
 
+const getAllPostForSuperUserFromDB = async () => {
+  return await prisma.post.findMany({
+    include: {
+      author: {
+        select: {
+          name: true,
+          email: true,
+          profilePhoto: true,
+        },
+      },
+      category: true,
+      tags: true,
+    },
+  });
+};
+
+
 export const postService = {
   createPostIntoDB,
   getAllPostFromDb,
@@ -606,5 +638,6 @@ export const postService = {
   updateReadingTime,
   updatePostIntoDB,
   getSinglePostFromDb,
-  managePostIntoDB
+  managePostIntoDB,
+  getAllPostForSuperUserFromDB
 };

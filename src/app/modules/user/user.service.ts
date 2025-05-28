@@ -12,7 +12,12 @@ import { hashedPassword } from "./user.utils";
 import prisma from "../../../shared/prisma";
 import { IUploadFile } from "../../../interfaces/file";
 import { FileUploadHelper } from "../../../helpers/fileUploadHelper";
-import { IUserFilterRequest, TUser, UserStats } from "./user.interface";
+import {
+  IUserFilterRequest,
+  TSocialUser,
+  TUser,
+  UserStats,
+} from "./user.interface";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { userSearchableFields } from "./user.constant";
@@ -21,7 +26,6 @@ import { jwtHelpers } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
 import ApiError from "../../../errors/ApiError";
-import { userRoutes } from "./user.route";
 
 interface AuthResponse {
   accessToken: string;
@@ -30,13 +34,13 @@ interface AuthResponse {
   userWithoutPassword: Omit<User, "password">;
 }
 
-const createUserWithSocialIntoDB = async (payload: TUser) => {
+const createUserWithSocialIntoDB = async (payload: TSocialUser) => {
   let user = await prisma.user.findUnique({
     where: { email: payload.email },
   });
 
-  const rawPassword = payload.password || (config.user_Pass as string);
-  const hash = await hashedPassword(rawPassword);
+  const rawPassword = payload.password ?? null;
+  const hash = rawPassword ? await hashedPassword(rawPassword) : null;
 
   if (!user) {
     user = await prisma.user.create({
@@ -45,10 +49,10 @@ const createUserWithSocialIntoDB = async (payload: TUser) => {
         password: hash,
         name: payload.name,
         profilePhoto: payload.profilePhoto,
-        role: UserRole.USER,
         gender: payload.gender,
-        needPasswordChange: true,
-        status: UserStatus.ACTIVE,
+        role: "USER",
+        status: "ACTIVE",
+        needPasswordChange: false,
       },
     });
   }
@@ -58,17 +62,16 @@ const createUserWithSocialIntoDB = async (payload: TUser) => {
   const accessToken = jwtHelpers.createToken(
     {
       userId: user.id,
-      role: user.role,
       email: user.email,
-      profilePhoto: user.profilePhoto,
+      role: user.role,
     },
-    config.jwt.secret as Secret,
+    config.jwt.secret as string,
     config.jwt.expires_in as string
   );
 
   const refreshToken = jwtHelpers.createToken(
     { userId: user.id, role: user.role },
-    config.jwt.refresh_secret as Secret,
+    config.jwt.refresh_secret as string,
     config.jwt.refresh_expires_in as string
   );
 
@@ -577,8 +580,6 @@ const userStats = async (userId: string): Promise<UserStats> => {
   };
 };
 
-
-
 const updateMyProfile = async (authUser: any, req: Request) => {
   const userData = await prisma.user.findUnique({
     where: {
@@ -594,7 +595,9 @@ const updateMyProfile = async (authUser: any, req: Request) => {
   const file = req.file as IUploadFile;
 
   if (file) {
-    const uploadedProfileImage = (await FileUploadHelper.uploadToCloudinary(file)) as { secure_url?: string };
+    const uploadedProfileImage = (await FileUploadHelper.uploadToCloudinary(
+      file
+    )) as { secure_url?: string };
     req.body.profilePhoto = uploadedProfileImage?.secure_url;
   }
 
@@ -605,7 +608,10 @@ const updateMyProfile = async (authUser: any, req: Request) => {
       name: req.body.name,
       gender: req.body.gender,
       profilePhoto: req.body.profilePhoto,
-      email: req.body.email && req.body.email !== userData.email ? req.body.email : undefined,
+      email:
+        req.body.email && req.body.email !== userData.email
+          ? req.body.email
+          : undefined,
     },
   });
 
@@ -645,9 +651,6 @@ const updateMyProfile = async (authUser: any, req: Request) => {
 
   return updatedUser;
 };
-
-
-
 
 const updateSuperUser = async (
   userId: string,

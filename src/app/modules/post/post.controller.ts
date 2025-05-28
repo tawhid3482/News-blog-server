@@ -169,6 +169,16 @@ const managePost = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllPostForSuperUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await postService.getAllPostForSuperUserFromDB();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Post retrieved successfully!",
+    data: result,
+  });
+});
+
 export const postController = {
   createPost,
   getAllPost,
@@ -178,4 +188,5 @@ export const postController = {
   updatedPost,
   getSinglePost,
   managePost,
+  getAllPostForSuperUser
 };

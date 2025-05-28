@@ -46,3 +46,12 @@ export type UserStats = {
     createdAt: Date;
   } | null;  // <-- এখানে null যোগ করো
 };
+
+
+export type TSocialUser = {
+  email: string;
+  name: string;
+  profilePhoto?: string;
+  gender: 'MALE' | 'FEMALE' | 'OTHER';
+  password?: string;
+};

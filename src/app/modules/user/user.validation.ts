@@ -6,13 +6,14 @@ const UserRoleEnum = z.nativeEnum(UserRole);
 const UserStatusEnum = z.nativeEnum(UserStatus);
 
 export const createSocialUserValidation = z.object({
-  email: z.string().email({ message: "Valid email is required" }),
-  name: z.string().min(1, { message: "Name is required" }),
-  gender: GenderEnum,
-  password: z.string().optional(),
-  role: UserRoleEnum.default("USER"),
-  status: UserStatusEnum.optional(),
-  profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
+  body: z.object({
+    email: z.string().email({ message: "Valid email is required" }),
+    name: z.string().min(1, { message: "Name is required" }),
+    gender: GenderEnum,
+    password: z.string().optional(),
+    role: UserRoleEnum.default("USER"),
+    profilePhoto: z.string().url({ message: "Invalid URL" }).optional(),
+  }),
 });
 
 export const createUserValidation = z.object({
@@ -90,8 +91,7 @@ export const updateSuperUserValidation = z.object({
   }),
 });
 
-
- const updateUserStatusValidation = z.object({
+const updateUserStatusValidation = z.object({
   body: z.object({
     status: z.enum(["BLOCKED", "ACTIVE", "PENDING", "DELETED"], {
       required_error: "Status is required",
@@ -99,7 +99,6 @@ export const updateSuperUserValidation = z.object({
     }),
   }),
 });
-
 
 export const UserValidation = {
   createUserValidation,
@@ -109,5 +108,5 @@ export const UserValidation = {
   createSocialUserValidation,
   updateUserValidation,
   updateSuperUserValidation,
-  updateUserStatusValidation
+  updateUserStatusValidation,
 };

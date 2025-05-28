@@ -9,6 +9,7 @@ import optionalAuth from "../../middlewares/optionalAuth";
 
 const router = express.Router();
 router.get("/", postController.getAllPost);
+router.get("/all-posts", postController.getAllPostForSuperUser);
 
 router.get(
   "/my-posts",
