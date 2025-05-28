@@ -23,7 +23,6 @@ const updateOpinion = z.object({
 const updateOpinionStatus = z.object({
   body: z.object({
     isPublished: z.boolean().optional(),
-    isDeleted: z.boolean().optional(),
   }),
 });
 

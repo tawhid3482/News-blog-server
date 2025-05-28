@@ -5,12 +5,16 @@ import validateRequest from "../../middlewares/validationRequest";
 import { OpinionController } from "./opinions.controller";
 import { OpinionValidation } from "./opinions.validation";
 
-
 const router = express.Router();
 
 // ✅ Public
 router.get("/", OpinionController.getAllOpinion);
-router.get("/:slug", OpinionController.getSingleOpinion);
+router.get("/all-opinion", OpinionController.getAllOpinionForSuperUser);
+router.get(
+  "/my-opinions",
+  auth(USER_ROLE.ADMIN, USER_ROLE.AUTHOR, USER_ROLE.SUPER_ADMIN),
+  OpinionController.getAllMyOpinions
+);
 
 // ✅ Create (Author / Editor)
 router.post(
@@ -19,6 +23,10 @@ router.post(
   validateRequest(OpinionValidation.createOpinion),
   OpinionController.createOpinion
 );
+
+
+router.get("/:id", OpinionController.getSingleMyOpinion);
+router.get("/:slug", OpinionController.getSingleOpinion);
 
 // ✅ Update (Author / Editor)
 router.patch(
@@ -32,7 +40,6 @@ router.patch(
 router.patch(
   "/:id/update-status",
   auth(USER_ROLE.EDITOR, USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
-  validateRequest(OpinionValidation.updateOpinionStatus),
   OpinionController.updateOpinionStatus
 );
 

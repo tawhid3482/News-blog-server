@@ -116,10 +116,12 @@ const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
 
   const result = await userService.updateMyProfile(user, req);
 
+  console.log(result)
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Profile data fetched!",
+    message: "Profile data updated!",
     data: result,
   });
 });

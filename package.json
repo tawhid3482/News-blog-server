@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/date-fns": "^2.5.3",
     "@types/express": "^5.0.1",
     "@types/http-status": "^0.2.30",
     "@types/jsonwebtoken": "^9.0.9",
@@ -28,6 +29,7 @@
     "cloudinary": "^2.6.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "http-status": "^2.1.0",

@@ -577,6 +577,8 @@ const userStats = async (userId: string): Promise<UserStats> => {
   };
 };
 
+
+
 const updateMyProfile = async (authUser: any, req: Request) => {
   const userData = await prisma.user.findUnique({
     where: {
@@ -586,57 +588,68 @@ const updateMyProfile = async (authUser: any, req: Request) => {
   });
 
   if (!userData) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "User does not exists!");
+    throw new ApiError(httpStatus.BAD_REQUEST, "User does not exist!");
   }
 
   const file = req.file as IUploadFile;
 
   if (file) {
-    const uploadedProfileImage = (await FileUploadHelper.uploadToCloudinary(
-      file
-    )) as { secure_url?: string };
+    const uploadedProfileImage = (await FileUploadHelper.uploadToCloudinary(file)) as { secure_url?: string };
     req.body.profilePhoto = uploadedProfileImage?.secure_url;
   }
 
-  let profileData;
-  if (userData?.role === UserRole.ADMIN) {
-    profileData = await prisma.admin.update({
-      where: {
-        email: userData.email,
+  // --- STEP 1: Update main user table first ---
+  const updatedUser = await prisma.user.update({
+    where: { id: userData.id },
+    data: {
+      name: req.body.name,
+      gender: req.body.gender,
+      profilePhoto: req.body.profilePhoto,
+      email: req.body.email && req.body.email !== userData.email ? req.body.email : undefined,
+    },
+  });
+
+  const currentEmail = updatedUser.email; // latest updated email
+
+  // --- STEP 2: Update role-specific tables ---
+  const roleData = {
+    name: req.body.name,
+    profilePhoto: req.body.profilePhoto,
+  };
+
+  if (userData.role === UserRole.ADMIN) {
+    await prisma.admin.update({
+      where: { email: userData.email }, // old email
+      data: {
+        ...roleData,
+        email: currentEmail, // must update email here too
       },
-      data: req.body,
     });
-  } else if (userData?.role === UserRole.AUTHOR) {
-    profileData = await prisma.author.update({
-      where: {
-        email: userData.email,
+  } else if (userData.role === UserRole.AUTHOR) {
+    await prisma.author.update({
+      where: { email: userData.email },
+      data: {
+        ...roleData,
+        email: currentEmail,
       },
-      data: req.body,
     });
-  } else if (userData?.role === UserRole.EDITOR) {
-    profileData = await prisma.editor.update({
-      where: {
-        email: userData.email,
+  } else if (userData.role === UserRole.EDITOR) {
+    await prisma.editor.update({
+      where: { email: userData.email },
+      data: {
+        ...roleData,
+        email: currentEmail,
       },
-      data: req.body,
-    });
-  } else if (userData?.role === UserRole.USER) {
-    profileData = await prisma.user.update({
-      where: {
-        email: userData.email,
-      },
-      data: req.body,
     });
   }
-  //  if (profileData && 'gender' in profileData) {
-  //     const { email, name, gender } = profileData;
-  //     await index.updateDocuments([{ email, name, gender }]);
-  //   }
 
-  return { profileData };
+  return updatedUser;
 };
 
-export const updateSuperUser = async (
+
+
+
+const updateSuperUser = async (
   userId: string,
   field: "isActive" | "isVerified" | "isDeleted"
 ) => {
@@ -725,8 +738,7 @@ export const updateSuperUser = async (
   throw new ApiError(httpStatus.BAD_REQUEST, "Unsupported role or field.");
 };
 
-
-export const updateUserStatus = async (
+const updateUserStatus = async (
   userId: string,
   newStatus: UserStatus // eg: "BLOCKED", "DELETED"
 ) => {
@@ -774,5 +786,5 @@ export const userService = {
   updateMyProfile,
   getAllSuperUser,
   updateSuperUser,
-  updateUserStatus
+  updateUserStatus,
 };

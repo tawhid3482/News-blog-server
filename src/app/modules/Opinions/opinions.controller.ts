@@ -43,10 +43,63 @@ const getAllOpinion = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAllMyOpinions = catchAsync(async (req: Request, res: Response) => {
+  const filters = {
+    ...pick(req.query, opinionFilterableFields),
+    searchTerm: req.query.searchTerm as string | undefined,
+    fromDate: req.query.fromDate as string | undefined,
+    toDate: req.query.toDate as string | undefined,
+    tags: req.query.tags
+      ? Array.isArray(req.query.tags)
+        ? req.query.tags.map((tag) => String(tag))
+        : [String(req.query.tags)]
+      : undefined,
+  };
+
+  const { userId } = req.user;
+
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
+  const result = await OpinionService.getAllMyOpinionsFromDb(
+    filters,
+    options,
+    userId
+  );
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "My Opinions retrieved successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
+// controller
+const getSingleMyOpinion = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await OpinionService.getSingleMyOpinionFromDb(id);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Opinion retrieved successfully",
+    data: result,
+  });
+});
 
 const getSingleOpinion = catchAsync(async (req: Request, res: Response) => {
   const { slug } = req.params;
   const result = await OpinionService.getSingleOpinionFromDB(slug);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Opinion retrieved successfully!",
+    data: result,
+  });
+});
+const getAllOpinionForSuperUser = catchAsync(async (req: Request, res: Response) => {
+  const result = await OpinionService.getAllOpinionForSuperUserFromDB();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -101,4 +154,7 @@ export const OpinionController = {
   updateOpinion,
   updateOpinionStatus,
   deleteOpinion,
+  getAllMyOpinions,
+  getSingleMyOpinion,
+  getAllOpinionForSuperUser
 };
