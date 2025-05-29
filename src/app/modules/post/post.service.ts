@@ -594,27 +594,46 @@ const managePostIntoDB = async (
     updateData.isPublished = isPublished;
     updateData.publishedAt = isPublished ? new Date() : null;
 
-    // Auto update status based on isPublished unless status is BLOCKED manually set
     if (status === "BLOCKED") {
       updateData.status = "BLOCKED";
     } else {
       updateData.status = isPublished ? "PUBLISHED" : "DRAFT";
     }
   } else if (status) {
-    // If only status is given (e.g., BLOCKED), update it
     updateData.status = status;
   }
 
+  // Post update
   const updatedPost = await prisma.post.update({
     where: { id: postId },
     data: updateData,
   });
+
+  // If post is published, check for existing notification before create
+  if (updateData.status === "PUBLISHED") {
+    const existingNotification = await prisma.notification.findFirst({
+      where: {
+        title: `New News "${updatedPost.title}" has been published!`,
+      },
+    });
+
+    if (!existingNotification) {
+      await prisma.notification.create({
+        data: {
+          title: `New News "${updatedPost.title}" has been published!`,
+        },
+      });
+    }
+  }
 
   return updatedPost;
 };
 
 const getAllPostForSuperUserFromDB = async () => {
   return await prisma.post.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       author: {
         select: {
@@ -629,7 +648,6 @@ const getAllPostForSuperUserFromDB = async () => {
   });
 };
 
-
 export const postService = {
   createPostIntoDB,
   getAllPostFromDb,
@@ -639,5 +657,5 @@ export const postService = {
   updatePostIntoDB,
   getSinglePostFromDb,
   managePostIntoDB,
-  getAllPostForSuperUserFromDB
+  getAllPostForSuperUserFromDB,
 };

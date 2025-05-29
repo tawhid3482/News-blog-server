@@ -259,6 +259,13 @@ model PostReading {
   post Post @relation(fields: [postId], references: [id])
 }
 
+model Notification {
+  id        String   @id @default(uuid())
+  title     String
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
 enum UserRole {
   ADMIN
   USER
@@ -303,14 +310,16 @@ enum PostStatus {
 
 enum SetNewsType {
   WORLD
+  WAR
+  POLITICS
+  ECONOMY
   NATIONAL
   SPORTS
+  HEALTH
   SCIENCE
   EDUCATION
-  WAR
-  ECONOMY
   TECHNOLOGY
-  HEALTH
   ENTERTAINMENT
   INVESTIGATION
+  OTHER
 }

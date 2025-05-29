@@ -304,6 +304,13 @@ exports.Prisma.PostReadingScalarFieldEnum = {
   readAt: 'readAt'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -364,16 +371,18 @@ exports.PostStatus = exports.$Enums.PostStatus = {
 
 exports.SetNewsType = exports.$Enums.SetNewsType = {
   WORLD: 'WORLD',
+  WAR: 'WAR',
+  POLITICS: 'POLITICS',
+  ECONOMY: 'ECONOMY',
   NATIONAL: 'NATIONAL',
   SPORTS: 'SPORTS',
+  HEALTH: 'HEALTH',
   SCIENCE: 'SCIENCE',
   EDUCATION: 'EDUCATION',
-  WAR: 'WAR',
-  ECONOMY: 'ECONOMY',
   TECHNOLOGY: 'TECHNOLOGY',
-  HEALTH: 'HEALTH',
   ENTERTAINMENT: 'ENTERTAINMENT',
-  INVESTIGATION: 'INVESTIGATION'
+  INVESTIGATION: 'INVESTIGATION',
+  OTHER: 'OTHER'
 };
 
 exports.ReactionType = exports.$Enums.ReactionType = {
@@ -401,7 +410,8 @@ exports.Prisma.ModelName = {
   Subscriber: 'Subscriber',
   ContactMessage: 'ContactMessage',
   PostView: 'PostView',
-  PostReading: 'PostReading'
+  PostReading: 'PostReading',
+  Notification: 'Notification'
 };
 
 /**
