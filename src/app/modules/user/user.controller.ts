@@ -5,18 +5,27 @@ import httpStatus from "http-status";
 import { userService } from "./user.service";
 import pick from "../../../shared/pick";
 import { userFilterableFields } from "./user.constant";
+import config from "../../../config";
 
 const createUserWithSocial = catchAsync(async (req, res) => {
   const result = await userService.createUserWithSocialIntoDB(req.body);
   const { accessToken, refreshToken, userWithoutPassword, needPasswordChange } =
     result;
+
+  const cookieOptions = {
+    secure: config.env === "production",
+    httpOnly: true,
+  };
+
+  // ✅ Set refreshToken in cookie
+  res.cookie("refreshToken", refreshToken, cookieOptions);
+
   res.status(200).json({
     success: true,
     statusCode: httpStatus.OK,
     message: "User login or registration successful",
     data: userWithoutPassword,
     token: accessToken,
-    refreshToken,
     needPasswordChange,
   });
 });
@@ -116,7 +125,7 @@ const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
 
   const result = await userService.updateMyProfile(user, req);
 
-  console.log(result)
+  console.log(result);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -127,9 +136,9 @@ const updateMyProfile = catchAsync(async (req: Request, res: Response) => {
 });
 
 const updateSuperUser = catchAsync(async (req: Request, res: Response) => {
-const { id: userId } = req.params;
-const { field } = req.body; 
-const result = await userService.updateSuperUser(userId, field);
+  const { id: userId } = req.params;
+  const { field } = req.body;
+  const result = await userService.updateSuperUser(userId, field);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -141,7 +150,7 @@ const result = await userService.updateSuperUser(userId, field);
 
 const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
   const { id: userId } = req.params;
-  const { status: newStatus } = req.body; 
+  const { status: newStatus } = req.body;
 
   const result = await userService.updateUserStatus(userId, newStatus);
 
@@ -152,7 +161,6 @@ const updateUserStatus = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
 
 export const userController = {
   createUser,
@@ -166,5 +174,5 @@ export const userController = {
   updateMyProfile,
   getAllSuperUser,
   updateSuperUser,
-  updateUserStatus
+  updateUserStatus,
 };
