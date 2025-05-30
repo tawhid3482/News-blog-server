@@ -11,7 +11,8 @@ import {
   TPost,
 } from "./post.interface";
 import { IGenericResponse } from "../../../interfaces/common";
-import { postSearchableFields } from "./post.constant";
+import { noImage, postSearchableFields } from "./post.constant";
+import meiliClient, { addDocumentToIndex } from "../../../shared/meilisearch";
 
 const createPostIntoDB = async (req: Request, userId: string) => {
   const file = req.file as IUploadFile;
@@ -572,16 +573,22 @@ const updatePostIntoDB = async (
   return post;
 };
 
-const managePostIntoDB = async (
+export const managePostIntoDB = async (
   req: Request,
   postId: string,
   userId: string
 ) => {
-  // Check user is active
+  // ✅ Check if user is active
   const user = await prisma.user.findUnique({
-    where: { id: userId, status: "ACTIVE" },
+    where: {
+      id: userId,
+      status: "ACTIVE",
+    },
   });
-  if (!user) throw new Error("Unauthorized: Inactive or missing user");
+
+  if (!user) {
+    throw new Error("Unauthorized: Inactive or missing user");
+  }
 
   const { isPublished, status } = req.body as {
     isPublished?: boolean;
@@ -590,6 +597,7 @@ const managePostIntoDB = async (
 
   const updateData: Prisma.PostUpdateInput = {};
 
+  // ✅ Determine post status
   if (typeof isPublished === "boolean") {
     updateData.isPublished = isPublished;
     updateData.publishedAt = isPublished ? new Date() : null;
@@ -603,14 +611,24 @@ const managePostIntoDB = async (
     updateData.status = status;
   }
 
-  // Post update
+  // ✅ Update post and select fields needed for MeiliSearch
   const updatedPost = await prisma.post.update({
     where: { id: postId },
     data: updateData,
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      coverImage: true,
+    },
   });
 
-  // If post is published, check for existing notification before create
-  if (updateData.status === "PUBLISHED") {
+  // ✅ Only add to MeiliSearch if status is PUBLISHED
+  const finalStatus = updateData.status;
+  if (finalStatus === "PUBLISHED") {
+    await addDocumentToIndex(updatedPost, "news");
+
+    // ✅ Create notification if not already exists
     const existingNotification = await prisma.notification.findFirst({
       where: {
         title: `New News "${updatedPost.title}" has been published!`,

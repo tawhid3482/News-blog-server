@@ -1,0 +1,58 @@
+import { MeiliSearch } from "meilisearch";
+import config from "../config";
+import { noImage } from "../app/modules/post/post.constant";
+import { TNews } from "../app/modules/post/post.interface";
+
+const meiliClient = new MeiliSearch({
+  host: config.meiliPort as string,
+  apiKey: config.meiliApiKey,
+});
+
+export async function addDocumentToIndex(
+  result: TNews & { id: string },
+  indexKey: string
+) {
+  const index = meiliClient.index(indexKey);
+
+  const { id, title, content, coverImage } = result;
+  const image = coverImage || noImage;
+
+  try {
+    // Check if the document already exists
+    const existing = await index.getDocument(id).catch(() => null);
+
+    if (existing) {
+      console.log(`Document with ID ${id} already exists. Skipping add.`);
+      return;
+    }
+
+    const document = {
+      id,
+      title,
+      content,
+      image: image,
+    };
+
+    await index.addDocuments([document]);
+    console.log(`Document with ID ${id} added to MeiliSearch.`);
+  } catch (error) {
+    console.error("Error adding document to MeiliSearch:", error);
+  }
+}
+
+export const deleteDocumentFromIndex = async (indexKey: string, id: string) => {
+  const index = meiliClient.index(indexKey);
+
+  try {
+    await index.deleteDocument(id);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Error deleting resource from MeiliSearch:", error);
+  }
+};
+
+export const deleteMeiliSearchIndex = async (indexKey: string) => {
+  meiliClient.deleteIndex(indexKey);
+};
+
+export default meiliClient;

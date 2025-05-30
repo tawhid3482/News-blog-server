@@ -12,6 +12,7 @@ import { adminRoutes } from "../modules/admin/admin.route";
 import { SubscriberRoutes } from "../modules/subscriber/subscriber.route";
 import { OpinionRoutes } from "../modules/Opinions/opinions.route";
 import { EditorRoutes } from "../modules/editor/editor.route";
+import { NotificationRoutes } from "../modules/notification/notification.roue";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -66,6 +67,10 @@ const moduleRoutes = [
   {
     path: "/editor",
     route: EditorRoutes,
+  },
+  {
+    path: "/notification",
+    route: NotificationRoutes,
   },
 ];
 

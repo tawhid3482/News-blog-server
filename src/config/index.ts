@@ -28,4 +28,6 @@ export default {
   reset_link: process.env.RESET_LINK,
   email: process.env.EMAIL,
   app_pass: process.env.APP_PASS,
+  meiliPort:process.env.MEILISEARCH_HOST,
+  meiliApiKey:process.env.MEILISEARCH_MASTER_KEY
 };
