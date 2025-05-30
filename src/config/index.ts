@@ -28,7 +28,7 @@ export default {
   reset_link: process.env.RESET_LINK,
   email: process.env.EMAIL,
   app_pass: process.env.APP_PASS,
-  meiliPort: process.env.MEILISEARCH_HOST,
+  meiliHost: process.env.MEILISEARCH_HOST,
   meiliApiKey: process.env.MEILISEARCH_MASTER_KEY,
   super_admin: process.env.SUPER_ADMIN,
   super_pass: process.env.SUPER_ADMIN,

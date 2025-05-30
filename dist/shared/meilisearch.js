@@ -18,7 +18,7 @@ const meilisearch_1 = require("meilisearch");
 const config_1 = __importDefault(require("../config"));
 const post_constant_1 = require("../app/modules/post/post.constant");
 const meiliClient = new meilisearch_1.MeiliSearch({
-    host: config_1.default.meiliPort,
+    host: config_1.default.meiliHost,
     apiKey: config_1.default.meiliApiKey,
 });
 function addDocumentToIndex(result, indexKey) {
@@ -49,7 +49,6 @@ const deleteDocumentFromIndex = (indexKey, id) => __awaiter(void 0, void 0, void
     try {
         const index = meiliClient.index(indexKey);
         yield index.deleteDocument(id);
-        ;
     }
     catch (error) {
         console.error(`❌ Failed to delete document with ID ${id} from MeiliSearch index "${indexKey}":`, (error === null || error === void 0 ? void 0 : error.message) || error);

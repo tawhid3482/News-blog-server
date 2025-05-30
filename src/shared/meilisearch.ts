@@ -4,7 +4,7 @@ import { noImage } from "../app/modules/post/post.constant";
 import { TNews } from "../app/modules/post/post.interface";
 
 const meiliClient = new MeiliSearch({
-  host: config.meiliPort as string,
+  host: config.meiliHost as string,
   apiKey: config.meiliApiKey,
 });
 
@@ -42,7 +42,6 @@ export const deleteDocumentFromIndex = async (indexKey: string, id: string) => {
   try {
     const index = meiliClient.index(indexKey);
     await index.deleteDocument(id);
-  ;
   } catch (error: any) {
     console.error(
       `❌ Failed to delete document with ID ${id} from MeiliSearch index "${indexKey}":`,
