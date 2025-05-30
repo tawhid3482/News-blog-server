@@ -594,6 +594,11 @@
             "date": 1748575889494,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-30-05-09-success.log",
             "hash": "9e345f00411178258fe8b61ef4c914d643ce2c8b6788a0f9e8aa56e1b4cb78d6"
+        },
+        {
+            "date": 1748578337167,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-30-05-10-success.log",
+            "hash": "3b01300414edce10f08ed0c9ca03026fd21ec66252b15d04fc2a595a18c28c88"
         }
     ],
     "hashType": "sha256"

@@ -13,6 +13,7 @@ import { SubscriberRoutes } from "../modules/subscriber/subscriber.route";
 import { OpinionRoutes } from "../modules/Opinions/opinions.route";
 import { EditorRoutes } from "../modules/editor/editor.route";
 import { NotificationRoutes } from "../modules/notification/notification.roue";
+import { MeilisearchRoutes } from "../modules/meilisearch/meilisearch.route";
 const router = express.Router();
 
 const moduleRoutes = [
@@ -71,6 +72,10 @@ const moduleRoutes = [
   {
     path: "/notification",
     route: NotificationRoutes,
+  },
+  {
+    path: "/search-news",
+    route: MeilisearchRoutes,
   },
 ];
 

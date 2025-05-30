@@ -4,14 +4,15 @@ import cookieParser from "cookie-parser";
 import router from "./app/routes";
 import httpStatus from "http-status";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import meiliClient from "./shared/meilisearch";
 
 const app: Application = express();
 
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: ["http://localhost:3000", "http://localhost:3001"],
     credentials: true,
-  }),
+  })
 );
 app.use(cookieParser());
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/s1", router);
+
 
 app.get("/", async (req: Request, res: Response) => {
   res.status(200).json({

@@ -12,7 +12,7 @@ import {
 } from "./post.interface";
 import { IGenericResponse } from "../../../interfaces/common";
 import { noImage, postSearchableFields } from "./post.constant";
-import meiliClient, { addDocumentToIndex } from "../../../shared/meilisearch";
+import meiliClient, { addDocumentToIndex, deleteDocumentFromIndex } from "../../../shared/meilisearch";
 
 const createPostIntoDB = async (req: Request, userId: string) => {
   const file = req.file as IUploadFile;
@@ -573,7 +573,7 @@ const updatePostIntoDB = async (
   return post;
 };
 
-export const managePostIntoDB = async (
+ const managePostIntoDB = async (
   req: Request,
   postId: string,
   userId: string
@@ -582,30 +582,30 @@ export const managePostIntoDB = async (
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
-      status: "ACTIVE",
+      status: 'ACTIVE',
     },
   });
 
   if (!user) {
-    throw new Error("Unauthorized: Inactive or missing user");
+    throw new Error('Unauthorized: Inactive or missing user');
   }
 
   const { isPublished, status } = req.body as {
     isPublished?: boolean;
-    status?: "DRAFT" | "PUBLISHED" | "BLOCKED";
+    status?: 'DRAFT' | 'PUBLISHED' | 'BLOCKED';
   };
 
   const updateData: Prisma.PostUpdateInput = {};
 
   // ✅ Determine post status
-  if (typeof isPublished === "boolean") {
+  if (typeof isPublished === 'boolean') {
     updateData.isPublished = isPublished;
     updateData.publishedAt = isPublished ? new Date() : null;
 
-    if (status === "BLOCKED") {
-      updateData.status = "BLOCKED";
+    if (status === 'BLOCKED') {
+      updateData.status = 'BLOCKED';
     } else {
-      updateData.status = isPublished ? "PUBLISHED" : "DRAFT";
+      updateData.status = isPublished ? 'PUBLISHED' : 'DRAFT';
     }
   } else if (status) {
     updateData.status = status;
@@ -623,10 +623,12 @@ export const managePostIntoDB = async (
     },
   });
 
-  // ✅ Only add to MeiliSearch if status is PUBLISHED
   const finalStatus = updateData.status;
-  if (finalStatus === "PUBLISHED") {
-    await addDocumentToIndex(updatedPost, "news");
+  const finalPublished = updateData.isPublished;
+
+  // ✅ Add to MeiliSearch if published
+  if (finalStatus === 'PUBLISHED' && finalPublished === true) {
+    await addDocumentToIndex(updatedPost, 'news');
 
     // ✅ Create notification if not already exists
     const existingNotification = await prisma.notification.findFirst({
@@ -642,6 +644,14 @@ export const managePostIntoDB = async (
         },
       });
     }
+  }
+
+  // ✅ Remove from MeiliSearch if Draft or Blocked and not published
+  if (
+    (finalStatus === 'DRAFT' || finalStatus === 'BLOCKED') &&
+    finalPublished === false
+  ) {
+    await deleteDocumentFromIndex('news', updatedPost.id.toString());
   }
 
   return updatedPost;

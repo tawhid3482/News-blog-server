@@ -41,13 +41,17 @@ export async function addDocumentToIndex(
 }
 
 export const deleteDocumentFromIndex = async (indexKey: string, id: string) => {
-  const index = meiliClient.index(indexKey);
-
   try {
+    const index = meiliClient.index(indexKey);
     await index.deleteDocument(id);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("Error deleting resource from MeiliSearch:", error);
+    console.log(
+      `✅ Document with ID ${id} deleted from MeiliSearch index "${indexKey}"`
+    );
+  } catch (error: any) {
+    console.error(
+      `❌ Failed to delete document with ID ${id} from MeiliSearch index "${indexKey}":`,
+      error?.message || error
+    );
   }
 };
 
