@@ -629,6 +629,16 @@
             "date": 1748607091078,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-30-05-18-success.log",
             "hash": "76add64d0195586b8aaea88122b9e5bd4918a72f87c66721eaaabaf43fec70c4"
+        },
+        {
+            "date": 1748612403682,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-30-05-19-success.log",
+            "hash": "8ddcc0e9172e69273e07356af70d36a3a252c1f9c902a649089134c730980fa6"
+        },
+        {
+            "date": 1748614745507,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\successes\\phu-2025-30-05-20-success.log",
+            "hash": "d7c80b3d97cb3eae8d1b2b93f1ead3fb3d8fa9a0a462fdd604b01c9bf9fd554c"
         }
     ],
     "hashType": "sha256"

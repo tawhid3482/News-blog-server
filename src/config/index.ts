@@ -33,3 +33,5 @@ export default {
   super_admin: process.env.SUPER_ADMIN,
   super_pass: process.env.SUPER_ADMIN,
 };
+console.log("MEILISEARCH_HOST:", process.env.MEILISEARCH_HOST);
+console.log("MEILISEARCH_MASTER_KEY:", process.env.MEILISEARCH_MASTER_KEY);
