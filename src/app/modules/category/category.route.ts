@@ -11,7 +11,7 @@ router.get("/", CategoryController.getAllCategory);
 
 router.post(
   "/create-category",
-  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN,USER_ROLE.AUTHOR),
+  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN,USER_ROLE.AUTHOR,USER_ROLE.EDITOR),
   validateRequest(CategoryValidation.createCategoryValidation),
 
   CategoryController.createCategory

@@ -10,6 +10,13 @@ const router = express.Router();
 // router.get("/", ReviewController.getAllReview);
 router.get(
   "/:email",
+  auth(
+    USER_ROLE.ADMIN,
+    USER_ROLE.SUPER_ADMIN,
+    USER_ROLE.USER,
+    USER_ROLE.AUTHOR,
+    USER_ROLE.EDITOR
+  ),
   SubscriberController.getSubscriberByEmail
 );
 

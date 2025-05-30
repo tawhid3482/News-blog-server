@@ -22,7 +22,6 @@ export async function addDocumentToIndex(
     const existing = await index.getDocument(id).catch(() => null);
 
     if (existing) {
-      console.log(`Document with ID ${id} already exists. Skipping add.`);
       return;
     }
 
@@ -34,7 +33,6 @@ export async function addDocumentToIndex(
     };
 
     await index.addDocuments([document]);
-    console.log(`Document with ID ${id} added to MeiliSearch.`);
   } catch (error) {
     console.error("Error adding document to MeiliSearch:", error);
   }
@@ -44,9 +42,7 @@ export const deleteDocumentFromIndex = async (indexKey: string, id: string) => {
   try {
     const index = meiliClient.index(indexKey);
     await index.deleteDocument(id);
-    console.log(
-      `✅ Document with ID ${id} deleted from MeiliSearch index "${indexKey}"`
-    );
+  ;
   } catch (error: any) {
     console.error(
       `❌ Failed to delete document with ID ${id} from MeiliSearch index "${indexKey}":`,

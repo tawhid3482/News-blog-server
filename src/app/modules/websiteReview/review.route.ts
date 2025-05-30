@@ -13,7 +13,7 @@ router.get("/my-review", ReviewController.getMyReview);
 
 router.post(
   "/create-review",
-  auth(USER_ROLE.USER),
+  auth(USER_ROLE.USER, USER_ROLE.ADMIN, USER_ROLE.AUTHOR, USER_ROLE.EDITOR),
   validateRequest(ReviewValidation.createReviewValidation),
   ReviewController.createReview
 );

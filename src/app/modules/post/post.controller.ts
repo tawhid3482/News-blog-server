@@ -95,7 +95,6 @@ const getAllMyPosts = catchAsync(async (req: Request, res: Response) => {
 const trackPostView = catchAsync(async (req: Request, res: Response) => {
   const postId = req.params.id;
   const userId = req.user?.id || null;
-  console.log("User ID:", userId);
   const ipAddress = req.ip || req.headers["x-forwarded-for"] || null;
   const userAgent = req.headers["user-agent"] || "unknown";
 

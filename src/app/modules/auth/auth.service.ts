@@ -152,7 +152,6 @@ const forgotPass = async (email: string) => {
 
   const resetLink: string =
     config.reset_link + `?id=${isUserExist.id}&token=${passResetToken}`;
-console.log(resetLink)
   await sendEmail(
     email,
     `

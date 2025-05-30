@@ -44,6 +44,7 @@ router.get(
 
 router.post(
   "/create-admin",
+  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
   FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = UserValidation.createAdminValidation.parse(
@@ -55,6 +56,7 @@ router.post(
 
 router.post(
   "/create-author",
+  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
   FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = UserValidation.createAuthorValidation.parse(
@@ -66,6 +68,7 @@ router.post(
 
 router.post(
   "/create-editor",
+  auth(USER_ROLE.ADMIN, USER_ROLE.SUPER_ADMIN),
   FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = UserValidation.createEditorValidation.parse(

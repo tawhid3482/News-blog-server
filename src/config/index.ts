@@ -11,7 +11,7 @@ dotenv.config({ path: envPath });
 export default {
   env: process.env.NODE_ENV,
   port: process.env.PORT,
-  user_Pass:process.env.USER_DF_PASS,
+  user_Pass: process.env.USER_DF_PASS,
   bcrypt_salt_rounds: process.env.SALT_ROUND,
   cloudinary: {
     cloud_name: process.env.CLOUD_NAME,
@@ -28,6 +28,8 @@ export default {
   reset_link: process.env.RESET_LINK,
   email: process.env.EMAIL,
   app_pass: process.env.APP_PASS,
-  meiliPort:process.env.MEILISEARCH_HOST,
-  meiliApiKey:process.env.MEILISEARCH_MASTER_KEY
+  meiliPort: process.env.MEILISEARCH_HOST,
+  meiliApiKey: process.env.MEILISEARCH_MASTER_KEY,
+  super_admin: process.env.SUPER_ADMIN,
+  super_pass: process.env.SUPER_ADMIN,
 };

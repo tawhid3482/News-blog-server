@@ -26,7 +26,6 @@ export default function optionalAuth(
       config.jwt.secret as Secret
     ) as JwtPayload | string;
 
-    console.log("Decoded JWT:", decoded);
 
     if (
       typeof decoded === "object" &&

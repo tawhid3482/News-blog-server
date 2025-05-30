@@ -614,6 +614,11 @@
             "date": 1748592601103,
             "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-30-05-14-error.log",
             "hash": "4c0555704c74055be0a447b738bf359a309d5f3fb5f9219125158f671cd8b7e2"
+        },
+        {
+            "date": 1748595678924,
+            "name": "C:\\Project\\News-blog-server\\logs\\winston\\errors\\phu-2025-30-05-15-error.log",
+            "hash": "70e0a9e26d4a0fa9037fb20a2560191196a60f16ae45821b5f9b1d1fe8715720"
         }
     ],
     "hashType": "sha256"

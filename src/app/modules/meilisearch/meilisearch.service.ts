@@ -13,7 +13,6 @@ const getAllNews = async (limit: number, searchTerm?: string) => {
     const result = await index.search(searchString, { limit });
     return result;
   } catch (error) {
-    console.error('Error searching MeiliSearch:', error);
     throw error;
   }
 };

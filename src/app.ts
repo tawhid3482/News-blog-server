@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import router from "./app/routes";
 import httpStatus from "http-status";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
-import meiliClient from "./shared/meilisearch";
 
 const app: Application = express();
 
