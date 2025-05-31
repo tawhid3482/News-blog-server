@@ -9,7 +9,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: ["https://news-blog-server-production-ba38.up.railway.app"],
+    origin: ["https://news-blog-drab.vercel.app"],
     credentials: true,
   })
 );

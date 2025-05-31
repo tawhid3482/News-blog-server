@@ -20,7 +20,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["https://news-blog-drab.vercel.app"],
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());

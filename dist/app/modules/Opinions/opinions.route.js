@@ -17,8 +17,8 @@ router.get("/all-opinion", opinions_controller_1.OpinionController.getAllOpinion
 router.get("/my-opinions", (0, auth_1.default)(user_1.USER_ROLE.ADMIN, user_1.USER_ROLE.AUTHOR, user_1.USER_ROLE.SUPER_ADMIN), opinions_controller_1.OpinionController.getAllMyOpinions);
 // ✅ Create (Author / Editor)
 router.post("/create-opinion", (0, auth_1.default)(user_1.USER_ROLE.AUTHOR, user_1.USER_ROLE.EDITOR), (0, validationRequest_1.default)(opinions_validation_1.OpinionValidation.createOpinion), opinions_controller_1.OpinionController.createOpinion);
-router.get("/:id", opinions_controller_1.OpinionController.getSingleMyOpinion);
 router.get("/:slug", opinions_controller_1.OpinionController.getSingleOpinion);
+router.get("/:id", opinions_controller_1.OpinionController.getSingleMyOpinion);
 // ✅ Update (Author / Editor)
 router.patch("/update-opinion/:id", (0, auth_1.default)(user_1.USER_ROLE.AUTHOR, user_1.USER_ROLE.EDITOR), (0, validationRequest_1.default)(opinions_validation_1.OpinionValidation.updateOpinion), opinions_controller_1.OpinionController.updateOpinion);
 // ✅ Update publish/delete status (Editor / Admin / Super Admin)
