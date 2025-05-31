@@ -25,8 +25,8 @@ router.post(
 );
 
 
-router.get("/:id", OpinionController.getSingleMyOpinion);
 router.get("/:slug", OpinionController.getSingleOpinion);
+router.get("/:id", OpinionController.getSingleMyOpinion);
 
 // ✅ Update (Author / Editor)
 router.patch(

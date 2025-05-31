@@ -9,7 +9,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: ["https://news-blog-server-production-ba38.up.railway.app"],
     credentials: true,
   })
 );

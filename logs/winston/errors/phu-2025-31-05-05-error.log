@@ -1,0 +1,152 @@
+Sat May 31 2025 5:1:55 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:1:55 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:1:58 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:1:59 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:0 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:0 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:24 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:24 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:25 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:25 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:27 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:2:27 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:4:12 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:4:12 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:25:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ jwt expired
+Sat May 31 2025 5:25:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "cookies",
+      "refreshToken"
+    ],
+    "message": "Refresh Token is required"
+  }
+]
+Sat May 31 2025 5:25:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ jwt malformed
+Sat May 31 2025 5:26:20 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ 
+Invalid `prisma.post.findMany()` invocation:
+
+{
+  where: {
+    AND: [
+      {
+        AND: [
+          {
+            category: {
+              is: {
+                name: {
+                  equals: "INVESTIGATIVE"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    isPublished: true,
+    status: "PUBLISHED"
+  },
+  skip: 0,
+  take: 2,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    category: true,
+    tags: true,
+    reactions: true,
+    comments: true,
+    postViews: true,
+    author: true
+  }
+}
+
+Invalid value for argument `equals`. Expected SetNewsType.
+Sat May 31 2025 5:44:21 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ 
+Invalid `prisma.post.findMany()` invocation:
+
+{
+  where: {
+    AND: [
+      {
+        AND: [
+          {
+            category: {
+              is: {
+                name: {
+                  equals: "INVESTIGATIVE"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    isPublished: true,
+    status: "PUBLISHED"
+  },
+  skip: 0,
+  take: 2,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    category: true,
+    tags: true,
+    reactions: true,
+    comments: true,
+    postViews: true,
+    author: true
+  }
+}
+
+Invalid value for argument `equals`. Expected SetNewsType.
+Sat May 31 2025 5:44:21 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ 
+Invalid `prisma.post.findMany()` invocation:
+
+{
+  where: {
+    AND: [
+      {
+        AND: [
+          {
+            category: {
+              is: {
+                name: {
+                  equals: "INVESTIGATIVE"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    isPublished: true,
+    status: "PUBLISHED"
+  },
+  skip: 0,
+  take: 2,
+  orderBy: {
+    createdAt: "desc"
+  },
+  include: {
+    category: true,
+    tags: true,
+    reactions: true,
+    comments: true,
+    postViews: true,
+    author: true
+  }
+}
+
+Invalid value for argument `equals`. Expected SetNewsType.
+Sat May 31 2025 5:44:56 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ User does not exist
+Sat May 31 2025 5:46:7 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:46:8 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:46:8 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
+Sat May 31 2025 5:46:9 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ Index `news` not found.
