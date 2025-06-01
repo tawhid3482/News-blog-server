@@ -26,6 +26,7 @@ const createUserWithSocial = (0, catchAsync_1.default)((req, res) => __awaiter(v
     const cookieOptions = {
         secure: config_1.default.env === "production",
         httpOnly: true,
+        sameSite: config_1.default.env === "production" ? "none" : "lax",
     };
     // ✅ Set refreshToken in cookie
     res.cookie("refreshToken", refreshToken, cookieOptions);
