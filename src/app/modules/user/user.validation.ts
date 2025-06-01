@@ -5,11 +5,12 @@ const GenderEnum = z.nativeEnum(Gender).optional();
 const UserRoleEnum = z.nativeEnum(UserRole);
 const UserStatusEnum = z.nativeEnum(UserStatus);
 
- const createSocialUserValidation = z.object({
+const createSocialUserValidation = z.object({
   body: z.object({
     email: z.string().email({ message: "Valid email is required" }),
     name: z.string().min(1, { message: "Name is required" }),
     gender: GenderEnum,
+    profilePhoto: z.string().optional(),
     password: z.string().optional(),
     role: UserRoleEnum.default("USER"),
   }),
