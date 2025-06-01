@@ -12,7 +12,7 @@ export const createSocialUserValidation = z.object({
     gender: GenderEnum,
     password: z.string().optional(),
     role: UserRoleEnum.default("USER"),
-    profilePhoto: z.string().default("").optional(),
+    profilePhoto: z.string().url().optional().or(z.literal("")).or(z.null()), 
   }),
 });
 
