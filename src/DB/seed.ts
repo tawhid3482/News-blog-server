@@ -18,7 +18,7 @@ const ensureSuperAdmin = async () => {
     await prisma.user.create({
       data: {
         name: "Super Admin",
-        email: `{${config.super_admin}}`,
+        email: `${config.super_admin}`,
         password: await bcrypt.hash(`${config.super_pass}`, 10),
         role: UserRole.SUPER_ADMIN,
         gender: Gender.MALE,
