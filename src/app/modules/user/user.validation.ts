@@ -14,7 +14,7 @@ export const createSocialUserValidation = z.object({
     role: UserRoleEnum.default("USER"),
     profilePhoto: z
       .union([
-        z.string().url({ message: "Invalid URL" }),
+        z.string(),
         z.literal(""),
         z.null(),
       ])
