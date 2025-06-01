@@ -10,7 +10,7 @@ const createSocialUserValidation = z.object({
     email: z.string().email({ message: "Valid email is required" }),
     name: z.string().min(1, { message: "Name is required" }),
     gender: GenderEnum,
-    profilePhoto: z.string().optional(),
+    profilePhoto: z.string().nullable().optional(),
     password: z.string().optional(),
     role: UserRoleEnum.default("USER"),
   }),
