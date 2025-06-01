@@ -9,12 +9,12 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.loginUser(req.body);
   const { refreshToken } = result;
   const cookieOptions = {
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     httpOnly: true,
-    sameSite: 'none' as 'none',
+    sameSite: "none" as const,
   };
 
-  if (typeof refreshToken === 'string') {
+  if (typeof refreshToken === "string") {
     res.cookie("refreshToken", refreshToken, cookieOptions);
   }
 

@@ -31,11 +31,11 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     const result = yield auth_service_1.AuthService.loginUser(req.body);
     const { refreshToken } = result;
     const cookieOptions = {
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         httpOnly: true,
-        sameSite: 'none',
+        sameSite: "none",
     };
-    if (typeof refreshToken === 'string') {
+    if (typeof refreshToken === "string") {
         res.cookie("refreshToken", refreshToken, cookieOptions);
     }
     (0, sendResponse_1.default)(res, {
