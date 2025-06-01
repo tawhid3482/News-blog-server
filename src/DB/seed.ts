@@ -21,6 +21,7 @@ const ensureSuperAdmin = async () => {
         email: `${config.super_admin}`,
         password: await bcrypt.hash(`${config.super_pass}`, 10),
         role: UserRole.SUPER_ADMIN,
+        profilePhoto:"",
         gender: Gender.MALE,
         status: "ACTIVE",
         needPasswordChange: false,
