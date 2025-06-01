@@ -19,8 +19,8 @@ router.get(
 
 router.post(
   "/create-post",
-  FileUploadHelper.upload.single("file"),
   auth(USER_ROLE.ADMIN, USER_ROLE.AUTHOR, USER_ROLE.SUPER_ADMIN),
+  FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = PostValidation.createPostValidation.parse(
       JSON.parse(req.body.data)
@@ -36,8 +36,8 @@ router.post("/:id/reading-time", postController.updateReadingTime);
 
 router.patch(
   "/:postId/update-news",
-  FileUploadHelper.upload.single("file"),
   auth(USER_ROLE.ADMIN, USER_ROLE.AUTHOR, USER_ROLE.SUPER_ADMIN),
+  FileUploadHelper.upload.single("file"),
   (req: Request, res: Response, next: NextFunction) => {
     req.body = PostValidation.updatePostValidation.parse(
       JSON.parse(req.body.data)
