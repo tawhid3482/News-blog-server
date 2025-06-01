@@ -34,6 +34,7 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
         secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         sameSite: "none",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
     };
     if (typeof refreshToken === "string") {
         res.cookie("refreshToken", refreshToken, cookieOptions);

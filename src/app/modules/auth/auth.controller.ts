@@ -12,6 +12,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     secure: process.env.NODE_ENV === "production",
     httpOnly: true,
     sameSite: "none" as const,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   };
 
   if (typeof refreshToken === "string") {
