@@ -13,7 +13,7 @@ const createUserWithSocial = catchAsync(async (req, res) => {
     result;
 
   const cookieOptions = {
-    secure: config.env === "production",
+    secure: true,
     httpOnly: true,
     sameSite:
       config.env === "production" ? ("none" as "none") : ("lax" as "lax"),

@@ -24,7 +24,7 @@ const createUserWithSocial = (0, catchAsync_1.default)((req, res) => __awaiter(v
     const result = yield user_service_1.userService.createUserWithSocialIntoDB(req.body);
     const { accessToken, refreshToken, userWithoutPassword, needPasswordChange } = result;
     const cookieOptions = {
-        secure: config_1.default.env === "production",
+        secure: true,
         httpOnly: true,
         sameSite: config_1.default.env === "production" ? "none" : "lax",
     };
