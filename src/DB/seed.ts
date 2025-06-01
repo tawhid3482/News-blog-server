@@ -21,7 +21,7 @@ const ensureSuperAdmin = async () => {
         email: `${config.super_admin}`,
         password: await bcrypt.hash(`${config.super_pass}`, 10),
         role: UserRole.SUPER_ADMIN,
-        profilePhoto:"",
+        profilePhoto:"https://img.freepik.com/premium-vector/silver-membership-icon-default-avatar-profile-icon-membership-icon-social-media-user-image-vector-illustration_561158-4195.jpg",
         gender: Gender.MALE,
         status: "ACTIVE",
         needPasswordChange: false,
