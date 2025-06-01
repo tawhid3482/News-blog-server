@@ -1,0 +1,11 @@
+Sun Jun 01 2025 11:39:49 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ User is neither a verified author nor an admin. Only authors or admins can publish posts.
+Sun Jun 01 2025 11:39:54 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ User is neither a verified author nor an admin. Only authors or admins can publish posts.
+Sun Jun 01 2025 11:45:15 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ User is neither a verified author nor an admin. Only authors or admins can publish posts.
+Sun Jun 01 2025 11:45:24 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ User is neither a verified author nor an admin. Only authors or admins can publish posts.
+Sun Jun 01 2025 11:51:17 } [PH] error: 🐱‍🏍 globalErrorHandler ~~ 
+Invalid `prisma.user.findUnique()` invocation:
+
+
+Can't reach database server at `shuttle.proxy.rlwy.net:48628`
+
+Please make sure your database server is running at `shuttle.proxy.rlwy.net:48628`.
