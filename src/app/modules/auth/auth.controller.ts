@@ -11,11 +11,12 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const cookieOptions = {
     secure: true,
     httpOnly: true,
-    sameSite:
-      config.env === "production" ? ("none" as "none") : ("lax" as "lax"),
+    sameSite: 'none' as 'none',
   };
 
-  res.cookie("refreshToken", refreshToken, cookieOptions);
+  if (typeof refreshToken === 'string') {
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+  }
 
   sendResponse<TLoginUserResponse>(res, {
     statusCode: 200,

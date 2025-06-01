@@ -32,7 +32,7 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     const result = yield auth_service_1.AuthService.loginUser(req.body);
     const { refreshToken } = result;
     const cookieOptions = {
-        secure: config_1.default.env === "production",
+        secure: true,
         httpOnly: true,
         sameSite: config_1.default.env === "production" ? "none" : "lax",
     };
