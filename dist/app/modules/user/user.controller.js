@@ -19,14 +19,13 @@ const http_status_1 = __importDefault(require("http-status"));
 const user_service_1 = require("./user.service");
 const pick_1 = __importDefault(require("../../../shared/pick"));
 const user_constant_1 = require("./user.constant");
-const config_1 = __importDefault(require("../../../config"));
 const createUserWithSocial = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield user_service_1.userService.createUserWithSocialIntoDB(req.body);
     const { accessToken, refreshToken, userWithoutPassword, needPasswordChange } = result;
     const cookieOptions = {
         secure: true,
         httpOnly: true,
-        sameSite: config_1.default.env === "production" ? "none" : "lax",
+        sameSite: "none",
     };
     // ✅ Set refreshToken in cookie
     res.cookie("refreshToken", refreshToken, cookieOptions);

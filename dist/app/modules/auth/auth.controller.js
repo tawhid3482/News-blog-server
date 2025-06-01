@@ -25,7 +25,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
-const config_1 = __importDefault(require("../../../config"));
 const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const auth_service_1 = require("./auth.service");
 const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -34,9 +33,11 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     const cookieOptions = {
         secure: true,
         httpOnly: true,
-        sameSite: config_1.default.env === "production" ? "none" : "lax",
+        sameSite: 'none',
     };
-    res.cookie("refreshToken", refreshToken, cookieOptions);
+    if (typeof refreshToken === 'string') {
+        res.cookie("refreshToken", refreshToken, cookieOptions);
+    }
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
