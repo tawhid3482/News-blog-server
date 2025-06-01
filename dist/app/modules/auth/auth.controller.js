@@ -32,14 +32,15 @@ const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void
     const result = yield auth_service_1.AuthService.loginUser(req.body);
     const { refreshToken } = result;
     const cookieOptions = {
-        secure: config_1.default.env === 'production',
+        secure: config_1.default.env === "production",
         httpOnly: true,
+        sameSite: config_1.default.env === "production" ? "none" : "lax",
     };
-    res.cookie('refreshToken', refreshToken, cookieOptions);
+    res.cookie("refreshToken", refreshToken, cookieOptions);
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
-        message: 'User logged in successfully !',
+        message: "User logged in successfully !",
         data: {
             accessToken: result.accessToken,
             needPasswordChange: result.needPasswordChange,
@@ -58,7 +59,7 @@ const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, v
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
-        message: 'User logged in successfully !',
+        message: "User logged in successfully !",
         data: result,
     });
 }));
@@ -69,10 +70,10 @@ const changePassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0,
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
-        message: 'Password changed successfully!',
+        message: "Password changed successfully!",
         data: {
             status: 200,
-            message: 'Password changed successfully!',
+            message: "Password changed successfully!",
         },
     });
 }));
@@ -81,23 +82,23 @@ const forgotPass = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
-        message: 'Check your email!',
+        message: "Check your email!",
         data: {
             status: 200,
-            message: 'Check your email for reset link!',
+            message: "Check your email for reset link!",
         },
     });
 }));
 const resetPassword = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = req.headers.authorization || '';
+    const token = req.headers.authorization || "";
     yield auth_service_1.AuthService.resetPassword(req.body, token);
     (0, sendResponse_1.default)(res, {
         statusCode: 200,
         success: true,
-        message: 'Account recovered!',
+        message: "Account recovered!",
         data: {
             status: 200,
-            message: 'Password Reset Successfully',
+            message: "Password Reset Successfully",
         },
     });
 }));
