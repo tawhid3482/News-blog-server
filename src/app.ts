@@ -1,4 +1,4 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./app/routes";
@@ -9,7 +9,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: ["https://news-blog-drab.vercel.app","http://localhost:3000"],
+    origin: ["https://news-blog-drab.vercel.app"],
     credentials: true,
   })
 );

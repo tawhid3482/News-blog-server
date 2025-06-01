@@ -1,4 +1,3 @@
-// post.controller.ts
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 import catchAsync from "../../../shared/catchAsync";
@@ -9,7 +8,6 @@ import { postFilterableFields } from "./post.constant";
 
 const createPost = catchAsync(async (req: Request, res: Response) => {
   const { userId } = req.user;
-  console.log("User ID:", userId);
   const result = await postService.createPostIntoDB(req, userId);
 
   sendResponse(res, {
