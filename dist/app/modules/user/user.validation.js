@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserValidation = exports.updateSuperUserValidation = exports.createEditorValidation = exports.createAuthorValidation = exports.createAdminValidation = exports.updateUserValidation = exports.createUserValidation = exports.createSocialUserValidation = void 0;
+exports.UserValidation = exports.updateSuperUserValidation = exports.createEditorValidation = exports.createAuthorValidation = exports.createAdminValidation = exports.updateUserValidation = exports.createUserValidation = void 0;
 const zod_1 = require("zod");
 const prisma_1 = require("../../../../generated/prisma");
 const GenderEnum = zod_1.z.nativeEnum(prisma_1.Gender).optional();
 const UserRoleEnum = zod_1.z.nativeEnum(prisma_1.UserRole);
 const UserStatusEnum = zod_1.z.nativeEnum(prisma_1.UserStatus);
-exports.createSocialUserValidation = zod_1.z.object({
+const createSocialUserValidation = zod_1.z.object({
     body: zod_1.z.object({
         email: zod_1.z.string().email({ message: "Valid email is required" }),
         name: zod_1.z.string().min(1, { message: "Name is required" }),
         gender: GenderEnum,
+        profilePhoto: zod_1.z.string().nullable().optional(),
         password: zod_1.z.string().optional(),
         role: UserRoleEnum.default("USER"),
-        profilePhoto: zod_1.z.string().url({ message: "Invalid URL" }).optional(),
     }),
 });
 exports.createUserValidation = zod_1.z.object({
@@ -100,7 +100,7 @@ exports.UserValidation = {
     createAdminValidation: exports.createAdminValidation,
     createAuthorValidation: exports.createAuthorValidation,
     createEditorValidation: exports.createEditorValidation,
-    createSocialUserValidation: exports.createSocialUserValidation,
+    createSocialUserValidation,
     updateUserValidation: exports.updateUserValidation,
     updateSuperUserValidation: exports.updateSuperUserValidation,
     updateUserStatusValidation,
