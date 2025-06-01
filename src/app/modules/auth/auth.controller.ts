@@ -9,9 +9,10 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthService.loginUser(req.body);
   const { refreshToken } = result;
   const cookieOptions = {
-     secure: config.env === "production",
-        httpOnly: true,
-        sameSite: config.env === "production" ? "none" as "none" : "lax" as "lax",
+    secure: true,
+    httpOnly: true,
+    sameSite:
+      config.env === "production" ? ("none" as "none") : ("lax" as "lax"),
   };
 
   res.cookie("refreshToken", refreshToken, cookieOptions);
