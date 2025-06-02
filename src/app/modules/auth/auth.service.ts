@@ -136,7 +136,7 @@ const changePassword = async (
 };
 
 const forgotPass = async (email: string) => {
-  const isUserExist = await prisma.user.findUnique({
+  const isUserExist = await prisma.user.findFirst({
     where: {
       email,
       status: UserStatus.ACTIVE,
@@ -159,7 +159,12 @@ const forgotPass = async (email: string) => {
     <strong>Reset Your Password Quickly</strong>
       <div>
         <p>Dear ${isUserExist.role},</p>
-        <p>Your password reset link: <a href=${resetLink}><button>RESET PASSWORD</button/></a></p>
+       <p>
+        Your password reset link:
+          <a href="${resetLink}" style="padding: 10px 20px; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">
+          RESET PASSWORD
+         </a>
+        </p>
         <p>Thank you</p>
       </div>
   `

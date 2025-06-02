@@ -105,7 +105,7 @@ const changePassword = (user, payload) => __awaiter(void 0, void 0, void 0, func
     });
 });
 const forgotPass = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const isUserExist = yield prisma_1.default.user.findUnique({
+    const isUserExist = yield prisma_1.default.user.findFirst({
         where: {
             email,
             status: prisma_2.UserStatus.ACTIVE,
@@ -122,7 +122,12 @@ const forgotPass = (email) => __awaiter(void 0, void 0, void 0, function* () {
     <strong>Reset Your Password Quickly</strong>
       <div>
         <p>Dear ${isUserExist.role},</p>
-        <p>Your password reset link: <a href=${resetLink}><button>RESET PASSWORD</button/></a></p>
+       <p>
+        Your password reset link:
+          <a href="${resetLink}" style="padding: 10px 20px; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">
+          RESET PASSWORD
+         </a>
+        </p>
         <p>Thank you</p>
       </div>
   `);
