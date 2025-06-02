@@ -81,13 +81,11 @@ const refreshToken = async (token: string): Promise<TRefreshTokenResponse> => {
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
   }
-  const { role, profilePhoto, needPasswordChange } = isUserExist;
-
   const newAccessToken = jwtHelpers.createToken(
     {
       userId: isUserExist.id,
       email: isUserExist.email,
-      profilePhoto: profilePhoto,
+      profilePhoto: isUserExist.profilePhoto,
       role: isUserExist.role,
     },
     config.jwt.secret as Secret,

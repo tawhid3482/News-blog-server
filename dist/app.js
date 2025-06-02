@@ -20,7 +20,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ["https://news-blog-drab.vercel.app"],
+    origin: ["https://tis-news.vercel.app"],
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());

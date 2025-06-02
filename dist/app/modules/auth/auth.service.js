@@ -67,11 +67,10 @@ const refreshToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     if (!isUserExist) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User does not exist");
     }
-    const { role, profilePhoto, needPasswordChange } = isUserExist;
     const newAccessToken = jwtHelpers_1.jwtHelpers.createToken({
         userId: isUserExist.id,
         email: isUserExist.email,
-        profilePhoto: profilePhoto,
+        profilePhoto: isUserExist.profilePhoto,
         role: isUserExist.role,
     }, config_1.default.jwt.secret, config_1.default.jwt.expires_in);
     return {

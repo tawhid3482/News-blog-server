@@ -9,7 +9,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: ["https://news-blog-drab.vercel.app"],
+    origin: ["https://tis-news.vercel.app"],
     credentials: true,
   })
 );
