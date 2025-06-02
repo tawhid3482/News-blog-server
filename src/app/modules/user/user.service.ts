@@ -63,6 +63,7 @@ const createUserWithSocialIntoDB = async (payload: TSocialUser) => {
     {
       userId: user.id,
       email: user.email,
+      profilePhoto: user.profilePhoto,
       role: user.role,
     },
     config.jwt.secret as string,

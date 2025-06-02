@@ -58,6 +58,7 @@ const createUserWithSocialIntoDB = (payload) => __awaiter(void 0, void 0, void 0
     const accessToken = jwtHelpers_1.jwtHelpers.createToken({
         userId: user.id,
         email: user.email,
+        profilePhoto: user.profilePhoto,
         role: user.role,
     }, config_1.default.jwt.secret, config_1.default.jwt.expires_in);
     const refreshToken = jwtHelpers_1.jwtHelpers.createToken({ userId: user.id, role: user.role }, config_1.default.jwt.refresh_secret, config_1.default.jwt.refresh_expires_in);
