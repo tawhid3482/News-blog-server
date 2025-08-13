@@ -219,7 +219,6 @@ const getAllUser = (filters, options) => __awaiter(void 0, void 0, void 0, funct
             })),
         });
     }
-    // ✅ এখানে ফোর্স করছি role = 'user'
     const finalFilterData = Object.assign(Object.assign({}, filterData), { role: "USER" });
     if (Object.keys(finalFilterData).length > 0) {
         andConditions.push({

@@ -289,10 +289,9 @@ const getAllUser = async (
     });
   }
 
-  // ✅ এখানে ফোর্স করছি role = 'user'
   const finalFilterData = {
     ...filterData,
-    role: "USER" as UserRole, // Force role to 'USER'
+    role: "USER" as UserRole, 
   };
 
   if (Object.keys(finalFilterData).length > 0) {
